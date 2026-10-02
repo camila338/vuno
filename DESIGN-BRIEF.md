@@ -16,6 +16,8 @@
 | Tema | Decisión (en palabras del usuario) | Qué implica |
 |---|---|---|
 | Personalidad | "Como el PDF: 70% sobrio, 20% juego" | Confianza adulta. El 20% de "juego" vive únicamente en el color de acento, la tipografía display y el movimiento con rebote suave; la interfaz se mantiene calmada. |
+| El 10% "unexpected" | "Detalles distintivos e inesperados que aporten personalidad, sin afectar la claridad ni la confianza" | Acentos lima muy puntuales, microinteracciones, formas abstractas y pequeños momentos de sorpresa (por ejemplo, al crear una meta o alcanzar un hito). No llena la interfaz de elementos llamativos; aparece solo como un acento memorable. Reglas en `FOUNDATIONS.md` §7. |
+| Foundations | "Me gusta la B" | Opción B · Tech suave: neutros casi grises con un toque cálido, morado del PDF, Plus Jakarta Sans + Bricolage Grotesque, tarjetas planas con borde. Valores en `FOUNDATIONS.md`. |
 | Tipografía | "Sans para UI + display para titulares y saldos" | Dos familias: una sans legible para interfaz y una display con carácter para titulares y cifras de saldo. |
 | Color de marca | "Morado de marca" para el botón primario | El morado es marca y acción primaria. |
 | Color de estado | "Estados con su propio color, aparte" | Éxito, error, advertencia e info son semánticos fijos. Los colores de vertical solo identifican la vertical. |
@@ -55,19 +57,30 @@ No se adopta:
 
 ## 5. Verticales
 
-Banking, Save, Invest y Credit comparten sistema, con un acento de color por vertical. El PDF propone una asignación cromática por vertical; esa asignación está **por confirmar** (ver pendientes).
+Banking, Save, Invest y Credit comparten sistema, con un acento de color por vertical:
 
-## 6. Pendiente por decidir
+- **Banking**: tinta oscura.
+- **Save**: mint.
+- **Invest**: sky.
+- **Credit**: coral.
 
-- Qué es el 10% restante del 70/20/10. El 70% es sobrio y el 20% es "juego" (color de acento, tipografía display y movimiento con rebote suave); el 10% no está definido.
-- Cómo se genera y se publica la versión web del Storybook para compartir.
-- Paleta final y escalas de neutros (sin hex todavía).
-- Familias tipográficas concretas (sans de UI y display).
-- Asignación de color por vertical y qué hacer con Signal Lime, que en el PDF no tiene vertical.
-- Colores semánticos de error y advertencia, que el PDF no define.
-- Grosor y librería de iconos.
-- Curvas y duraciones del movimiento.
-- Accesibilidad: criterios de contraste y tamaños mínimos de toque.
-- Elevación y sombras.
-- Herramienta para generar los tokens para React Native.
-- Si el PDF se actualiza o se reemplaza por este documento como fuente de verdad.
+Signal Lime no es de ninguna vertical: es el color del 10%. Valores en `FOUNDATIONS.md` §1.
+
+## 6. Pendientes resueltos
+
+Todos los pendientes se resolvieron con la opción B. Los valores están en `FOUNDATIONS.md`.
+
+| Pendiente | Resolución |
+|---|---|
+| Qué es el 10% del 70/20/10 | Detalles inesperados y puntuales (ver §2). Reglas en §7 de `FOUNDATIONS.md`. |
+| Versión web del Storybook | `@storybook/react-native-web-vite`, con build estático publicado en Vercel. |
+| Paleta final y neutros | Familias `ink`, `purple`, `mint`, `sky`, `coral`, `lime`, `green`, `red`, `amber` y `azure`, en pasos 100–900. |
+| Familias tipográficas | Plus Jakarta Sans (UI) + Bricolage Grotesque (display). |
+| Color por vertical y Signal Lime | Ver §5: lima = 10%. |
+| Error y advertencia | Familias propias `red` y `amber`, separadas de `coral`. |
+| Iconos | Ionicons: outline por defecto, relleno en activo. |
+| Movimiento | Resortes `soft` y `bounce`; duraciones de 100, 150, 250 y 400 ms. |
+| Accesibilidad | WCAG 2.2 AA y área táctil mínima de 48. |
+| Elevación | Tarjetas planas con borde; sombra solo en elementos flotantes y overlays. |
+| Herramienta de tokens | JSON en formato DTCG + Style Dictionary v4. |
+| ¿PDF o este documento? | `DESIGN-BRIEF.md`, `TOKEN-NAMING.md` y `FOUNDATIONS.md` son la fuente de verdad. El PDF queda como antecedente. |

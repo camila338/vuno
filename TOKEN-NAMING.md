@@ -29,7 +29,7 @@ radius.md
 space.md
 font.family.display
 font.family.ui
-motion.duration.200
+motion.duration.250
 ```
 
 ### Escala de los primitivos
@@ -48,10 +48,26 @@ motion.duration.200
 - Todas las familias de color usan los mismos nueve pasos, y `500` siempre es la base.
 - No se añaden pasos intermedios (por ejemplo `550`) ni extremos (`50`, `950`) sin acordarlo.
 
-**`radius`, `space` y `font.size`: tallas con nombre `xs`, `sm`, `md`, `lg`, `xl`.**
+**`radius`, `space`, `font.size`, `elevation`, `border.width` e `icon.size`: tallas con nombre.**
+
+| Categoría | Tallas acordadas |
+|---|---|
+| `space` | `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` |
+| `font.size` | `xs`, `sm`, `md`, `lg`, `xl`, `2xl` |
+| `radius` | `xs`, `sm`, `md`, `lg`, `xl`, más `full` |
+| `elevation` | `sm`, `md` |
+| `border.width` | `sm`, `md` |
+| `icon.size` | `sm`, `md`, `lg` |
 
 - Cada talla es mayor que la anterior; solo expresan **orden**, no un valor.
-- No se añaden tallas (por ejemplo `2xl`) sin acordarlo.
+- Las tallas más allá de `xs`–`xl` llevan prefijo numérico (`2xs`, `2xl`, `3xl`).
+- `radius.full` es la única talla que no expresa orden: significa "completamente redondeado" (pastilla o círculo). La usa `radius.pill`.
+- No se añaden tallas fuera de esta tabla sin acordarlo.
+
+**`motion.duration` y `opacity`: número con unidad implícita.**
+
+- `motion.duration.<ms>`: el número son milisegundos (`motion.duration.250` = 250 ms).
+- `opacity.<porcentaje>`: el número es el porcentaje (`opacity.40` = 0.40).
 
 ## Capa 2 — Semántico (el rol)
 
@@ -67,6 +83,8 @@ color.vertical.save.accent
 color.vertical.save.on-accent
 color.vertical.accent
 color.vertical.on-accent
+color.highlight.accent
+color.highlight.on-accent
 radius.card
 radius.pill
 space.inset.card
@@ -88,6 +106,7 @@ border.focus.ring
 
 - `pressed` y `disabled` cambian el color o la opacidad del token base.
 - `focus` se expresa como un contorno (`border.focus.ring`), no como un relleno distinto.
+- Los tokens `border.*` semánticos son compuestos (grosor + color): `border.default` combina `border.width.sm` con `color.border.default`, y `border.focus.ring` combina `border.width.md` con `color.border.focus`.
 - Los tokens de componente no definen estados propios: referencian el estado semántico que corresponda.
 
 ### Par de contraste del acento de vertical
@@ -130,7 +149,7 @@ Los tokens de componente **nunca nombran una vertical**. No existen `card.vertic
 
 | Categoría | Prefijo | Notas |
 |---|---|---|
-| Color | `color` | Marca, texto, superficie, estado y vertical. |
+| Color | `color` | Marca, texto, superficie, borde, estado, vertical y destacado (el 10%). |
 | Radio | `radius` | Tallas primitivas y roles (`card`, `pill`). |
 | Espaciado | `space` | Tallas primitivas y roles de padding (`inset.*`). |
 | Tipografía | `font` | Familias, tallas (`font.size.*`) y roles como `balance` y `headline`. |
@@ -150,13 +169,14 @@ Los colores de vertical (`color.vertical.*`) son independientes de los de estado
 ## Reglas de escritura
 
 - Todo en minúsculas, en inglés, separado por puntos. Las palabras compuestas llevan guion (`on-accent`).
-- Los primitivos de color usan la escala `100`–`900`; `radius`, `space` y `font.size` usan tallas `xs`–`xl`. Nunca nombres de valor (`light`, `dark`, `big`).
+- Los primitivos de color usan la escala `100`–`900`; las categorías con tallas usan solo las de la tabla de tallas acordadas; `motion.duration` y `opacity` usan números. Nunca nombres de valor (`light`, `dark`, `big`).
 - Los semánticos describen función, no apariencia: `color.text.primary`, no `color.text.black`.
 - Un token nuevo de componente solo se crea si ningún semántico existente lo cubre.
 - Un token de componente nunca nombra una vertical.
 
-## Pendiente
+## Resuelto
 
-- Escala de `motion.duration`: el ejemplo `motion.duration.200` usa números y queda sin regla propia hasta decidirla.
-- Reglas de pasos para los primitivos de `elevation`, `border` y `opacity`.
-- Lista final de roles semánticos de `elevation`, `border` y `opacity`; los ejemplos de este documento son ilustrativos.
+- Escala de `motion.duration`: número en milisegundos.
+- Pasos de `elevation` (`sm`, `md`), `border.width` (`sm`, `md`) y `opacity` (porcentaje).
+- Tallas ampliadas de `space` (`2xs`–`3xl`) y `font.size` (hasta `2xl`, para que quepa el rol `title`), y `radius.full`.
+- Lista final de roles de `elevation`, `border` y `opacity`, con sus valores: ver `FOUNDATIONS.md`.

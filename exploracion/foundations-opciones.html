@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vuno Foundations A/B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:wght@600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Bricolage+Grotesque:wght@700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-bg: #FFFFFF; --c-bg2: #F4F4F5; --c-text: #18181B; --c-muted: #5F5F68; --c-line: #E4E4E7;
+  --c-ok: #0E7A3E; --c-ok-bg: #E3F6EA; --c-bad: #B42318; --c-bad-bg: #FDE8E6; --c-prop: #6A4A00; --c-prop-bg: #FFF1CC;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--c-bg); color: var(--c-text); font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 32px 16px 96px; }
+header h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+header p { margin: 0 0 6px; color: var(--c-muted); max-width: 820px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; background: var(--c-prop-bg); color: var(--c-prop); vertical-align: middle; }
+.tag.ask { background: #E8E4FF; color: #3B2C9E; }
+.tag.agree { background: #FDE8E6; color: #8A1C12; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 8px; }
+nav.toc a { font-size: 13px; color: var(--c-text); text-decoration: none; padding: 4px 10px; border: 1px solid var(--c-line); border-radius: 99px; }
+nav.toc a:hover { background: var(--c-bg2); }
+section.row { border-top: 1px solid var(--c-line); padding: 28px 0 8px; }
+section.row > h2 { font-size: 20px; margin: 0 0 4px; }
+section.row > p.lead { margin: 0 0 16px; color: var(--c-muted); max-width: 860px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 920px) { .cols { grid-template-columns: 1fr; } }
+.colhead { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-muted); margin: 0 0 8px; }
+.mono { font-family: var(--mono); font-size: 12px; }
+.muted { color: var(--c-muted); }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+th { font-size: 12px; color: var(--c-muted); font-weight: 600; }
+.scroll { overflow-x: auto; }
+details { margin-top: 12px; }
+summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+pre { background: var(--c-bg2); padding: 12px; border-radius: 8px; overflow: auto; max-height: 360px; font-family: var(--mono); font-size: 11.5px; }
+button.tool { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--c-line); background: var(--c-bg); cursor: pointer; }
+
+/* ---- Option panel: everything inside uses the option's own tokens ---- */
+.opt { background: var(--page); color: var(--text); border-radius: 20px; padding: 20px; font-family: var(--f-ui); min-width: 0; }
+.opt .h-opt { font-family: var(--f-display); font-size: 26px; line-height: 1.15; margin: 0 0 6px; }
+.opt p { margin: 0 0 8px; }
+.opt .meta { font-size: 12px; color: var(--text3); }
+.card { background: var(--card); border-radius: var(--r-card); padding: var(--inset-card); box-shadow: var(--sh-card); border: var(--card-border); }
+
+.r-balance { font-family: var(--f-display); font-weight: var(--w-balance); font-size: var(--s-balance); line-height: var(--lh-balance); letter-spacing: var(--ls-balance); font-variant-numeric: lining-nums; }
+.r-headline { font-family: var(--f-display); font-weight: var(--w-headline); font-size: var(--s-headline); line-height: var(--lh-headline); letter-spacing: var(--ls-headline); }
+.r-body { font-family: var(--f-ui); font-weight: 400; font-size: 16px; line-height: 24px; }
+.r-label { font-family: var(--f-ui); font-weight: 600; font-size: 14px; line-height: 20px; }
+.r-caption { font-family: var(--f-ui); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: .01em; }
+
+.btn-primary { appearance: none; border: 0; cursor: pointer; background: var(--primary); color: var(--on-primary); border-radius: 999px; min-height: 48px; padding: 0 24px; font: 600 16px/24px var(--f-ui); transition: transform var(--spring-soft-ms) var(--spring-soft); display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:active { background: var(--primary-pressed); transform: scale(.96); transition-duration: 100ms; transition-timing-function: cubic-bezier(.2,0,0,1); }
+.btn-primary:focus-visible, .btn-circle:focus-visible, .tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn-circle { appearance: none; width: 48px; height: 48px; border-radius: 999px; border: 1px solid var(--border); background: var(--card); color: var(--text); display: inline-grid; place-items: center; cursor: pointer; transition: transform var(--spring-soft-ms) var(--spring-soft); }
+.btn-circle:active { transform: scale(.92); transition-duration: 100ms; }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 10px 4px 8px; font: 600 12px/16px var(--f-ui); }
+.chip svg { flex: none; }
+
+.vgrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-list); }
+.vcard { background: var(--accent); color: var(--on-accent); border-radius: var(--r-card); padding: var(--inset-card); min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--sh-card); }
+.vcard .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.vcard .arrow { width: 32px; height: 32px; border-radius: 99px; border: 1.5px solid currentColor; display: grid; place-items: center; flex: none; }
+
+.tabbar { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--tab-bg); border-radius: 999px; padding: 6px; box-shadow: var(--sh-floating); }
+.tabbar .ind { position: absolute; top: 6px; bottom: 6px; left: 0; border-radius: 999px; background: var(--tab-active-bg); transition: transform var(--spring-soft-ms) var(--spring-soft), width var(--spring-soft-ms) var(--spring-soft); }
+.tab { position: relative; appearance: none; background: none; border: 0; cursor: pointer; color: var(--tab-item); min-height: 52px; border-radius: 999px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font: 500 11px/14px var(--f-ui); }
+.tab[aria-selected="true"] { color: var(--tab-active-fg); font-weight: 600; }
+.tab .i-on { display: none; } .tab[aria-selected="true"] .i-on { display: block; } .tab[aria-selected="true"] .i-off { display: none; }
+
+.sw-grid { display: grid; grid-template-columns: 64px repeat(9, 1fr); gap: 3px; align-items: center; margin-bottom: 4px; }
+.sw { height: 34px; border-radius: 6px; display: grid; place-items: center; font: 600 10px/1 var(--mono); }
+.sw-hex { font: 9px/1.2 var(--mono); color: var(--text3); text-align: center; overflow: hidden; }
+.fam { font: 600 11px/1.2 var(--mono); }
+.fam small { display: block; font-weight: 400; color: var(--text3); font-family: var(--f-ui); }
+
+.aa { display: inline-block; font: 700 11px/1 var(--f-ui); padding: 4px 7px; border-radius: 99px; }
+.aa.ok { background: var(--c-ok-bg); color: var(--c-ok); } .aa.bad { background: var(--c-bad-bg); color: var(--c-bad); }
+.sample { display: inline-grid; place-items: center; width: 52px; height: 30px; border-radius: 6px; font-weight: 700; border: 1px solid rgba(0,0,0,.06); }
+.opt table td, .opt table th { border-color: var(--border); }
+.opt table th { color: var(--text3); }
+
+.bar { height: 14px; background: var(--primary); border-radius: 3px; }
+.rad { width: 64px; height: 64px; background: var(--card); border: 1.5px solid var(--text3); }
+.elev { background: var(--card); border-radius: var(--r-card); height: 72px; display: grid; place-items: center; font-size: 12px; }
+.motion-stage { height: 92px; border-radius: var(--r-card); background: var(--card); border: 1px dashed var(--border); position: relative; overflow: hidden; }
+.motion-dot { position: absolute; left: 12px; top: 22px; width: 48px; height: 48px; border-radius: 99px; background: var(--primary); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 13px; }
+.kv dt { color: var(--text3); } .kv dd { margin: 0; }
+.tag.ok-def { background: var(--c-ok-bg); color: var(--c-ok); }
+.goal { position: relative; overflow: hidden; }
+.goal .track { height: 8px; border-radius: 99px; background: color-mix(in srgb, currentColor 14%, transparent); margin: 14px 0 14px; }
+.goal .fill { height: 100%; width: 62%; border-radius: 99px; background: currentColor; transition: width 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .fill { width: 100%; transition: width var(--dur-nav) cubic-bezier(.2,0,0,1); }
+.hl-chip { background: var(--hl); color: var(--on-hl); transform: scale(0); transition: transform 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .hl-chip { transform: scale(1); transition: transform var(--spring-bounce-ms) var(--spring-bounce) var(--dur-nav); }
+.spark-dot { position: absolute; top: -22px; right: -22px; width: 76px; height: 76px; border-radius: 999px; background: var(--hl); transform: scale(0); transition: transform 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .spark-dot { transform: scale(1); transition: transform var(--spring-bounce-ms) var(--spring-bounce) calc(var(--dur-nav) + 80ms); }
+.spark-pill { position: absolute; right: 24px; bottom: 18px; width: 64px; height: 22px; border-radius: 999px; background: var(--hl); opacity: 0; transform: translateX(48px); transition: opacity 150ms, transform 150ms; }
+.goal.done .spark-pill { opacity: 1; transform: none; transition: opacity 200ms var(--dur-nav), transform var(--spring-bounce-ms) var(--spring-bounce) calc(var(--dur-nav) + 160ms); }
+@media (prefers-reduced-motion: reduce) { .goal * { transition: opacity 200ms !important; } .goal.done .hl-chip, .goal.done .spark-dot { transform: scale(1); } }
+.qbox { border: 2px solid #3B2C9E; border-radius: 16px; padding: 20px; background: #F6F4FF; }
+.qbox h3 { margin: 0 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Vuno · Foundations — Opción A vs Opción B</h1>
+  <p>Dos propuestas de foundations para comparar lado a lado. <strong>Todo lo de esta página es <span class="tag">propuesta</span></strong> hasta que elijas. Nada se ha escrito en <code>FOUNDATIONS.md</code> ni en un repo.</p>
+  <p>Ambas respetan <code>DESIGN-BRIEF.md</code> (70% sobrio, morado como marca y acción, estados separados de verticales, radio medio con botones en pastilla, rebote suave, solo modo claro) y <code>TOKEN-NAMING.md</code> (tres capas, escalas <code>100–900</code> y tallas <code>xs–xl</code>). Los contrastes se calculan en vivo con la fórmula WCAG 2.x a partir de los mismos hex que se muestran.</p>
+  <p class="muted">Etiquetas: <span class="tag">propuesta</span> pendiente de tu elección · <span class="tag agree">requiere acordar</span> rompe una regla de <code>TOKEN-NAMING.md</code> y necesita tu visto bueno · <span class="tag ok-def">definido por ti</span> decisión tuya ya tomada.</p>
+  <nav class="toc">
+    <a href="#resumen">Resumen</a><a href="#muestras">Muestras</a><a href="#paleta">Paleta</a><a href="#tipo">Tipografía</a><a href="#espacio">Espaciado y radios</a><a href="#elevacion">Elevación</a><a href="#movimiento">Movimiento</a><a href="#contraste">Contraste AA</a><a href="#pendientes">Pendientes del brief</a><a href="#diez">El 10%</a><a href="#figma">Figma-ready</a>
+  </nav>
+</header>
+<main id="app"></main>
+</div>
+
+<script>
+const DATA = {"A":{"primitives":{"ink":{"100":"#FAF6EE","200":"#F2EEE6","300":"#E2DED5","400":"#C1BDB5","500":"#8F8C84","600":"#6C6861","700":"#504D46","800":"#312D27","900":"#171612"},"purple":{"100":"#F5F6FF","200":"#DCE0FF","300":"#BAC1FD","400":"#8C93FD","500":"#5B4CF0","600":"#4D3DD1","700":"#3F30B0","800":"#2D2187","900":"#1A1257"},"mint":{"100":"#EAFCF4","200":"#D0F3E5","300":"#AAE6CF","400":"#78D2B2","500":"#3FB28F","600":"#0B7B5F","700":"#07614A","800":"#024937","900":"#002F22"},"sky":{"100":"#F2F7FF","200":"#DCEBFF","300":"#BDD9FE","400":"#8FBFFE","500":"#5A9BEF","600":"#2963AB","700":"#1A4D8B","800":"#0F3768","900":"#062143"},"coral":{"100":"#FFF4F2","200":"#FFE3DD","300":"#FECBC0","400":"#FFA694","500":"#F2765F","600":"#A63B28","700":"#85291A","800":"#641B0F","900":"#400E06"},"lime":{"100":"#F4FAE1","200":"#EDF8C6","300":"#E2F49D","400":"#D5EC68","500":"#C5DE2E","600":"#7F9110","700":"#5E6B0A","800":"#444E00","900":"#2B3201"},"green":{"100":"#EAFCEE","200":"#CDF1D6","300":"#A1E0B3","400":"#69C687","500":"#1E9E57","600":"#0E773F","700":"#075D2F","800":"#014420","900":"#002A12"},"red":{"100":"#FFF4F2","200":"#FEDBD6","300":"#FFB6AB","400":"#FC7C6D","500":"#D6372E","600":"#B4231D","700":"#91100E","800":"#6D0606","900":"#460202"},"amber":{"100":"#FFF5E9","200":"#FEE8CC","300":"#FFD59F","400":"#FBBA5E","500":"#E59A12","600":"#B4780E","700":"#8E5E06","800":"#6A4400","900":"#472D02"},"azure":{"100":"#F1F7FF","200":"#D2E7FF","300":"#A6CEFE","400":"#64ABFB","500":"#1F7BD6","600":"#0963B5","700":"#044D8F","800":"#00386C","900":"#002245"}},"semantic":{"color.surface.page":{"ref":"ink.200","hex":"#F2EEE6"},"color.surface.card":{"ref":"ink.100","hex":"#FAF6EE"},"color.surface.inverse":{"ref":"ink.900","hex":"#171612"},"color.text.primary":{"ref":"ink.900","hex":"#171612"},"color.text.secondary":{"ref":"ink.700","hex":"#504D46"},"color.text.tertiary":{"ref":"ink.600","hex":"#6C6861"},"color.text.on-inverse":{"ref":"ink.100","hex":"#FAF6EE"},"color.text.on-inverse-muted":{"ref":"ink.400","hex":"#C1BDB5"},"color.brand.primary":{"ref":"purple.500","hex":"#5B4CF0"},"color.brand.primary.pressed":{"ref":"purple.600","hex":"#4D3DD1"},"color.brand.on-primary":{"ref":"ink.100","hex":"#FAF6EE"},"border.default":{"ref":"ink.300","hex":"#E2DED5"},"border.focus.ring":{"ref":"purple.500","hex":"#5B4CF0"},"color.vertical.banking.accent":{"ref":"purple.500","hex":"#5B4CF0"},"color.vertical.banking.on-accent":{"ref":"ink.100","hex":"#FAF6EE"},"color.vertical.save.accent":{"ref":"mint.200","hex":"#D0F3E5"},"color.vertical.save.on-accent":{"ref":"mint.900","hex":"#002F22"},"color.vertical.invest.accent":{"ref":"sky.200","hex":"#DCEBFF"},"color.vertical.invest.on-accent":{"ref":"sky.900","hex":"#062143"},"color.vertical.credit.accent":{"ref":"coral.200","hex":"#FFE3DD"},"color.vertical.credit.on-accent":{"ref":"coral.900","hex":"#400E06"},"color.status.success.bg":{"ref":"green.100","hex":"#EAFCEE"},"color.status.success.fg":{"ref":"green.700","hex":"#075D2F"},"color.status.error.bg":{"ref":"red.100","hex":"#FFF4F2"},"color.status.error.fg":{"ref":"red.700","hex":"#91100E"},"color.status.warning.bg":{"ref":"amber.100","hex":"#FFF5E9"},"color.status.warning.fg":{"ref":"amber.800","hex":"#6A4400"},"color.status.info.bg":{"ref":"azure.100","hex":"#F1F7FF"},"color.status.info.fg":{"ref":"azure.700","hex":"#044D8F"},"color.tabbar.bg":{"ref":"ink.900","hex":"#171612"},"color.tabbar.item":{"ref":"ink.400","hex":"#C1BDB5"},"color.tabbar.item.active.bg":{"ref":"purple.500","hex":"#5B4CF0"},"color.tabbar.item.active.fg":{"ref":"ink.100","hex":"#FAF6EE"},"color.highlight.accent":{"ref":"lime.500","hex":"#C5DE2E"},"color.highlight.on-accent":{"ref":"ink.900","hex":"#171612"}},"pairs":[{"label":"Texto principal / página","fg":"color.text.primary","bg":"color.surface.page","kind":"text"},{"label":"Texto principal / tarjeta","fg":"color.text.primary","bg":"color.surface.card","kind":"text"},{"label":"Texto secundario / página","fg":"color.text.secondary","bg":"color.surface.page","kind":"text"},{"label":"Texto terciario (caption) / página","fg":"color.text.tertiary","bg":"color.surface.page","kind":"text"},{"label":"Texto terciario (caption) / tarjeta","fg":"color.text.tertiary","bg":"color.surface.card","kind":"text"},{"label":"Saldo (balance) / página","fg":"color.text.primary","bg":"color.surface.page","kind":"large"},{"label":"Botón primario: etiqueta","fg":"color.brand.on-primary","bg":"color.brand.primary","kind":"text"},{"label":"Botón primario presionado","fg":"color.brand.on-primary","bg":"color.brand.primary.pressed","kind":"text"},{"label":"Anillo de foco / página","fg":"border.focus.ring","bg":"color.surface.page","kind":"ui"},{"label":"Banking: on-accent / accent","fg":"color.vertical.banking.on-accent","bg":"color.vertical.banking.accent","kind":"text"},{"label":"Save: on-accent / accent","fg":"color.vertical.save.on-accent","bg":"color.vertical.save.accent","kind":"text"},{"label":"Invest: on-accent / accent","fg":"color.vertical.invest.on-accent","bg":"color.vertical.invest.accent","kind":"text"},{"label":"Credit: on-accent / accent","fg":"color.vertical.credit.on-accent","bg":"color.vertical.credit.accent","kind":"text"},{"label":"Chip éxito","fg":"color.status.success.fg","bg":"color.status.success.bg","kind":"text"},{"label":"Chip error","fg":"color.status.error.fg","bg":"color.status.error.bg","kind":"text"},{"label":"Chip advertencia","fg":"color.status.warning.fg","bg":"color.status.warning.bg","kind":"text"},{"label":"Chip info","fg":"color.status.info.fg","bg":"color.status.info.bg","kind":"text"},{"label":"Texto de error / página","fg":"color.status.error.fg","bg":"color.surface.page","kind":"text"},{"label":"Texto de éxito / página","fg":"color.status.success.fg","bg":"color.surface.page","kind":"text"},{"label":"10%: texto sobre lima (chip de hito)","fg":"color.highlight.on-accent","bg":"color.highlight.accent","kind":"text"},{"label":"10%: lima sobre superficie oscura","fg":"color.highlight.accent","bg":"color.surface.inverse","kind":"ui"},{"label":"Tab bar: ítem inactivo","fg":"color.tabbar.item","bg":"color.tabbar.bg","kind":"text"},{"label":"Tab bar: ítem activo","fg":"color.tabbar.item.active.fg","bg":"color.tabbar.item.active.bg","kind":"text"},{"label":"Tab bar: pastilla activa / barra","fg":"color.tabbar.item.active.bg","bg":"color.tabbar.bg","kind":"ui"}]},"B":{"primitives":{"ink":{"100":"#F8F7F1","200":"#F2F0EA","300":"#E3E1DB","400":"#C5C4BE","500":"#94928D","600":"#6D6C67","700":"#4E4D48","800":"#2C2B27","900":"#141411"},"purple":{"100":"#F5F6FF","200":"#E0E3FE","300":"#C2C8FF","400":"#9BA1FD","500":"#6C63FF","600":"#5347D3","700":"#4034AC","800":"#2E2383","900":"#1B1355"},"mint":{"100":"#E9FCF5","200":"#D1F5E7","300":"#ABEBD4","400":"#7BDABB","500":"#46BE9C","600":"#0F7B61","700":"#0A614C","800":"#034938","900":"#002F23"},"sky":{"100":"#F2F7FF","200":"#DEEDFF","300":"#C4DDFE","400":"#9CC7FF","500":"#6AA8F7","600":"#2D64A7","700":"#1E4D87","800":"#123865","900":"#082240"},"coral":{"100":"#FFF4F2","200":"#FFE7E2","300":"#FED4CC","400":"#FEB8AB","500":"#FF8D7A","600":"#B45243","700":"#913D30","800":"#6C2B21","900":"#461912"},"lime":{"100":"#F4FCD7","200":"#EFFCBA","300":"#E8FC90","400":"#E1F964","500":"#D9F23F","600":"#8C9D03","700":"#64710C","800":"#444E02","900":"#2B3200"},"green":{"100":"#E9FDEE","200":"#CCF2D6","300":"#A0E3B4","400":"#67CA8A","500":"#17A35B","600":"#107641","700":"#085D31","800":"#014422","900":"#012A13"},"red":{"100":"#FFF4F2","200":"#FFDCD6","300":"#FEB8AE","400":"#FC8172","500":"#E0352B","600":"#B81814","700":"#940204","800":"#6D0505","900":"#480000"},"amber":{"100":"#FFF5E9","200":"#FEEAD0","300":"#FED9AA","400":"#FDC16E","500":"#F0A21A","600":"#B57801","700":"#8D5E0E","800":"#694403","900":"#472C00"},"azure":{"100":"#F1F7FF","200":"#D5E7FE","300":"#ADD0FD","400":"#6EAEFF","500":"#2B7FE0","600":"#1162B8","700":"#014B95","800":"#03376E","900":"#002148"}},"semantic":{"color.surface.page":{"ref":"ink.200","hex":"#F2F0EA"},"color.surface.card":{"ref":"ink.100","hex":"#F8F7F1"},"color.surface.inverse":{"ref":"ink.900","hex":"#141411"},"color.text.primary":{"ref":"ink.900","hex":"#141411"},"color.text.secondary":{"ref":"ink.700","hex":"#4E4D48"},"color.text.tertiary":{"ref":"ink.600","hex":"#6D6C67"},"color.text.on-inverse":{"ref":"ink.100","hex":"#F8F7F1"},"color.text.on-inverse-muted":{"ref":"ink.400","hex":"#C5C4BE"},"color.brand.primary":{"ref":"purple.600","hex":"#5347D3"},"color.brand.primary.pressed":{"ref":"purple.700","hex":"#4034AC"},"color.brand.on-primary":{"ref":"ink.100","hex":"#F8F7F1"},"border.default":{"ref":"ink.300","hex":"#E3E1DB"},"border.focus.ring":{"ref":"purple.600","hex":"#5347D3"},"color.vertical.banking.accent":{"ref":"ink.900","hex":"#141411"},"color.vertical.banking.on-accent":{"ref":"ink.100","hex":"#F8F7F1"},"color.vertical.save.accent":{"ref":"mint.300","hex":"#ABEBD4"},"color.vertical.save.on-accent":{"ref":"mint.900","hex":"#002F23"},"color.vertical.invest.accent":{"ref":"sky.300","hex":"#C4DDFE"},"color.vertical.invest.on-accent":{"ref":"sky.900","hex":"#082240"},"color.vertical.credit.accent":{"ref":"coral.300","hex":"#FED4CC"},"color.vertical.credit.on-accent":{"ref":"coral.900","hex":"#461912"},"color.status.success.bg":{"ref":"green.200","hex":"#CCF2D6"},"color.status.success.fg":{"ref":"green.800","hex":"#014422"},"color.status.error.bg":{"ref":"red.200","hex":"#FFDCD6"},"color.status.error.fg":{"ref":"red.800","hex":"#6D0505"},"color.status.warning.bg":{"ref":"amber.200","hex":"#FEEAD0"},"color.status.warning.fg":{"ref":"amber.900","hex":"#472C00"},"color.status.info.bg":{"ref":"azure.200","hex":"#D5E7FE"},"color.status.info.fg":{"ref":"azure.800","hex":"#03376E"},"color.tabbar.bg":{"ref":"ink.100","hex":"#F8F7F1"},"color.tabbar.item":{"ref":"ink.600","hex":"#6D6C67"},"color.tabbar.item.active.bg":{"ref":"ink.900","hex":"#141411"},"color.tabbar.item.active.fg":{"ref":"lime.300","hex":"#E8FC90"},"color.highlight.accent":{"ref":"lime.500","hex":"#D9F23F"},"color.highlight.on-accent":{"ref":"ink.900","hex":"#141411"}},"pairs":[{"label":"Texto principal / página","fg":"color.text.primary","bg":"color.surface.page","kind":"text"},{"label":"Texto principal / tarjeta","fg":"color.text.primary","bg":"color.surface.card","kind":"text"},{"label":"Texto secundario / página","fg":"color.text.secondary","bg":"color.surface.page","kind":"text"},{"label":"Texto terciario (caption) / página","fg":"color.text.tertiary","bg":"color.surface.page","kind":"text"},{"label":"Texto terciario (caption) / tarjeta","fg":"color.text.tertiary","bg":"color.surface.card","kind":"text"},{"label":"Saldo (balance) / página","fg":"color.text.primary","bg":"color.surface.page","kind":"large"},{"label":"Botón primario: etiqueta","fg":"color.brand.on-primary","bg":"color.brand.primary","kind":"text"},{"label":"Botón primario presionado","fg":"color.brand.on-primary","bg":"color.brand.primary.pressed","kind":"text"},{"label":"Anillo de foco / página","fg":"border.focus.ring","bg":"color.surface.page","kind":"ui"},{"label":"Banking: on-accent / accent","fg":"color.vertical.banking.on-accent","bg":"color.vertical.banking.accent","kind":"text"},{"label":"Save: on-accent / accent","fg":"color.vertical.save.on-accent","bg":"color.vertical.save.accent","kind":"text"},{"label":"Invest: on-accent / accent","fg":"color.vertical.invest.on-accent","bg":"color.vertical.invest.accent","kind":"text"},{"label":"Credit: on-accent / accent","fg":"color.vertical.credit.on-accent","bg":"color.vertical.credit.accent","kind":"text"},{"label":"Chip éxito","fg":"color.status.success.fg","bg":"color.status.success.bg","kind":"text"},{"label":"Chip error","fg":"color.status.error.fg","bg":"color.status.error.bg","kind":"text"},{"label":"Chip advertencia","fg":"color.status.warning.fg","bg":"color.status.warning.bg","kind":"text"},{"label":"Chip info","fg":"color.status.info.fg","bg":"color.status.info.bg","kind":"text"},{"label":"Texto de error / página","fg":"color.status.error.fg","bg":"color.surface.page","kind":"text"},{"label":"Texto de éxito / página","fg":"color.status.success.fg","bg":"color.surface.page","kind":"text"},{"label":"10%: texto sobre lima (chip de hito)","fg":"color.highlight.on-accent","bg":"color.highlight.accent","kind":"text"},{"label":"10%: lima sobre superficie oscura","fg":"color.highlight.accent","bg":"color.surface.inverse","kind":"ui"},{"label":"Tab bar: ítem inactivo","fg":"color.tabbar.item","bg":"color.tabbar.bg","kind":"text"},{"label":"Tab bar: ítem activo","fg":"color.tabbar.item.active.fg","bg":"color.tabbar.item.active.bg","kind":"text"},{"label":"Tab bar: pastilla activa / barra","fg":"color.tabbar.item.active.bg","bg":"color.tabbar.bg","kind":"ui"}]}};
+
+// ---------- Option configs (non-color foundations) ----------
+const OPT = {
+  A: {
+    name: 'Opción A · Editorial cálido',
+    pitch: 'Crema cálido, morado profundo y una display serif suave para titulares y saldos. Banking se viste con el morado de marca (la cuenta central); Save, Invest y Credit en pasteles. Sombras suaves y difusas; rebote contenido.',
+    fonts: { ui: 'Inter', display: 'Fraunces' },
+    fontNotes: { ui: 'Neutra, numerales tabulares (tnum) para listas de movimientos, muy probada en UI densa.', display: 'Serif "suave" con terminales redondeados: calidez y carácter en cifras grandes, sin parecer banco tradicional. Cercana al saldo de la referencia 6.' },
+    expo: { ui: '@expo-google-fonts/inter → Inter_400Regular, Inter_500Medium, Inter_600SemiBold', display: '@expo-google-fonts/fraunces → Fraunces_600SemiBold' },
+    type: [
+      { role: 'balance', size: 'xl', fam: 'display', w: 600, wName: 'SemiBold', px: 48, lh: 52, ls: -1 },
+      { role: 'headline', size: 'lg', fam: 'display', w: 600, wName: 'SemiBold', px: 28, lh: 36, ls: -0.5 },
+      { role: 'body', size: 'md', fam: 'ui', w: 400, wName: 'Regular', px: 16, lh: 24, ls: 0 },
+      { role: 'label', size: 'sm', fam: 'ui', w: 600, wName: 'SemiBold', px: 14, lh: 20, ls: 0 },
+      { role: 'caption', size: 'xs', fam: 'ui', w: 500, wName: 'Medium', px: 12, lh: 16, ls: 1 },
+    ],
+    space: { xs: 4, sm: 8, md: 16, lg: 24, xl: 40 },
+    spaceSem: { 'space.inset.screen': 'md', 'space.inset.card': 'lg', 'space.gap.list': 'sm', 'space.gap.section': 'xl' },
+    radius: { xs: 4, sm: 8, md: 12, lg: 16, xl: 24 },
+    radiusSem: { 'radius.input': 'md', 'radius.card': 'lg', 'radius.sheet': 'xl', 'radius.pill': 'full' },
+    elevation: {
+      card: { prim: 'elevation.sm', layers: [[0, 1, 2, 0, 4], [0, 4, 12, 0, 6]] },
+      floating: { prim: 'elevation.md', layers: [[0, 8, 24, -4, 16]] },
+      overlay: { prim: 'elevation.lg', layers: [[0, 16, 40, -8, 22]] },
+    },
+    cardBorder: 'none',
+    duration: [100, 200, 300, 500],
+    springs: { soft: { mass: 1, stiffness: 220, damping: 22 }, bounce: { mass: 1, stiffness: 250, damping: 19 } },
+    icons: 'Phosphor (phosphor-react-native): peso "regular" (≈1.5 px a 24 px) por defecto y peso "fill" en activo. Tiene librería oficial en Figma.',
+    stroke: 1.5,
+    lime: 'Lima = color del 10% (color.highlight.*): solo aparece en momentos de hito, nunca en reposo.',
+    ten: 'La lima nunca está en reposo: solo aparece en el momento de hito. Es la versión más contenida.',
+    banking: 'Banking = morado de marca sólido (purple.500, texto ink.100). La cuenta central "es" Vuno; las otras verticales son pasteles.',
+  },
+  B: {
+    name: 'Opción B · Tech suave',
+    pitch: 'Neutros casi grises con un toque cálido, el morado del PDF tal cual como color de marca y una grotesca display con carácter. Banking se viste de tinta oscura, así el morado queda solo para marca y acción y la lima queda libre para el 10%. Tarjetas planas con borde; sombra solo en lo flotante. Rebote algo más vivo.',
+    fonts: { ui: 'Plus Jakarta Sans', display: 'Bricolage Grotesque' },
+    fontNotes: { ui: 'Geométrica-humanista, amable y muy legible en tamaños pequeños; numerales claros.', display: 'Grotesca con contraste y personalidad: energía joven en saldos y titulares sin perder seriedad. Cercana a los titulares de las referencias 2 y 5.' },
+    expo: { ui: '@expo-google-fonts/plus-jakarta-sans → PlusJakartaSans_400Regular, _500Medium, _600SemiBold', display: '@expo-google-fonts/bricolage-grotesque → BricolageGrotesque_700Bold' },
+    type: [
+      { role: 'balance', size: 'xl', fam: 'display', w: 700, wName: 'Bold', px: 52, lh: 56, ls: -2 },
+      { role: 'headline', size: 'lg', fam: 'display', w: 700, wName: 'Bold', px: 28, lh: 32, ls: -1 },
+      { role: 'body', size: 'md', fam: 'ui', w: 400, wName: 'Regular', px: 16, lh: 24, ls: 0 },
+      { role: 'label', size: 'sm', fam: 'ui', w: 600, wName: 'SemiBold', px: 14, lh: 20, ls: 0 },
+      { role: 'caption', size: 'xs', fam: 'ui', w: 500, wName: 'Medium', px: 12, lh: 16, ls: 1 },
+    ],
+    space: { xs: 4, sm: 8, md: 12, lg: 20, xl: 32 },
+    spaceSem: { 'space.inset.screen': 'lg', 'space.inset.card': 'lg', 'space.gap.list': 'sm', 'space.gap.section': 'xl' },
+    radius: { xs: 4, sm: 8, md: 16, lg: 20, xl: 28 },
+    radiusSem: { 'radius.input': 'md', 'radius.card': 'lg', 'radius.sheet': 'xl', 'radius.pill': 'full' },
+    elevation: {
+      card: { prim: 'elevation.sm', layers: [], note: 'Sin sombra: borde 1 px border.default' },
+      floating: { prim: 'elevation.md', layers: [[0, 6, 20, 0, 12]] },
+      overlay: { prim: 'elevation.lg', layers: [[0, 12, 32, 0, 18]] },
+    },
+    cardBorder: '1px solid var(--border)',
+    duration: [100, 150, 250, 400],
+    springs: { soft: { mass: 1, stiffness: 300, damping: 22 }, bounce: { mass: 1, stiffness: 340, damping: 20 } },
+    icons: 'Ionicons (incluida en @expo/vector-icons, sin dependencia extra): variante "-outline" por defecto y variante rellena en activo. Hay archivo de comunidad en Figma.',
+    stroke: 1.75,
+    lime: 'Lima = color del 10% (color.highlight.*) en momentos de hito, más un único acento fijo: el icono activo de la barra inferior (lime.300).',
+    ten: 'Lima en los momentos de hito más un único acento fijo como firma: el icono activo de la barra inferior. Un poco más presente que A.',
+    banking: 'Banking = tinta oscura (ink.900, texto ink.100), como los bloques negros del PDF. Antes era lima; lo cambié porque una superficie lima fija contradice "acentos lima muy puntuales".',
+  },
+};
+
+// ---------- Helpers ----------
+const toLin = c => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+const lum = h => { const [r, g, b] = [1, 3, 5].map(i => toLin(parseInt(h.slice(i, i + 2), 16) / 255)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+const S = (k, t) => DATA[k].semantic[t].hex;
+const R = (k, t) => DATA[k].semantic[t].ref;
+const P = (k, ref) => { const [f, s] = ref.split('.'); return DATA[k].primitives[f][s]; };
+const shadowCss = (k, layers) => layers.length ? layers.map(([x, y, b, s, a]) => `${x}px ${y}px ${b}px ${s}px ${P(k, 'ink.900')}${Math.round(a * 2.55).toString(16).padStart(2, '0')}`).join(', ') : 'none';
+const shadowSpec = layers => layers.map(([x, y, b, s, a]) => `x ${x} · y ${y} · blur ${b} · spread ${s} · ink.900 ${a}%`).join('<br>');
+
+// Damped spring → CSS linear() easing + duration (same params as Reanimated withSpring / Figma spring).
+function spring({ mass, stiffness, damping }) {
+  let x = 0, v = 0, t = 0; const dt = 1 / 1000, pts = [];
+  let peak = 0;
+  while (t < 3) {
+    const a = (-stiffness * (x - 1) - damping * v) / mass;
+    v += a * dt; x += v * dt; t += dt; pts.push(x); peak = Math.max(peak, x);
+    if (t > 0.05 && Math.abs(x - 1) < 0.002 && Math.abs(v) < 0.02) break;
+  }
+  const n = 48, stops = [];
+  for (let i = 0; i <= n; i++) stops.push(i === n ? 1 : +pts[Math.round((i / n) * (pts.length - 1))].toFixed(4));
+  stops[0] = 0;
+  return { css: `linear(${stops.join(', ')})`, ms: Math.round(t * 1000), overshoot: Math.max(0, (peak - 1) * 100), zeta: damping / (2 * Math.sqrt(stiffness * mass)), pts };
+}
+
+const ICON = {
+  home: ['<path d="M3.5 10.2 12 3.5l8.5 6.7V19a1.5 1.5 0 0 1-1.5 1.5h-4.5V15h-5v5.5H5A1.5 1.5 0 0 1 3.5 19z"/>'],
+  card: ['<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h3"/>'],
+  pie: ['<path d="M11 4a8 8 0 1 0 9 9h-9z"/><path d="M14 2.5a7.5 7.5 0 0 1 7.5 7.5H14z"/>'],
+  user: ['<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/>'],
+  back: ['<path d="M15 5l-7 7 7 7"/>'],
+  more: ['<circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/>'],
+  arrow: ['<path d="M7 17 17 7M9 7h8v8"/>'],
+  send: ['<path d="M12 19V5M6 11l6-6 6 6"/>'],
+  check: ['<path d="M5 12.5 10 17l9-10"/>'],
+  x: ['<path d="M6 6l12 12M18 6 6 18"/>'],
+  warn: ['<path d="M12 7v6M12 16.5v.5"/>'],
+  info: ['<path d="M12 11v6M12 7.5v.5"/>'],
+};
+const icon = (name, { size = 24, stroke = 1.5, fill = false } = {}) =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name][0]}</svg>`;
+
+const pct = v => (v > 0 ? '+' : '') + v + '%';
+const lsPx = (px, p) => +(px * p / 100).toFixed(2);
+
+function vars(k) {
+  const o = OPT[k], t = o.type, soft = spring(o.springs.soft);
+  const role = r => t.find(x => x.role === r);
+  const v = {
+    '--page': S(k, 'color.surface.page'), '--card': S(k, 'color.surface.card'), '--text': S(k, 'color.text.primary'),
+    '--text2': S(k, 'color.text.secondary'), '--text3': S(k, 'color.text.tertiary'), '--primary': S(k, 'color.brand.primary'),
+    '--primary-pressed': S(k, 'color.brand.primary.pressed'), '--on-primary': S(k, 'color.brand.on-primary'), '--border': S(k, 'border.default'),
+    '--focus': S(k, 'border.focus.ring'), '--tab-bg': S(k, 'color.tabbar.bg'), '--tab-item': S(k, 'color.tabbar.item'),
+    '--tab-active-bg': S(k, 'color.tabbar.item.active.bg'), '--tab-active-fg': S(k, 'color.tabbar.item.active.fg'),
+    '--f-ui': `"${o.fonts.ui}", system-ui, sans-serif`, '--f-display': `"${o.fonts.display}", Georgia, serif`,
+    '--r-card': o.radius[o.radiusSem['radius.card']] + 'px', '--inset-card': o.space[o.spaceSem['space.inset.card']] + 'px',
+    '--gap-list': o.space[o.spaceSem['space.gap.list']] + 'px',
+    '--sh-card': shadowCss(k, o.elevation.card.layers), '--sh-floating': shadowCss(k, o.elevation.floating.layers), '--card-border': o.cardBorder,
+    '--spring-soft': soft.css, '--spring-soft-ms': soft.ms + 'ms',
+    '--spring-bounce': spring(o.springs.bounce).css, '--spring-bounce-ms': spring(o.springs.bounce).ms + 'ms', '--dur-nav': o.duration[2] + 'ms',
+    '--hl': S(k, 'color.highlight.accent'), '--on-hl': S(k, 'color.highlight.on-accent'),
+  };
+  for (const r of ['balance', 'headline']) { const x = role(r); Object.assign(v, { [`--s-${r}`]: x.px + 'px', [`--lh-${r}`]: x.lh + 'px', [`--ls-${r}`]: lsPx(x.px, x.ls) + 'px', [`--w-${r}`]: x.w }); }
+  return Object.entries(v).map(([a, b]) => `${a}:${b}`).join(';');
+}
+const panel = (k, html) => `<div class="opt" data-opt="${k}" style='${vars(k)}'>${html}</div>`;
+function row(id, title, lead, fn) {
+  return `<section class="row" id="${id}"><h2>${title}</h2>${lead ? `<p class="lead">${lead}</p>` : ''}<div class="cols">${['A', 'B'].map(k => `<div><p class="colhead">${OPT[k].name}</p>${panel(k, fn(k, OPT[k]))}</div>`).join('')}</div></section>`;
+}
+
+// ---------- Sections ----------
+const resumen = row('resumen', 'Resumen', 'La idea de cada opción en una frase, y la pareja tipográfica.', (k, o) => `
+  <div class="h-opt">${k === 'A' ? 'Editorial cálido' : 'Tech suave'}</div>
+  <p class="r-body">${o.pitch}</p>
+  <dl class="kv" style="margin-top:12px">
+    <dt>Sans UI</dt><dd><strong>${o.fonts.ui}</strong>. ${o.fontNotes.ui}</dd>
+    <dt>Display</dt><dd><strong>${o.fonts.display}</strong>. ${o.fontNotes.display}</dd>
+    <dt>Expo</dt><dd class="mono">${o.expo.ui}<br>${o.expo.display}</dd>
+  </dl>
+  <p style="margin-top:10px"><span class="tag">propuesta</span></p>`);
+
+function tabbar(k, o) {
+  const items = [['home', 'Inicio'], ['card', 'Cuentas'], ['pie', 'Invertir'], ['user', 'Perfil']];
+  return `<div class="tabbar" role="tablist" aria-label="Barra inferior ${k}"><span class="ind"></span>${items.map(([ic, l], i) =>
+    `<button class="tab" role="tab" aria-selected="${i === 0}"><span class="i-off">${icon(ic, { stroke: o.stroke })}</span><span class="i-on">${icon(ic, { stroke: o.stroke, fill: true })}</span>${l}</button>`).join('')}</div>`;
+}
+const chips = (k, o) => [['success', 'check', 'Pago recibido'], ['error', 'x', 'Pago rechazado'], ['warning', 'warn', 'Saldo bajo'], ['info', 'info', '+$100 llega el lunes']]
+  .map(([s, ic, l]) => `<span class="chip" style="background:${S(k, `color.status.${s}.bg`)};color:${S(k, `color.status.${s}.fg`)}">${icon(ic, { size: 14, stroke: 2.25 })}${l}</span>`).join(' ');
+const verticals = [['banking', 'Vuno', '$1,050.77', 'Cuenta principal'], ['save', 'Vuno Save', '$2,480.00', 'Meta: viaje · 62%'], ['invest', 'Vuno Invest', '$5,912.40', '+3.2% este mes'], ['credit', 'Vuno Credit', '$320.15', 'Vence el 14 oct']];
+
+const muestras = row('muestras', 'Muestras', 'Botón primario (púlsalo: rebote con el resorte <code>motion.spring.soft</code>), botones circulares, chips de estado, tarjetas de vertical, barra inferior flotante (toca los ítems) y cifra de saldo.', (k, o) => `
+  <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+    <button class="btn-circle" aria-label="Atrás">${icon('back', { stroke: o.stroke })}</button>
+    <button class="btn-circle" aria-label="Más">${icon('more', { stroke: o.stroke * 1.4 })}</button>
+  </div>
+  <div class="r-caption" style="color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Saldo disponible</div>
+  <div class="r-balance" style="margin:4px 0 8px">$1,050<span style="font-size:.55em;vertical-align:.62em">.77</span></div>
+  <div style="margin-bottom:20px"></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+    <button class="btn-primary">${icon('send', { size: 20, stroke: 2 })}Enviar dinero</button>
+  </div>
+  <div class="r-label" style="margin-bottom:8px">Chips de estado</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">${chips(k, o)}</div>
+  <div class="r-headline" style="margin-bottom:12px">Tus productos</div>
+  <div class="vgrid" style="margin-bottom:24px">${verticals.map(([v, n, amt, cap]) => `
+    <div class="vcard" style="--accent:${S(k, `color.vertical.${v}.accent`)};--on-accent:${S(k, `color.vertical.${v}.on-accent`)}">
+      <div class="top"><span class="r-label">${n}</span><span class="arrow">${icon('arrow', { size: 16, stroke: 1.75 })}</span></div>
+      <div><div class="r-headline" style="font-size:24px;line-height:28px">${amt}</div><div class="r-caption" style="opacity:1">${cap}</div></div>
+    </div>`).join('')}</div>
+  ${tabbar(k, o)}
+  <p class="meta" style="margin-top:12px">${o.banking}</p>`);
+
+const famRole = { ink: 'neutros', purple: 'marca', mint: 'vertical', sky: 'vertical', coral: 'vertical', lime: 'destacado 10%', green: 'estado', red: 'estado', amber: 'estado', azure: 'estado' };
+const paleta = row('paleta', 'Paleta', 'Primitivos <code>color.&lt;familia&gt;.100–900</code> (500 = base). Los estados usan familias propias (green, red, amber, azure), distintas de las de vertical (mint, sky, coral, lime). Debajo, la capa semántica que referencia a esos primitivos.', (k, o) => {
+  const prim = DATA[k].primitives;
+  const used = new Set(Object.values(DATA[k].semantic).map(x => x.ref));
+  const grid = Object.entries(prim).map(([f, s]) => `<div class="sw-grid"><div class="fam">${f}<small>${famRole[f]}</small></div>${Object.entries(s).map(([st, h]) =>
+    `<div title="color.${f}.${st} ${h}"><div class="sw" style="background:${h};color:${ratio(h, '#FFFFFF') > ratio(h, '#171612') ? '#FFF' : '#171612'};${used.has(f + '.' + st) ? 'outline:2px solid var(--text);outline-offset:-2px' : ''}">${st}</div><div class="sw-hex">${h.slice(1)}</div></div>`).join('')}</div>`).join('');
+  const sem = Object.entries(DATA[k].semantic).map(([t, x]) => `<tr><td class="mono">${t}</td><td class="mono">color.${x.ref}</td><td><span class="sample" style="width:28px;height:18px;background:${x.hex}"></span> <span class="mono">${x.hex}</span></td></tr>`).join('');
+  return `${grid}<p class="meta">Contorno = paso que usa la capa semántica. ${o.lime}</p>
+  <details><summary>Capa semántica (${Object.keys(DATA[k].semantic).length} tokens)</summary><div class="scroll"><table><tr><th>Semántico</th><th>→ Primitivo</th><th>Valor</th></tr>${sem}</table></div></details>`;
+});
+
+const tipo = row('tipo', 'Tipografía', 'Cinco roles que encajan con las cinco tallas de <code>font.size</code> (xs–xl): <code>font.role.&lt;rol&gt;</code> → <code>font.size.&lt;talla&gt;</code> + familia + peso. Tracking en % (Figma) y en px (React Native).', (k, o) => {
+  const sample = { balance: '$12,480.50', headline: 'Tu dinero, claro', body: 'Tu pago llegó. Así queda tu saldo.', label: 'Enviar dinero', caption: 'Hoy, 9:41 · Tarjeta •••• 4821' };
+  return `<table>${o.type.map(t => `<tr><td style="padding:12px 8px">
+    <div class="mono muted" style="margin-bottom:4px">font.role.${t.role} → font.size.${t.size}</div>
+    <div class="r-${t.role}" style="${t.role === 'caption' ? 'color:var(--text3)' : ''}">${sample[t.role]}</div>
+    <div class="meta" style="margin-top:4px">${o.fonts[t.fam]} ${t.wName} ${t.w} · ${t.px}/${t.lh} px · tracking ${pct(t.ls)} (${lsPx(t.px, t.ls)} px)</div></td></tr>`).join('')}</table>
+  <p class="meta" style="margin-top:8px">Todas las alturas de línea son múltiplos de 4. Tamaño mínimo de texto: 12 px (caption).</p>
+  <p class="meta"><span class="tag agree">requiere acordar</span> Con solo cinco tallas no cabe un rol <code>title</code> (≈20 px) para títulos de sección y hojas. Propongo añadir <code>font.size.2xl</code> o ampliar la regla. Decide tú.</p>`;
+});
+
+const espacio = row('espacio', 'Espaciado y radios', 'Grilla de 4 pt. Primitivos <code>space.xs–xl</code> y <code>radius.xs–xl</code>, y sus roles semánticos.', (k, o) => `
+  <div class="r-label" style="margin-bottom:8px">Espaciado</div>
+  <table>${Object.entries(o.space).map(([n, v]) => `<tr><td class="mono" style="width:90px">space.${n}</td><td style="width:50px">${v}</td><td><div class="bar" style="width:${v * 3}px"></div></td></tr>`).join('')}</table>
+  <p class="meta" style="margin-top:8px">${Object.entries(o.spaceSem).map(([t, s]) => `<span class="mono">${t}</span> → ${s} (${o.space[s]})`).join(' · ')}</p>
+  <p class="meta"><span class="tag agree">requiere acordar</span> ${k === 'A' ? 'Faltan 12 y 32 (paddings de chip y lista)' : 'Faltan 16, 24 y 48'}. Cinco tallas se quedan cortas para una app real; propongo permitir <code>2xs</code>/<code>2xl</code> o pasar a escala numérica (<code>space.4</code>, <code>space.8</code>…).</p>
+  <div class="r-label" style="margin:16px 0 8px">Radios</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">${Object.entries(o.radius).map(([n, v]) => `<div style="text-align:center"><div class="rad" style="border-radius:${v}px"></div><div class="mono" style="margin-top:4px">${n} · ${v}</div></div>`).join('')}
+    <div style="text-align:center"><div class="rad" style="width:96px;height:40px;border-radius:999px"></div><div class="mono" style="margin-top:4px">full · 999</div></div></div>
+  <p class="meta" style="margin-top:8px">${Object.entries(o.radiusSem).map(([t, s]) => `<span class="mono">${t}</span> → ${s}`).join(' · ')}</p>
+  <p class="meta"><span class="tag agree">requiere acordar</span> <code>radius.pill</code> necesita un primitivo que no es talla. Propongo <code>radius.full</code> (999).</p>`);
+
+const elevacion = row('elevacion', 'Elevación', 'Sombras definidas con los mismos campos que Figma ("Drop shadow") y que <code>boxShadow</code> de React Native (x, y, blur, spread, color, alfa). Color de sombra: <code>ink.900</code> (cálido, no negro puro).', (k, o) => `
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px 0 4px">${Object.entries(o.elevation).map(([n, e]) => `
+    <div><div class="elev" style="box-shadow:${shadowCss(k, e.layers)};${n === 'card' ? 'border:' + o.cardBorder : ''}">elevation.${n}</div>
+    <p class="meta" style="margin-top:8px">→ ${e.prim}<br>${e.layers.length ? shadowSpec(e.layers) : e.note}</p></div>`).join('')}</div>
+  <p class="meta"><span class="tag">propuesta</span> Primitivos con tallas <code>elevation.sm/md/lg</code>; roles <code>card</code>, <code>floating</code> (barra inferior, botón flotante) y <code>overlay</code> (hojas, modales). En Android antiguo sin la nueva arquitectura, <code>elevation</code> nativo como respaldo.</p>`);
+
+const movimiento = row('movimiento', 'Movimiento', 'Resortes definidos con masa, rigidez y amortiguación: son los mismos parámetros en Reanimated (<code>withSpring</code>) y en el resorte personalizado de Figma. La curva y la duración se calculan de esos valores.', (k, o) => {
+  const curves = Object.entries(o.springs).map(([n, p]) => {
+    const s = spring(p); const W = 220, H = 90, maxY = 1.25;
+    const pts = s.pts.filter((_, i) => i % 8 === 0).map((y, i, a) => `${(i / (a.length - 1) * W).toFixed(1)},${(H - y / maxY * H).toFixed(1)}`).join(' ');
+    return `<div style="margin-bottom:16px">
+      <div class="r-label">motion.spring.${n} <span class="muted" style="font-weight:400">· ${n === 'soft' ? 'botones, tarjetas, barra inferior' : 'momentos de logro (meta cumplida, pago enviado)'}</span></div>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:6px">
+        <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="background:var(--card);border-radius:8px;overflow:visible" aria-label="Curva del resorte ${n}">
+          <line x1="0" x2="${W}" y1="${H - H / maxY}" y2="${H - H / maxY}" stroke="var(--border)" stroke-dasharray="3 3"/>
+          <polyline points="${pts}" fill="none" stroke="var(--primary)" stroke-width="2"/></svg>
+        <dl class="kv"><dt>masa</dt><dd>${p.mass}</dd><dt>rigidez</dt><dd>${p.stiffness}</dd><dt>amortiguación</dt><dd>${p.damping}</dd>
+          <dt>rebote</dt><dd>${s.overshoot.toFixed(1)}% (ζ ${s.zeta.toFixed(2)})</dd><dt>asienta en</dt><dd>≈ ${s.ms} ms</dd></dl>
+      </div>
+      <div class="motion-stage" style="margin-top:8px"><div class="motion-dot" data-spring="${s.css}" data-ms="${s.ms}"></div></div>
+      <button class="tool play" style="margin-top:6px">▶ Probar</button></div>`;
+  }).join('');
+  return `${curves}
+  <table><tr><th>Duración</th><th>Uso</th></tr>${o.duration.map((d, i) => `<tr><td class="mono">motion.duration.${d}</td><td>${['Feedback al tocar (presionado)', 'Chips, cambios de estado, fundidos', 'Navegación, hojas, tarjetas', 'Celebración / logro'][i]}</td></tr>`).join('')}</table>
+  <p class="meta" style="margin-top:8px">Curvas sin resorte: <span class="mono">motion.easing.standard</span> = cubic-bezier(0.2, 0, 0, 1) · <span class="mono">motion.easing.exit</span> = cubic-bezier(0.4, 0, 1, 1). Con "Reducir movimiento" activo, los resortes se sustituyen por un fundido de ${o.duration[1]} ms.</p>`;
+});
+
+const kindTxt = { text: ['4.5:1', 'Texto normal'], large: ['3:1', 'Texto grande (≥24 px)'], ui: ['3:1', 'Componente / foco'] };
+const contraste = row('contraste', 'Contraste AA', 'Cada par texto/fondo que usan las muestras, calculado en vivo con los hex de la capa semántica. Umbrales WCAG 2.2 AA: 4.5:1 texto normal, 3:1 texto grande, iconos, bordes y anillo de foco.', (k) => {
+  let pass = 0;
+  const rows = DATA[k].pairs.map(p => {
+    const fg = S(k, p.fg), bg = S(k, p.bg), r = ratio(fg, bg), min = p.kind === 'text' ? 4.5 : 3, ok = r >= min; if (ok) pass++;
+    return `<tr><td>${p.label}<div class="mono muted" style="font-size:10.5px">${R(k, p.fg)} / ${R(k, p.bg)}</div></td>
+      <td><span class="sample" style="color:${fg};background:${bg}">Aa</span></td><td class="mono"><strong>${r.toFixed(2)}</strong></td>
+      <td class="mono" title="${kindTxt[p.kind][1]}">${kindTxt[p.kind][0]}</td><td><span class="aa ${ok ? 'ok' : 'bad'}">${ok ? '✓ AA' : '✗ Falla'}</span></td></tr>`;
+  }).join('');
+  return `<p class="r-label">${pass} / ${DATA[k].pairs.length} pares pasan AA</p><div class="scroll"><table><tr><th>Par</th><th></th><th>Ratio</th><th>Mín.</th><th></th></tr>${rows}</table></div>
+  ${k === 'B' ? '<p class="meta" style="margin-top:8px">El morado del PDF (#6C63FF, purple.500) con texto claro da 4.32:1 y no llega a AA. Por eso en B el botón usa purple.600; el 500 queda para logo y superficies sin texto.</p>' : '<p class="meta" style="margin-top:8px">El morado base se oscurece respecto al PDF (#6C63FF → #5B4CF0) para que el botón pase AA con su propio tono 500.</p>'}`;
+});
+
+// Pending items from the brief: [tema, ambas | {A, B}]
+const PEND = [
+  ['Paleta final y escalas de neutros', { A: 'Neutros "ink" con tono arena (más cálidos). Morado base #5B4CF0.', B: 'Neutros casi grises con calidez leve. Morado base #6C63FF (el del PDF), acción en purple.600.' }],
+  ['Familias tipográficas', { A: 'Inter (UI) + Fraunces (display).', B: 'Plus Jakarta Sans (UI) + Bricolage Grotesque (display).' }],
+  ['Color por vertical y Signal Lime', { A: 'Banking morado de marca sólido · Save mint · Invest sky · Credit coral (pasteles 200). Lima = 10%, solo en hitos.', B: 'Banking tinta oscura · Save mint · Invest sky · Credit coral (tonos 300). Lima = 10%: hitos + icono activo de la barra.' }],
+  ['Error y advertencia', { A: 'Error: familia red (fg red.700 sobre red.100). Advertencia: amber (fg amber.800 sobre amber.100). Separados de coral por saturación y tono.', B: 'Mismas familias con fondo de chip más presente (200) y texto 800/900.' }],
+  ['Grosor y librería de iconos', { A: 'Phosphor: regular (≈1.5 px) / fill en activo.', B: 'Ionicons: outline / relleno en activo (ya viene con Expo).' }],
+  ['Curvas y duraciones del movimiento', { A: 'soft 1/220/22 (≈3% rebote) · bounce 1/250/19. Duraciones 100/200/300/500.', B: 'soft 1/300/22 (≈8% rebote) · bounce 1/340/20. Duraciones 100/150/250/400.' }],
+  ['Elevación y sombras', { A: 'Tarjetas con sombra doble y suave; flotante y overlay más difusos.', B: 'Tarjetas planas con borde; sombra solo en flotante y overlay.' }],
+  ['Accesibilidad', 'AA en todos los pares (4.5:1 texto, 3:1 texto grande, iconos y foco). <code>size.touch.min</code> = 48 (cubre 44 pt de iOS y 48 dp de Android). Texto mínimo 12 px. Escalado de fuente del sistema permitido hasta 200% en body; saldo con <code>maxFontSizeMultiplier</code> 1.5. El color nunca es el único indicador (chips con icono). Se respeta "Reducir movimiento".'],
+  ['Herramienta de tokens para React Native', 'Fuente única en JSON con formato DTCG (W3C Design Tokens) → Style Dictionary v4 → <code>tokens.ts</code> tipado para RN. El mismo JSON se puede importar a variables de Figma (por ejemplo con Tokens Studio).'],
+  ['Versión web del Storybook', 'Storybook 9 con <code>@storybook/react-native</code> en dispositivo y <code>@storybook/react-native-web-vite</code> para web, con las mismas stories. El build estático se publica en Vercel (o en Chromatic si quieres revisión visual por PR).'],
+  ['¿PDF o este documento como fuente de verdad?', '<code>DESIGN-BRIEF.md</code> + <code>TOKEN-NAMING.md</code> + el futuro <code>FOUNDATIONS.md</code> pasan a ser la fuente de verdad. El PDF queda como antecedente, sin actualizarlo.'],
+  ['TOKEN-NAMING: escala de motion.duration', 'El número es milisegundos: <code>motion.duration.200</code> = 200 ms.'],
+  ['TOKEN-NAMING: pasos de elevation, border, opacity', '<code>elevation.sm/md/lg</code> (tallas). <code>border.width.sm</code> = 1, <code>border.width.md</code> = 2 (foco). <code>opacity.&lt;porcentaje&gt;</code>: <code>opacity.40</code> → <code>opacity.disabled</code>, <code>opacity.50</code> → <code>opacity.overlay</code>.'],
+];
+const pendientes = `<section class="row" id="pendientes"><h2>Pendientes del brief → propuestas</h2>
+  <p class="lead">Cada pendiente de <code>DESIGN-BRIEF.md §6</code> y de <code>TOKEN-NAMING.md</code> con una propuesta concreta. Todo marcado <span class="tag">propuesta</span> hasta que elijas.</p>
+  <div class="scroll"><table><tr><th style="width:22%">Pendiente</th><th>Opción A</th><th>Opción B</th></tr>
+  <tr><td><strong>Qué es el 10% del 70/20/10</strong></td><td colspan="2"><span class="tag ok-def">definido por ti</span> Detalles distintivos e inesperados, muy puntuales. Cómo lo traduzco a tokens y reglas: ver la sección siguiente <span class="tag">propuesta</span>.</td></tr>
+  ${PEND.map(([t, v]) => `<tr><td><strong>${t}</strong></td>${typeof v === 'string' ? `<td colspan="2"><span class="tag">propuesta</span> <span class="muted">(igual en ambas)</span> ${v}</td>` : `<td><span class="tag">propuesta</span> ${v.A}</td><td><span class="tag">propuesta</span> ${v.B}</td>`}</tr>`).join('')}
+  </table></div></section>`;
+
+const TEN_RULES = [
+  ['Tokens', '<code>color.highlight.accent</code> → lime.500 y <code>color.highlight.on-accent</code> → ink.900 (mismo patrón accent / on-accent que las verticales). Movimiento: <code>motion.spring.bounce</code>.'],
+  ['Cuándo', 'Solo en eventos positivos que el usuario provoca: crear una meta, alcanzar un hito, primer depósito, completar el alta. Nunca en errores, pagos fallidos, pagos vencidos de Credit ni avisos legales.'],
+  ['Cuánto', 'Como máximo un momento 10% por pantalla y por acción, de menos de 1 s. Si todo sorprende, nada sorprende.'],
+  ['Dónde no', 'Nunca sobre saldos, montos, botones primarios ni información crítica: lo inesperado acompaña, no informa.'],
+  ['Contraste', 'Lima sobre fondo claro da ≈1.2:1, así que nunca lleva información por sí sola: va con texto ink.900 encima (≥11.9:1) o sobre superficie oscura. Los puntos y formas decorativos no transmiten información y quedan fuera de AA.'],
+  ['Formas', 'Solo círculo y pastilla (el punto del logo y la pastilla de la portada del PDF), dibujados con <code>radius.full</code>. Son geometría de UI, no ilustración, así que respetan "sin ilustración, mascotas ni 3D".'],
+  ['Háptica', 'Toque háptico ligero al llegar al hito (<code>expo-haptics</code>, impacto Light), solo en el momento 10%.'],
+  ['Reducir movimiento', 'Sin rebote: el chip y el punto aparecen con un fundido.'],
+];
+const diez = `<section class="row" id="diez"><h2>El 10%: detalles inesperados</h2>
+  <p class="lead"><span class="tag ok-def">definido por ti</span> Una parte pequeña de la identidad reservada para detalles distintivos e inesperados (acentos lima muy puntuales, microinteracciones, formas abstractas y pequeñas sorpresas) sin afectar la claridad ni la confianza. Abajo propongo cómo convertirlo en tokens y reglas <span class="tag">propuesta</span>.</p>
+  <div class="scroll" style="margin-bottom:20px"><table>${TEN_RULES.map(([a, b]) => `<tr><td style="width:160px"><strong>${a}</strong></td><td>${b} <span class="tag">propuesta</span></td></tr>`).join('')}</table></div>
+  <div class="cols">${['A', 'B'].map(k => `<div><p class="colhead">${OPT[k].name}</p>${panel(k, `
+    <p class="r-body" style="margin-bottom:16px">${OPT[k].ten}</p>
+    <div class="card goal" style="background:${S(k, 'color.vertical.save.accent')};color:${S(k, 'color.vertical.save.on-accent')};border:0">
+      <span class="spark-dot" aria-hidden="true"></span><span class="spark-pill" aria-hidden="true"></span>
+      <div class="r-label">Vuno Save · Viaje a CDMX</div>
+      <div class="r-headline goal-amt" style="margin:8px 0 2px">$1,540.00</div>
+      <div class="r-caption">de $2,480.00</div>
+      <div class="track"><div class="fill"></div></div>
+      <span class="chip hl-chip">${icon('check', { size: 14, stroke: 2.25 })}¡Meta alcanzada!</span>
+    </div>
+    <button class="tool goal-play" style="margin-top:10px">▶ Simular hito</button>
+    <p class="meta" style="margin-top:8px">La barra se llena con <span class="mono">motion.easing.standard</span> (${OPT[k].duration[2]} ms); luego el chip lima y el punto entran con <span class="mono">motion.spring.bounce</span>.</p>`)}</div>`).join('')}</div></section>`;
+
+const figma = `<section class="row" id="figma"><h2>Figma-ready: cómo se cumple</h2>
+  <p class="lead">Aunque la prueba no usa Figma, cada valor se puede pasar tal cual a Variables y Estilos de Figma sin traducir nada.</p>
+  <table>
+  <tr><td><strong>Color</strong></td><td>Hex opacos de 6 dígitos. El alfa solo aparece en sombras y overlays, como en Figma.</td></tr>
+  <tr><td><strong>Unidades</strong></td><td>1 px aquí = 1 px en Figma = 1 pt en iOS = 1 dp en Android. Sin rem ni em.</td></tr>
+  <tr><td><strong>Tipografía</strong></td><td>Tamaño y alto de línea en px enteros; tracking en % (Figma) con su equivalente en px (RN). Solo pesos que existen como instancia estática en Google Fonts y en <code>@expo-google-fonts</code>.</td></tr>
+  <tr><td><strong>Sombras</strong></td><td>x, y, blur, spread, color y alfa: los mismos campos en Figma y en <code>boxShadow</code> de RN.</td></tr>
+  <tr><td><strong>Movimiento</strong></td><td>Resortes con masa, rigidez y amortiguación (Figma: animación inteligente con resorte personalizado; RN: Reanimated <code>withSpring</code>). Curvas bezier de 4 valores.</td></tr>
+  <tr><td><strong>Nombres</strong></td><td><code>color.purple.500</code> ⇄ <code>color/purple/500</code> en Variables. Tres colecciones: Primitivo, Semántico (modo "Light", listo para añadir "Dark") y Componente.</td></tr>
+  </table>
+  <div class="cols" style="margin-top:16px">${['A', 'B'].map(k => `<details><summary>JSON de tokens (DTCG) · ${OPT[k].name}</summary>
+    <button class="tool copy" data-k="${k}" style="margin:8px 0">Copiar JSON</button><pre id="json-${k}"></pre></details>`).join('')}</div></section>`;
+
+function dtcg(k) {
+  const o = OPT[k], out = { color: {}, space: {}, radius: {}, font: { family: {}, size: {}, role: {} }, motion: { duration: {}, spring: {} }, elevation: {}, semantic: {} };
+  for (const [f, s] of Object.entries(DATA[k].primitives)) { out.color[f] = {}; for (const [st, h] of Object.entries(s)) out.color[f][st] = { $type: 'color', $value: h }; }
+  for (const [n, v] of Object.entries(o.space)) out.space[n] = { $type: 'dimension', $value: { value: v, unit: 'px' } };
+  for (const [n, v] of Object.entries(o.radius)) out.radius[n] = { $type: 'dimension', $value: { value: v, unit: 'px' } };
+  out.radius.full = { $type: 'dimension', $value: { value: 999, unit: 'px' }, $description: 'requiere acordar' };
+  out.font.family = { ui: { $type: 'fontFamily', $value: o.fonts.ui }, display: { $type: 'fontFamily', $value: o.fonts.display } };
+  for (const t of o.type) {
+    out.font.size[t.size] = { $type: 'dimension', $value: { value: t.px, unit: 'px' } };
+    out.font.role[t.role] = { $type: 'typography', $value: { fontFamily: `{font.family.${t.fam}}`, fontSize: `{font.size.${t.size}}`, fontWeight: t.w, lineHeight: { value: t.lh, unit: 'px' }, letterSpacing: { value: lsPx(t.px, t.ls), unit: 'px' } } };
+  }
+  for (const d of o.duration) out.motion.duration[d] = { $type: 'duration', $value: { value: d, unit: 'ms' } };
+  for (const [n, p] of Object.entries(o.springs)) out.motion.spring[n] = { $type: 'spring', $value: p, $description: 'mass / stiffness / damping (Reanimated withSpring, Figma spring)' };
+  for (const [n, e] of Object.entries(o.elevation)) out.elevation[n] = { $type: 'shadow', $value: e.layers.map(([x, y, b, s, a]) => ({ color: '{color.ink.900}', alpha: a / 100, offsetX: { value: x, unit: 'px' }, offsetY: { value: y, unit: 'px' }, blur: { value: b, unit: 'px' }, spread: { value: s, unit: 'px' } })) };
+  for (const [t, x] of Object.entries(DATA[k].semantic)) out.semantic[t] = { $type: 'color', $value: `{color.${x.ref}}` };
+  return out;
+}
+
+document.getElementById('app').innerHTML = resumen + muestras + paleta + tipo + espacio + elevacion + movimiento + contraste + pendientes + diez + figma;
+
+// Fix the balance-area chip (only the "info" chip goes under the balance).
+document.querySelectorAll('#muestras .opt').forEach(p => {
+  const holder = p.querySelector('.r-balance').nextElementSibling; const info = p.querySelectorAll('.chip')[3];
+  holder.innerHTML = ''; holder.appendChild(info.cloneNode(true));
+});
+
+// Tab bar: spring-driven indicator.
+document.querySelectorAll('.tabbar').forEach(bar => {
+  const ind = bar.querySelector('.ind'), tabs = [...bar.querySelectorAll('.tab')];
+  const place = t => { ind.style.width = t.offsetWidth + 'px'; ind.style.transform = `translateX(${t.offsetLeft}px)`; };
+  tabs.forEach(t => t.addEventListener('click', () => { tabs.forEach(x => x.setAttribute('aria-selected', x === t)); place(t); }));
+  const init = () => { ind.style.transition = 'none'; place(tabs[0]); ind.offsetWidth; ind.style.transition = ''; };
+  init(); addEventListener('resize', init); document.fonts && document.fonts.ready.then(init);
+});
+
+// Spring demos.
+document.querySelectorAll('.play').forEach(b => b.addEventListener('click', () => {
+  const dot = b.previousElementSibling.querySelector('.motion-dot'), stage = dot.parentElement;
+  const end = stage.clientWidth - 72;
+  const back = dot.dataset.at === 'end';
+  dot.style.transition = `transform ${dot.dataset.ms}ms ${dot.dataset.spring}`;
+  dot.style.transform = back ? 'translateX(0)' : `translateX(${end}px)`;
+  dot.dataset.at = back ? 'start' : 'end';
+}));
+
+document.querySelectorAll('.goal-play').forEach(b => b.addEventListener('click', () => {
+  const g = b.previousElementSibling, done = g.classList.toggle('done');
+  b.textContent = done ? '↺ Reiniciar' : '▶ Simular hito';
+  g.querySelector('.goal-amt').textContent = done ? '$2,480.00' : '$1,540.00';
+}));
+
+for (const k of ['A', 'B']) document.getElementById('json-' + k).textContent = JSON.stringify(dtcg(k), null, 2);
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(document.getElementById('json-' + b.dataset.k).textContent); b.textContent = 'Copiado'; } catch { b.textContent = 'No se pudo copiar'; }
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vuno Foundations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Bricolage+Grotesque:wght@700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<style>
+:root {
+  --page: #F2F0EA; --card: #F8F7F1; --inverse: #141411; --text: #141411; --text2: #4E4D48; --text3: #6D6C67; --on-inv: #F8F7F1;
+  --primary: #5347D3; --primary-pressed: #4034AC; --on-primary: #F8F7F1; --border: #E3E1DB; --border-input: #6D6C67; --focus: #5347D3;
+  --hl: #D9F23F; --on-hl: #141411;
+  --ok-bg: #CCF2D6; --ok: #014422; --bad-bg: #FFDCD6; --bad: #6D0505;
+  --ui: "Plus Jakarta Sans", system-ui, sans-serif; --display: "Bricolage Grotesque", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --sh-floating: 0 6px 20px 0 #1414111F; --sh-overlay: 0 12px 32px 0 #1414112E;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--text); font: 400 16px/24px var(--ui); }
+.layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); max-width: 1240px; margin: 0 auto; }
+aside { position: sticky; top: 0; height: 100vh; overflow: auto; padding: 32px 16px 32px 20px; }
+aside .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+aside .logo { width: 36px; height: 36px; border-radius: 10px; background: #6C63FF; position: relative; }
+aside .logo::after { content: ""; position: absolute; width: 10px; height: 10px; border-radius: 99px; background: var(--hl); top: 6px; right: 6px; }
+aside a { display: block; padding: 6px 12px; border-radius: 999px; color: var(--text2); text-decoration: none; font: 500 14px/20px var(--ui); }
+aside a:hover { background: var(--card); color: var(--text); }
+main { padding: 40px 20px 120px; min-width: 0; }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } aside { position: static; height: auto; display: flex; flex-wrap: wrap; gap: 4px; padding: 16px; } aside .brand { width: 100%; margin-bottom: 8px; } main { padding-top: 8px; } }
+h1 { font: 700 52px/56px var(--display); letter-spacing: -1.04px; margin: 0 0 8px; }
+h2 { font: 700 28px/32px var(--display); letter-spacing: -0.28px; margin: 0 0 8px; }
+h3 { font: 600 20px/28px var(--ui); margin: 32px 0 12px; }
+section { padding: 48px 0 8px; border-top: 1px solid var(--border); margin-top: 32px; scroll-margin-top: 8px; }
+p { margin: 0 0 12px; max-width: 760px; }
+.lead { color: var(--text2); }
+.caption { font: 500 12px/16px var(--ui); letter-spacing: .12px; color: var(--text3); }
+.label { font: 600 14px/20px var(--ui); }
+code, .mono { font-family: var(--mono); font-size: 13px; }
+code { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0 5px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 20px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font: 600 12px/16px var(--ui); color: var(--text3); }
+.tablecard { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 8px; }
+.tablecard tr:last-child td { border-bottom: 0; }
+.dot { display: inline-block; width: 18px; height: 18px; border-radius: 6px; vertical-align: -4px; margin-right: 8px; border: 1px solid #1414111A; }
+.meta { font-size: 14px; line-height: 20px; color: var(--text2); }
+
+.rules { margin: 0 0 8px; padding-left: 20px; max-width: 800px; }
+.rules li { margin-bottom: 6px; }
+.dd { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+@media (max-width: 600px) { .dd { grid-template-columns: 1fr; } }
+.dd > div { border-radius: 20px; padding: 16px 20px; }
+.dd .do { background: var(--ok-bg); color: var(--ok); } .dd .dont { background: var(--bad-bg); color: var(--bad); }
+.dd h4 { margin: 0 0 8px; display: flex; align-items: center; gap: 6px; font: 600 14px/20px var(--ui); }
+.dd ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 20px; } .dd li { margin-bottom: 6px; }
+
+.ramp { display: grid; grid-template-columns: 110px repeat(9, minmax(0, 1fr)); gap: 4px; align-items: stretch; margin-bottom: 6px; }
+.ramp .fam { font: 500 13px/16px var(--mono); padding-top: 8px; } .ramp .fam small { display: block; font: 500 11px/14px var(--ui); color: var(--text3); }
+.sw { border-radius: 10px; height: 52px; padding: 6px; display: flex; flex-direction: column; justify-content: space-between; font: 500 10px/12px var(--mono); position: relative; }
+.sw.used::after { content: ""; position: absolute; right: 6px; top: 6px; width: 6px; height: 6px; border-radius: 9px; background: currentColor; }
+@media (max-width: 700px) { .ramp { grid-template-columns: 64px repeat(9, minmax(0, 1fr)); } .sw { height: 40px; font-size: 8px; } }
+
+.spec { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; align-items: end; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.spec:last-child { border-bottom: 0; }
+.bar { height: 16px; background: var(--primary); border-radius: 4px; }
+.rad { width: 72px; height: 72px; background: var(--card); border: 2px solid var(--text); }
+
+.btn { appearance: none; border: 0; cursor: pointer; background: var(--primary); color: var(--on-primary); border-radius: 999px; min-height: 48px; padding: 0 24px; font: 600 14px/20px var(--ui); display: inline-flex; align-items: center; gap: 8px; transition: transform var(--soft-ms) var(--soft); }
+.btn:active { background: var(--primary-pressed); transform: scale(.96); transition: transform 100ms cubic-bezier(.2,0,0,1); }
+.btn[disabled] { background: #C2C8FF; opacity: .4; cursor: not-allowed; transform: none; }
+.btn:focus-visible, .circle:focus-visible, .tab:focus-visible, .field input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.circle { appearance: none; width: 48px; height: 48px; border-radius: 999px; border: 1px solid var(--border); background: var(--card); color: var(--text); display: inline-grid; place-items: center; cursor: pointer; font-size: 24px; transition: transform var(--soft-ms) var(--soft); }
+.circle:active { transform: scale(.92); transition-duration: 100ms; }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 10px 4px 8px; font: 600 12px/16px var(--ui); }
+.chip ion-icon { font-size: 16px; }
+.field { display: grid; gap: 6px; max-width: 340px; }
+.field input { font: 400 16px/24px var(--ui); color: var(--text); background: var(--card); border: 1px solid var(--border-input); border-radius: 16px; min-height: 48px; padding: 0 16px; }
+.field.error input { border-color: var(--bad); }
+.field .err { display: flex; gap: 4px; align-items: center; color: var(--bad); font: 500 12px/16px var(--ui); }
+.vgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vcard { border-radius: 20px; padding: 20px; min-height: 148px; display: flex; flex-direction: column; justify-content: space-between; }
+.vcard .top { display: flex; justify-content: space-between; align-items: center; }
+.vcard .arrow { width: 32px; height: 32px; border-radius: 99px; border: 1.5px solid currentColor; display: grid; place-items: center; font-size: 16px; }
+.tabbar { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border-radius: 999px; padding: 6px; box-shadow: var(--sh-floating); max-width: 420px; }
+.tabbar .ind { position: absolute; top: 6px; bottom: 6px; left: 0; border-radius: 999px; background: var(--inverse); transition: transform var(--soft-ms) var(--soft), width var(--soft-ms) var(--soft); }
+.tab { position: relative; appearance: none; background: none; border: 0; cursor: pointer; color: var(--text3); min-height: 52px; border-radius: 999px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font: 500 11px/14px var(--ui); }
+.tab ion-icon { font-size: 24px; }
+.tab[aria-selected="true"] { color: var(--hl); font-weight: 600; }
+.phone { background: var(--page); border: 1px solid var(--border); border-radius: 28px; padding: 20px; }
+
+.elev { background: var(--card); border-radius: 20px; height: 96px; display: grid; place-items: center; font: 500 13px/16px var(--mono); }
+.stage { height: 88px; border-radius: 20px; background: var(--card); border: 1px dashed var(--border-input); position: relative; overflow: hidden; }
+.ball { position: absolute; left: 16px; top: 20px; width: 48px; height: 48px; border-radius: 99px; background: var(--primary); }
+.tool { font: 600 13px/16px var(--ui); padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border-input); background: var(--card); color: var(--text); cursor: pointer; margin-top: 8px; }
+
+.goal { position: relative; overflow: hidden; background: #ABEBD4; color: #002F23; border-radius: 20px; padding: 20px; max-width: 420px; }
+.goal .track { height: 8px; border-radius: 99px; background: #002F2324; margin: 14px 0; }
+.goal .fill { height: 100%; width: 62%; border-radius: 99px; background: currentColor; transition: width 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .fill { width: 100%; transition: width 250ms cubic-bezier(.2,0,0,1); }
+.hl-chip { background: var(--hl); color: var(--on-hl); transform: scale(0); transition: transform 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .hl-chip { transform: scale(1); transition: transform var(--bounce-ms) var(--bounce) 250ms; }
+.spark { position: absolute; top: -22px; right: -22px; width: 76px; height: 76px; border-radius: 999px; background: var(--hl); transform: scale(0); transition: transform 150ms cubic-bezier(.4,0,1,1); }
+.goal.done .spark { transform: scale(1); transition: transform var(--bounce-ms) var(--bounce) 330ms; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: 150ms !important; transition-timing-function: linear !important; transition-delay: 0s !important; } }
+
+.aa { display: inline-flex; align-items: center; gap: 4px; font: 600 12px/16px var(--ui); padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+.aa.ok { background: var(--ok-bg); color: var(--ok); } .aa.bad { background: var(--bad-bg); color: var(--bad); } .aa.ex { background: #FEEAD0; color: #472C00; }
+.sample { display: inline-grid; place-items: center; width: 52px; height: 32px; border-radius: 8px; font-weight: 700; border: 1px solid #1414111A; }
+.touch { position: relative; display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 99px; outline: 2px dashed var(--primary); outline-offset: 0; font-size: 24px; }
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+@media (max-width: 700px) { .hero { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand"><div class="logo"></div><div><div class="label">Vuno</div><div class="caption">Foundations · B</div></div></div>
+  <a href="#color">1 · Color</a><a href="#tipo">2 · Tipografía</a><a href="#espacio">3 · Espaciado</a><a href="#radios">4 · Radios</a><a href="#elevacion">5 · Elevación y bordes</a><a href="#movimiento">6 · Movimiento</a><a href="#iconos">7 · Iconos</a><a href="#a11y">8 · Accesibilidad</a><a href="#diez">9 · El 10%</a><a href="#componentes">10 · Componentes</a><a href="#contraste">11 · Contraste AA</a><a href="#figma">12 · Figma</a><a href="#pendientes">13 · Pendientes</a>
+</aside>
+<main id="app"></main>
+</div>
+<script>
+const PRIM = {"ink":{"100":"#F8F7F1","200":"#F2F0EA","300":"#E3E1DB","400":"#C5C4BE","500":"#94928D","600":"#6D6C67","700":"#4E4D48","800":"#2C2B27","900":"#141411"},"purple":{"100":"#F5F6FF","200":"#E0E3FE","300":"#C2C8FF","400":"#9BA1FD","500":"#6C63FF","600":"#5347D3","700":"#4034AC","800":"#2E2383","900":"#1B1355"},"mint":{"100":"#E9FCF5","200":"#D1F5E7","300":"#ABEBD4","400":"#7BDABB","500":"#46BE9C","600":"#0F7B61","700":"#0A614C","800":"#034938","900":"#002F23"},"sky":{"100":"#F2F7FF","200":"#DEEDFF","300":"#C4DDFE","400":"#9CC7FF","500":"#6AA8F7","600":"#2D64A7","700":"#1E4D87","800":"#123865","900":"#082240"},"coral":{"100":"#FFF4F2","200":"#FFE7E2","300":"#FED4CC","400":"#FEB8AB","500":"#FF8D7A","600":"#B45243","700":"#913D30","800":"#6C2B21","900":"#461912"},"lime":{"100":"#F4FCD7","200":"#EFFCBA","300":"#E8FC90","400":"#E1F964","500":"#D9F23F","600":"#8C9D03","700":"#64710C","800":"#444E02","900":"#2B3200"},"green":{"100":"#E9FDEE","200":"#CCF2D6","300":"#A0E3B4","400":"#67CA8A","500":"#17A35B","600":"#107641","700":"#085D31","800":"#014422","900":"#012A13"},"red":{"100":"#FFF4F2","200":"#FFDCD6","300":"#FEB8AE","400":"#FC8172","500":"#E0352B","600":"#B81814","700":"#940204","800":"#6D0505","900":"#480000"},"amber":{"100":"#FFF5E9","200":"#FEEAD0","300":"#FED9AA","400":"#FDC16E","500":"#F0A21A","600":"#B57801","700":"#8D5E0E","800":"#694403","900":"#472C00"},"azure":{"100":"#F1F7FF","200":"#D5E7FE","300":"#ADD0FD","400":"#6EAEFF","500":"#2B7FE0","600":"#1162B8","700":"#014B95","800":"#03376E","900":"#002148"}};
+// ---------- helpers ----------
+const toLin = c => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+const lum = h => { const [r, g, b] = [1, 3, 5].map(i => toLin(parseInt(h.slice(i, i + 2), 16) / 255)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+const P = ref => { const [f, s] = ref.split('.'); return PRIM[f][s]; };
+function spring({ mass, stiffness, damping }) {
+  let x = 0, v = 0, t = 0, peak = 0; const dt = 1 / 1000, pts = [];
+  while (t < 3) { const a = (-stiffness * (x - 1) - damping * v) / mass; v += a * dt; x += v * dt; t += dt; pts.push(x); peak = Math.max(peak, x); if (t > 0.05 && Math.abs(x - 1) < 0.002 && Math.abs(v) < 0.02) break; }
+  const n = 48, stops = []; for (let i = 0; i <= n; i++) stops.push(i === n ? 1 : +pts[Math.round((i / n) * (pts.length - 1))].toFixed(4)); stops[0] = 0;
+  return { css: `linear(${stops.join(', ')})`, ms: Math.round(t * 1000), overshoot: (peak - 1) * 100, pts };
+}
+const SPRINGS = { soft: { mass: 1, stiffness: 300, damping: 22 }, bounce: { mass: 1, stiffness: 340, damping: 20 } };
+const S_SOFT = spring(SPRINGS.soft), S_BOUNCE = spring(SPRINGS.bounce);
+document.documentElement.style.cssText += `--soft:${S_SOFT.css};--soft-ms:${S_SOFT.ms}ms;--bounce:${S_BOUNCE.css};--bounce-ms:${S_BOUNCE.ms}ms;`;
+const ic = (name, extra = '') => `<ion-icon name="${name}" aria-hidden="true" ${extra}></ion-icon>`;
+const table = (head, rows) => `<div class="tablecard scroll"><table><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const dd = (dos, donts) => `<div class="dd"><div class="do"><h4>${ic('checkmark-circle')} Do</h4><ul>${dos.map(x => `<li>${x}</li>`).join('')}</ul></div><div class="dont"><h4>${ic('close-circle')} Don't</h4><ul>${donts.map(x => `<li>${x}</li>`).join('')}</ul></div></div>`;
+const rules = list => `<ul class="rules">${list.map(x => `<li>${x}</li>`).join('')}</ul>`;
+const sw = hex => `<span class="dot" style="background:${hex}"></span>`;
+
+// ---------- semantic layer ----------
+const SEM = [
+  ['color.surface.page', 'ink.200'], ['color.surface.card', 'ink.100'], ['color.surface.inverse', 'ink.900'], ['color.surface.scrim', 'ink.900', 'con opacity.overlay'],
+  ['color.text.primary', 'ink.900'], ['color.text.secondary', 'ink.700'], ['color.text.tertiary', 'ink.600'], ['color.text.on-inverse', 'ink.100'], ['color.text.on-inverse-muted', 'ink.400'],
+  ['color.brand.primary', 'purple.600'], ['color.brand.primary.pressed', 'purple.700'], ['color.brand.primary.disabled', 'purple.300'], ['color.brand.on-primary', 'ink.100'], ['color.brand.logo', 'purple.500', 'solo logo y superficies sin texto'],
+  ['color.border.default', 'ink.300', 'decorativo'], ['color.border.input', 'ink.600', 'límite de control (3:1)'], ['color.border.focus', 'purple.600'],
+  ['color.vertical.banking.accent', 'ink.900'], ['color.vertical.banking.on-accent', 'ink.100'], ['color.vertical.save.accent', 'mint.300'], ['color.vertical.save.on-accent', 'mint.900'],
+  ['color.vertical.invest.accent', 'sky.300'], ['color.vertical.invest.on-accent', 'sky.900'], ['color.vertical.credit.accent', 'coral.300'], ['color.vertical.credit.on-accent', 'coral.900'],
+  ['color.status.success.bg', 'green.200'], ['color.status.success.fg', 'green.800'], ['color.status.error.bg', 'red.200'], ['color.status.error.fg', 'red.800'],
+  ['color.status.warning.bg', 'amber.200'], ['color.status.warning.fg', 'amber.900'], ['color.status.info.bg', 'azure.200'], ['color.status.info.fg', 'azure.800'],
+  ['color.highlight.accent', 'lime.500'], ['color.highlight.on-accent', 'ink.900'],
+];
+const SM = Object.fromEntries(SEM.map(([t, r]) => [t, r]));
+const H = t => P(SM[t]);
+const famRole = { ink: 'Neutros', purple: 'Marca', mint: 'Vertical · Save', sky: 'Vertical · Invest', coral: 'Vertical · Credit', lime: 'Destacado 10%', green: 'Estado · éxito', red: 'Estado · error', amber: 'Estado · advertencia', azure: 'Estado · info' };
+const used = new Set(SEM.map(s => s[1]));
+
+// ---------- sections ----------
+const intro = `<div class="hero"><div>
+  <div class="caption" style="text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Sistema de diseño · Opción B · Tech suave</div>
+  <h1>Vuno Foundations</h1>
+  <p class="lead">Los valores finales de cada token, sus reglas de uso y cómo se llevan a Figma. Los nombres siguen <code>TOKEN-NAMING.md</code>: el primitivo dice qué es, el semántico para qué sirve y el componente dónde se usa. La interfaz nunca usa un primitivo directamente. Por ahora hay solo modo claro.</p>
+  <p class="meta">Esta página está construida con los propios tokens: fondo <code>color.surface.page</code>, texto en Plus Jakarta Sans, titulares en Bricolage Grotesque.</p>
+</div></div>`;
+
+const color = `<section id="color"><h2>1 · Color</h2>
+  <p class="lead">Diez familias en pasos 100–900, donde 500 es la base de cada una. Las escalas se generaron en OKLCH y se recortaron a sRGB. El punto marca los pasos que usa la capa semántica.</p>
+  <h3>Primitivos</h3>
+  <div class="card">${Object.entries(PRIM).map(([f, s]) => `<div class="ramp"><div class="fam">${f}<small>${famRole[f]}</small></div>${Object.entries(s).map(([st, h]) =>
+    `<div class="sw ${used.has(f + '.' + st) ? 'used' : ''}" title="color.${f}.${st} ${h}" style="background:${h};color:${ratio(h, '#F8F7F1') > ratio(h, '#141411') ? '#F8F7F1' : '#141411'}"><span>${st}</span><span>${h.slice(1)}</span></div>`).join('')}</div>`).join('')}</div>
+  <h3>Semánticos</h3>
+  ${table(['Token', '→ Primitivo', 'Valor', 'Nota'], SEM.map(([t, r, n]) => [`<span class="mono">${t}</span>`, `<span class="mono">color.${r}</span>`, `${sw(P(r))}<span class="mono">${P(r)}</span>`, n ? `<span class="meta">${n}</span>` : '']))}
+  <p class="meta" style="margin-top:8px"><code>color.vertical.accent</code> y <code>color.vertical.on-accent</code> se resuelven según la vertical activa.</p>
+  <h3>Reglas</h3>
+  ${rules([
+    '<strong>70/20/10:</strong> el 70% son neutros <code>ink</code>, el 20% el morado de acción y los acentos de vertical, y el 10% la lima (§9).',
+    '<code>color.brand.primary</code> se usa solo para la acción principal y el foco. <code>color.brand.logo</code> (#6C63FF) nunca lleva texto encima.',
+    'El color de vertical identifica la vertical y nada más. El color de estado expresa estado y siempre va con icono o texto.',
+    'Si un acento es el fondo, su contenido usa el <code>on-accent</code> correspondiente.',
+    'No se usan blanco ni negro puros: el fondo más claro es <code>ink.100</code> y el más oscuro <code>ink.900</code>.'])}
+  ${dd(['Un solo botón morado por pantalla.', 'Mint para la tarjeta de Save.', 'Chip de error con icono ✕ y texto.', 'Texto <code>ink.900</code> sobre lima.'],
+       ['Morado en tarjetas, iconos decorativos o fondos.', 'Mint para decir "pago exitoso": eso es <code>status.success</code>.', 'Un error comunicado solo con color rojo.', 'Lima como texto sobre fondo claro, o #FFFFFF y #000000.'])}
+</section>`;
+
+const TYPE = [
+  ['balance', '2xl', 'display', 'Bricolage Grotesque Bold 700', 52, 56, -2, '$12,480.50', 'Cifra del saldo principal'],
+  ['headline', 'xl', 'display', 'Bricolage Grotesque Bold 700', 28, 32, -1, 'Tu dinero, claro', 'Titular de pantalla, monto en tarjeta'],
+  ['title', 'lg', 'ui', 'Plus Jakarta Sans SemiBold 600', 20, 28, 0, 'Movimientos recientes', 'Título de sección, de hoja y de modal'],
+  ['body', 'md', 'ui', 'Plus Jakarta Sans Regular 400', 16, 24, 0, 'Tu pago llegó. Así queda tu saldo.', 'Texto corrido'],
+  ['label', 'sm', 'ui', 'Plus Jakarta Sans SemiBold 600', 14, 20, 0, 'Enviar dinero', 'Botones, etiquetas, montos en listas'],
+  ['caption', 'xs', 'ui', 'Plus Jakarta Sans Medium 500', 12, 16, 1, 'Hoy, 9:41 · Tarjeta •••• 4821', 'Fechas, metadatos, chips'],
+];
+const tipo = `<section id="tipo"><h2>2 · Tipografía</h2>
+  <p class="lead">Una sans para la interfaz y una display para titulares y saldos. Ambas están en Google Fonts y en Expo.</p>
+  ${table(['Token', 'Fuente', 'Paquete Expo e instancias'], [
+    ['<span class="mono">font.family.ui</span>', '<span style="font:600 16px var(--ui)">Plus Jakarta Sans</span>', '<span class="mono">@expo-google-fonts/plus-jakarta-sans</span><br><span class="mono">PlusJakartaSans_400Regular · _500Medium · _600SemiBold</span>'],
+    ['<span class="mono">font.family.display</span>', '<span style="font:700 18px var(--display)">Bricolage Grotesque</span>', '<span class="mono">@expo-google-fonts/bricolage-grotesque</span><br><span class="mono">BricolageGrotesque_700Bold</span>']])}
+  <h3>Roles</h3>
+  <div class="card">${TYPE.map(([r, sz, fam, w, px, lh, ls, txt, use]) => `<div class="spec">
+    <div><div class="mono" style="color:var(--text3);margin-bottom:6px">font.role.${r} → font.size.${sz}</div>
+    <div style="font-family:var(--${fam});font-weight:${w.match(/\d+/)[0]};font-size:${px}px;line-height:${lh}px;letter-spacing:${(px * ls / 100).toFixed(2)}px;${r === 'balance' ? 'font-variant-numeric:lining-nums' : ''}">${txt}</div></div>
+    <div class="meta" style="text-align:right">${w}<br>${px}/${lh} px · tracking ${ls > 0 ? '+' : ''}${ls}% (${(px * ls / 100).toFixed(2)} px)<br>${use}</div></div>`).join('')}</div>
+  <h3>Reglas</h3>
+  ${rules(['La display es parte del 20%: se usa solo en <code>balance</code> y <code>headline</code>.', 'Un solo <code>balance</code> por pantalla.', 'Los montos en listas usan <code>fontVariant: [\'tabular-nums\']</code> para quedar alineados.',
+    'En React Native cada peso es una familia distinta: el rol apunta a la instancia, no a <code>fontWeight</code> (Android lo ignora con fuentes personalizadas).', 'El texto nunca baja de 12 px y todas las alturas de línea son múltiplos de 4.', 'Se respeta el escalado del sistema hasta 200% en <code>body</code>. El saldo usa <code>maxFontSizeMultiplier</code> 1.5.'])}
+  ${dd(['Un saldo grande en <code>balance</code>.', 'Títulos de sección en <code>title</code>, con la sans.', 'Montos de lista en <code>label</code> con cifras tabulares.'],
+       ['Dos saldos en <code>balance</code> compitiendo.', 'Bricolage en un botón o en un párrafo.', 'Texto de 10 u 11 px "para que quepa".'])}
+</section>`;
+
+const SPACE = { '2xs': 4, xs: 8, sm: 12, md: 16, lg: 20, xl: 24, '2xl': 32, '3xl': 48 };
+const espacio = `<section id="espacio"><h2>3 · Espaciado</h2>
+  <p class="lead">Grilla de 4 pt. Todo espacio es múltiplo de 4 y sale de un token.</p>
+  <div class="card">${Object.entries(SPACE).map(([n, v]) => `<div style="display:grid;grid-template-columns:110px 40px 1fr;align-items:center;gap:12px;padding:6px 0"><span class="mono">space.${n}</span><span class="meta">${v}</span><div class="bar" style="width:${v * 4}px"></div></div>`).join('')}</div>
+  <h3>Semánticos</h3>
+  ${table(['Token', '→ Primitivo', 'Valor', 'Uso'], [['space.inset.screen', 'space.lg', 20, 'Margen lateral de pantalla'], ['space.inset.card', 'space.lg', 20, 'Padding de tarjeta'], ['space.inset.chip', 'space.xs', 8, 'Padding horizontal de chip (vertical: space.2xs)'], ['space.gap.list', 'space.xs', 8, 'Entre filas y tarjetas en grilla'], ['space.gap.stack', 'space.md', 16, 'Entre bloques de una sección'], ['space.gap.section', 'space.2xl', 32, 'Entre secciones']].map(([a, b, c, d]) => [`<span class="mono">${a}</span>`, `<span class="mono">${b}</span>`, c, d]))}
+  <h3>Reglas</h3>
+  ${rules(['<strong>Densidad equilibrada:</strong> inicio y pantallas de marca usan <code>gap.section</code>; transacciones y detalle usan <code>gap.list</code>.', 'Entre dos áreas táctiles hay al menos <code>space.xs</code> (8).'])}
+  ${dd(['Margen de pantalla 20 en todas las verticales.', 'Más aire en inicio, más compacto en movimientos.'], ['Un margen de 18 "porque se ve mejor".', 'La misma densidad en todas las pantallas.'])}
+</section>`;
+
+const RAD = { xs: 4, sm: 8, md: 16, lg: 20, xl: 28, full: 999 };
+const radios = `<section id="radios"><h2>4 · Radios</h2>
+  <p class="lead">Redondeado medio en los contenedores y pastilla en todo lo que se pulsa.</p>
+  <div class="card" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end">${Object.entries(RAD).map(([n, v]) => `<div style="text-align:center"><div class="rad" style="border-radius:${v}px;${n === 'full' ? 'width:120px;height:48px' : ''}"></div><div class="mono" style="margin-top:6px">radius.${n} · ${v}</div></div>`).join('')}</div>
+  <h3>Semánticos</h3>
+  ${table(['Token', '→ Primitivo', 'Valor', 'Uso'], [['radius.input', 'radius.md', 16, 'Campos, selectores'], ['radius.card', 'radius.lg', 20, 'Tarjetas'], ['radius.sheet', 'radius.xl', 28, 'Esquinas superiores de hojas'], ['radius.pill', 'radius.full', 999, 'Botones, chips, barra inferior, botones circulares']].map(([a, b, c, d]) => [`<span class="mono">${a}</span>`, `<span class="mono">${b}</span>`, c, d]))}
+  ${dd(['Botón primario en pastilla.', 'Tarjeta 20 con imagen interna de 16 o menos.'], ['Botón con <code>radius.md</code>.', 'Un elemento anidado con más radio que su contenedor.'])}
+</section>`;
+
+const elevacion = `<section id="elevacion"><h2>5 · Elevación, bordes y opacidad</h2>
+  <p class="lead">Las tarjetas son planas, con borde. La sombra es solo para lo que flota sobre el contenido.</p>
+  <div class="grid2">
+    <div><div class="elev" style="border:1px solid var(--border)">card · border.default</div><p class="meta" style="margin-top:8px">Sin sombra. 1 px <code>ink.300</code>.</p></div>
+    <div><div class="elev" style="box-shadow:var(--sh-floating)">elevation.floating</div><p class="meta" style="margin-top:8px">→ <code>elevation.sm</code>: x 0 · y 6 · blur 20 · spread 0 · ink.900 al 12%</p></div>
+    <div><div class="elev" style="box-shadow:var(--sh-overlay)">elevation.overlay</div><p class="meta" style="margin-top:8px">→ <code>elevation.md</code>: x 0 · y 12 · blur 32 · spread 0 · ink.900 al 18%</p></div>
+  </div>
+  <h3>Bordes y opacidad</h3>
+  ${table(['Token', '→ Primitivo(s)', 'Uso'], [
+    ['border.width.sm / md', '1 / 2', 'Primitivos'], ['border.default', 'border.width.sm + color.border.default', 'Tarjetas, separadores, botón circular (decorativo)'], ['border.input', 'border.width.sm + color.border.input', 'Campos y controles (límite de 3:1)'],
+    ['border.focus.ring', 'border.width.md + color.border.focus, separado 2 px', 'Foco de teclado'], ['opacity.40 → opacity.disabled', '0.40', 'Elementos deshabilitados'], ['opacity.50 → opacity.overlay', '0.50', 'Velo detrás de hojas y modales (color.surface.scrim)']].map(([a, b, c]) => [`<span class="mono">${a}</span>`, `<span class="mono">${b}</span>`, c]))}
+  <p class="meta" style="margin-top:8px">En React Native se usa <code>boxShadow</code> (nueva arquitectura, Expo SDK 52 o superior). El respaldo en Android es <code>elevation</code> nativo.</p>
+  ${dd(['Sombra en la barra inferior flotante.', 'Velo ink.900 al 50% detrás de una hoja.'], ['Sombra en las tarjetas de una lista.', 'Velo negro puro.'])}
+</section>`;
+
+function curve(s) { const W = 240, Hh = 90, m = 1.25; const pts = s.pts.filter((_, i) => i % 8 === 0).map((y, i, a) => `${(i / (a.length - 1) * W).toFixed(1)},${(Hh - y / m * Hh).toFixed(1)}`).join(' ');
+  return `<svg width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="background:var(--page);border-radius:10px;overflow:visible"><line x1="0" x2="${W}" y1="${Hh - Hh / m}" y2="${Hh - Hh / m}" stroke="var(--border-input)" stroke-dasharray="3 3"/><polyline points="${pts}" fill="none" stroke="var(--primary)" stroke-width="2"/></svg>`; }
+const movimiento = `<section id="movimiento"><h2>6 · Movimiento</h2>
+  <p class="lead">Rebote suave y con propósito. Los resortes se definen con masa, rigidez y amortiguación, que son los mismos parámetros en Reanimated y en Figma.</p>
+  <div class="grid2">${[['soft', S_SOFT, SPRINGS.soft, 'Botones, tarjetas, indicador de la barra inferior'], ['bounce', S_BOUNCE, SPRINGS.bounce, 'Solo momentos 10%']].map(([n, s, p, use]) => `<div class="card">
+    <div class="label">motion.spring.${n}</div><p class="meta">${use}</p>${curve(s)}
+    <p class="meta" style="margin-top:8px">masa ${p.mass} · rigidez ${p.stiffness} · amortiguación ${p.damping}<br>rebote ≈${s.overshoot.toFixed(0)}% · asienta en ≈${s.ms} ms</p>
+    <div class="stage"><div class="ball" data-css="${s.css}" data-ms="${s.ms}"></div></div><button class="tool play">▶ Probar</button></div>`).join('')}</div>
+  <h3>Duraciones y curvas</h3>
+  ${table(['Semántico', '→ Primitivo', 'Uso'], [['motion.duration.press', 'motion.duration.100 (100 ms)', 'Respuesta al tocar'], ['motion.duration.state', 'motion.duration.150 (150 ms)', 'Chips, estados, fundidos'], ['motion.duration.nav', 'motion.duration.250 (250 ms)', 'Navegación, hojas, tarjetas'], ['motion.duration.celebrate', 'motion.duration.400 (400 ms)', 'Momentos 10%'], ['motion.easing.standard', 'cubic-bezier(0.2, 0, 0, 1)', 'Entradas'], ['motion.easing.exit', 'cubic-bezier(0.4, 0, 1, 1)', 'Salidas']].map(([a, b, c]) => [`<span class="mono">${a}</span>`, `<span class="mono">${b}</span>`, c]))}
+  <h3>Reglas</h3>
+  ${rules(['El movimiento confirma, explica o conecta una acción. Nunca es decorativo en reposo.', 'Al pulsar, el elemento se escala a 0.96 durante <code>press</code> y vuelve con <code>spring.soft</code> (pulsa el botón de §10).', 'La navegación usa las transiciones nativas de cada plataforma.', 'Con "Reducir movimiento" activo, los resortes se cambian por un fundido de <code>duration.state</code>.'])}
+  ${dd(['Rebote suave al soltar un botón.', 'Saldo que aparece con un fundido corto.'], ['<code>spring.bounce</code> en un botón normal.', 'Animaciones de más de 400 ms en flujos de pago.'])}
+</section>`;
+
+const ICONS = ['home', 'card', 'pie-chart', 'person', 'wallet', 'notifications', 'swap-horizontal', 'flag'];
+const iconos = `<section id="iconos"><h2>7 · Iconos</h2>
+  <p class="lead">Ionicons (incluida en <code>@expo/vector-icons</code>). Por defecto se usa la variante outline y, en estado activo, la rellena. El grosor es 1.5 px a 24 px (trazo de 32 sobre 512).</p>
+  <div class="card"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px">${ICONS.map(n => `<div style="text-align:center"><div style="display:flex;justify-content:center;gap:10px;font-size:24px">${ic(n + '-outline')}${ic(n)}</div><div class="caption" style="margin-top:6px">${n}</div></div>`).join('')}</div>
+  <p class="meta" style="margin:16px 0 0">Izquierda: reposo (outline) · derecha: activo (relleno)</p></div>
+  ${table(['Token', 'Valor', 'Uso'], [['icon.size.sm', `16 ${ic('home-outline', 'style="font-size:16px;vertical-align:-3px"')}`, 'Chips, junto a caption'], ['icon.size.md', `24 ${ic('home-outline', 'style="font-size:24px;vertical-align:-6px"')}`, 'Por defecto'], ['icon.size.lg', `32 ${ic('home-outline', 'style="font-size:32px;vertical-align:-9px"')}`, 'Estados vacíos, hitos']].map(([a, b, c]) => [`<span class="mono">${a}</span>`, b, c]))}
+  <h3>Reglas</h3>
+  ${rules(['El icono toma el color del texto que acompaña (<code>text.*</code>, <code>.fg</code> o <code>on-accent</code>).', 'Un icono sin texto necesita <code>accessibilityLabel</code>, y su área táctil es <code>size.touch.min</code>.'])}
+  ${dd(['<code>home-outline</code> → <code>home</code> al seleccionar la pestaña.', 'Botón circular de 48 con un icono de 24.'], ['Mezclar Ionicons con otra librería.', 'Un icono de 24 como área táctil de 24.'])}
+</section>`;
+
+const a11y = `<section id="a11y"><h2>8 · Accesibilidad y tamaños</h2>
+  <div class="card" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+    <span class="touch">${ic('arrow-back')}</span>
+    <div><div class="label">size.touch.min = 48</div><p class="meta" style="margin:0">El área punteada es el área táctil mínima. Cubre los 44 pt de iOS y los 48 dp de Android. Entre áreas táctiles hay al menos 8.</p></div></div>
+  <h3>Reglas</h3>
+  ${rules(['<strong>Contraste WCAG 2.2 AA:</strong> 4.5:1 para texto normal y 3:1 para texto grande (24 px o más, o 18.66 px en negrita), iconos, límites de control y foco. Los elementos deshabilitados están exentos.', 'El color nunca es el único indicador: los chips llevan icono y los errores llevan texto.', 'Se respeta el tamaño de fuente del sistema (§2) y "Reducir movimiento" (§6).', 'Los lectores de pantalla leen los montos completos ("1,050 dólares con 77 centavos").'])}
+</section>`;
+
+const diez = `<section id="diez"><h2>9 · El 10%: detalles inesperados</h2>
+  <p class="lead">Una parte pequeña de la identidad para detalles distintivos e inesperados que aportan personalidad sin afectar la claridad ni la confianza. Son acentos lima muy puntuales, microinteracciones, formas abstractas y pequeños momentos de sorpresa.</p>
+  <div class="grid2" style="align-items:start">
+    <div><div class="goal" id="goal"><span class="spark" aria-hidden="true"></span>
+      <div class="label">Vuno Save · Viaje a CDMX</div>
+      <div id="goal-amt" style="font:700 28px/32px var(--display);letter-spacing:-.28px;margin:8px 0 2px">$1,540.00</div><div class="caption" style="color:inherit">de $2,480.00</div>
+      <div class="track"><div class="fill"></div></div>
+      <span class="chip hl-chip">${ic('checkmark')}¡Meta alcanzada!</span></div>
+      <button class="tool" id="goal-play">▶ Simular hito</button>
+      <p class="meta" style="margin-top:8px">La barra se llena con <code>easing.standard</code> en <code>duration.nav</code>. Luego entran el chip lima y el punto con <code>spring.bounce</code>, y suena un háptico ligero.</p></div>
+    ${table(['Regla', ''], [['Tokens', '<code>color.highlight.accent</code> / <code>.on-accent</code>, <code>motion.spring.bounce</code>, <code>motion.duration.celebrate</code>'], ['Cuándo', 'Eventos positivos que provoca el usuario: crear una meta, alcanzar un hito, primer depósito, completar el alta.'], ['Cuándo no', 'Errores, pagos fallidos, pagos vencidos de Credit y avisos legales.'], ['Cuánto', 'Como máximo un momento por pantalla y por acción, de menos de 1 s.'], ['Dónde no', 'Saldos, montos, botones primarios e información crítica.'], ['Acento fijo', 'Una única excepción: el icono activo de la barra inferior.'], ['Formas', 'Solo círculo y pastilla, con <code>radius.full</code>. Son geometría, no ilustración.'], ['Háptica', '<code>expo-haptics</code>, impacto Light, solo en el hito.']].map(([a, b]) => [`<strong>${a}</strong>`, b]))}
+  </div>
+  ${dd(['Un chip lima al cumplir una meta.', 'Un punto lima que aparece una vez y se queda quieto.', 'Celebrar el primer depósito.'], ['Lima en el botón de "Pagar".', 'Formas lima flotando en reposo en el inicio.', 'Celebrar que se pagó el mínimo de una deuda.'])}
+</section>`;
+
+const VERT = [['banking', 'Vuno', '$1,050.77', 'Cuenta principal'], ['save', 'Vuno Save', '$2,480.00', 'Meta: viaje · 62%'], ['invest', 'Vuno Invest', '$5,912.40', '+3.2% este mes'], ['credit', 'Vuno Credit', '$320.15', 'Vence el 14 oct']];
+const STAT = [['success', 'checkmark', 'Pago recibido'], ['error', 'close', 'Pago rechazado'], ['warning', 'alert', 'Saldo bajo'], ['info', 'information', '+$100 llega el lunes']];
+const chip = ([s, i, l]) => `<span class="chip" style="background:${H(`color.status.${s}.bg`)};color:${H(`color.status.${s}.fg`)}">${ic(i)}${l}</span>`;
+const componentes = `<section id="componentes"><h2>10 · Componentes de muestra</h2>
+  <p class="lead">La capa 3: cada componente referencia solo tokens semánticos.</p>
+  <div class="grid2" style="align-items:start">
+  <div class="phone">
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px"><button class="circle" aria-label="Atrás">${ic('arrow-back')}</button><button class="circle" aria-label="Más">${ic('ellipsis-horizontal')}</button></div>
+    <div class="caption" style="text-transform:uppercase;letter-spacing:.08em">Saldo disponible</div>
+    <div style="font:700 52px/56px var(--display);letter-spacing:-1.04px;margin:4px 0 8px">$1,050<span style="font-size:.55em;vertical-align:.62em">.77</span></div>
+    ${chip(STAT[3])}
+    <div style="display:flex;gap:12px;margin:20px 0 24px;flex-wrap:wrap"><button class="btn">${ic('arrow-up')}Enviar dinero</button><button class="btn" disabled>Deshabilitado</button></div>
+    <div style="font:600 20px/28px var(--ui);margin-bottom:12px">Tus productos</div>
+    <div class="vgrid" style="margin-bottom:24px">${VERT.map(([v, n, a, c]) => `<div class="vcard" style="background:${H(`color.vertical.${v}.accent`)};color:${H(`color.vertical.${v}.on-accent`)}">
+      <div class="top"><span class="label">${n}</span><span class="arrow">${ic('arrow-forward')}</span></div>
+      <div><div style="font:700 24px/28px var(--display)">${a}</div><div class="caption" style="color:inherit">${c}</div></div></div>`).join('')}</div>
+    <div class="tabbar" role="tablist"><span class="ind"></span>${[['home', 'Inicio'], ['card', 'Cuentas'], ['pie-chart', 'Invertir'], ['person', 'Perfil']].map(([i, l], k) =>
+      `<button class="tab" role="tab" aria-selected="${k === 0}" data-icon="${i}">${ic(k === 0 ? i : i + '-outline')}${l}</button>`).join('')}</div>
+  </div>
+  <div>
+    <div class="card"><div class="label" style="margin-bottom:12px">Chips de estado</div><div style="display:flex;flex-wrap:wrap;gap:8px">${STAT.map(chip).join('')}</div></div>
+    <div class="card" style="margin-top:16px;display:grid;gap:16px"><div class="label">Campo de texto</div>
+      <label class="field"><span class="label">Monto</span><input value="$250.00" aria-label="Monto"></label>
+      <label class="field error"><span class="label">Número de cuenta</span><input value="1234" aria-label="Número de cuenta" aria-invalid="true"><span class="err">${ic('close-circle')}Faltan dígitos</span></label>
+      <p class="meta" style="margin:0">Borde <code>border.input</code> (ink.600, 4.90:1) · foco <code>border.focus.ring</code> (pulsa Tab) · error <code>status.error.fg</code></p></div>
+    ${'' }
+  </div></div>
+  <h3>Tokens de componente</h3>
+  ${table(['Componente', 'Tokens'], [
+    ['Botón primario', '<span class="mono">button.primary.bg → color.brand.primary · .fg → color.brand.on-primary · .radius → radius.pill · .height → size.touch.min · .font → font.role.label</span><br><span class="meta">pressed y disabled se resuelven con color.brand.primary.pressed / .disabled</span>'],
+    ['Botón circular', '<span class="mono">button.circle.bg → color.surface.card · .border → border.default · .size → size.touch.min · .icon → color.text.primary</span>'],
+    ['Chip de estado', '<span class="mono">chip.status.&lt;estado&gt;.bg / .fg → color.status.&lt;estado&gt;.bg / .fg · chip.radius → radius.pill · chip.font → font.role.caption · chip.icon → icon.size.sm</span>'],
+    ['Chip destacado', '<span class="mono">chip.highlight.bg → color.highlight.accent · chip.highlight.fg → color.highlight.on-accent</span>'],
+    ['Tarjeta de vertical', '<span class="mono">card.accent.bg → color.vertical.accent · card.accent.fg → color.vertical.on-accent · card.radius → radius.card · card.inset → space.inset.card</span>'],
+    ['Tarjeta neutra', '<span class="mono">card.bg → color.surface.card · card.border → border.default</span>'],
+    ['Campo de texto', '<span class="mono">input.bg → color.surface.card · input.border → border.input · input.border.focus → border.focus.ring · input.error.border → color.status.error.fg · input.radius → radius.input · input.height → size.touch.min</span>'],
+    ['Barra inferior', '<span class="mono">tabbar.bg → color.surface.card · .radius → radius.pill · .elevation → elevation.floating · .item.icon → color.text.tertiary · .item.active.bg → color.surface.inverse · .item.active.icon → color.highlight.accent</span>'],
+    ['Saldo', '<span class="mono">balance.fg → color.text.primary · balance.font → font.role.balance</span>']])}
+</section>`;
+
+const PAIRS = [
+  ['color.text.primary', 'color.surface.page', 4.5], ['color.text.primary', 'color.surface.card', 4.5], ['color.text.secondary', 'color.surface.page', 4.5], ['color.text.secondary', 'color.surface.card', 4.5],
+  ['color.text.tertiary', 'color.surface.page', 4.5], ['color.text.tertiary', 'color.surface.card', 4.5], ['color.text.on-inverse', 'color.surface.inverse', 4.5], ['color.text.on-inverse-muted', 'color.surface.inverse', 4.5],
+  ['color.brand.on-primary', 'color.brand.primary', 4.5], ['color.brand.on-primary', 'color.brand.primary.pressed', 4.5], ['color.border.focus', 'color.surface.page', 3], ['color.border.focus', 'color.surface.card', 3], ['color.border.input', 'color.surface.card', 3],
+  ...['banking', 'save', 'invest', 'credit'].map(v => [`color.vertical.${v}.on-accent`, `color.vertical.${v}.accent`, 4.5]),
+  ...['success', 'error', 'warning', 'info'].map(s => [`color.status.${s}.fg`, `color.status.${s}.bg`, 4.5]),
+  ...['success', 'error', 'warning', 'info'].flatMap(s => [[`color.status.${s}.fg`, 'color.surface.page', 4.5], [`color.status.${s}.fg`, 'color.surface.card', 4.5]]),
+  ['color.highlight.on-accent', 'color.highlight.accent', 4.5], ['color.highlight.accent', 'color.surface.inverse', 3, 'icono activo de la barra'], ['color.surface.inverse', 'color.surface.card', 3, 'pastilla activa sobre la barra'],
+];
+const BAD = [
+  ['purple.500', 'ink.100', 4.5, 'Texto sobre el morado del PDF. Por eso la acción usa purple.600.', 'text-on'],
+  ['purple.500', 'ink.900', 4.5, 'Ídem con texto oscuro.', 'text-on'],
+  ['ink.500', 'ink.100', 4.5, 'ink.500 no es un token de texto.'], ['ink.500', 'ink.200', 4.5, 'Ídem sobre la página.'],
+  ['lime.500', 'ink.100', 3, 'La lima nunca transmite información sobre fondo claro.'], ['lime.500', 'ink.200', 3, 'Ídem sobre la página.'],
+  ['ink.600', 'mint.300', 4.5, 'Sobre un acento solo va su on-accent.'], ['ink.600', 'sky.300', 4.5, 'Ídem.'], ['ink.600', 'coral.300', 4.5, 'Ídem.'],
+  ['ink.300', 'ink.100', 3, 'color.border.default no sirve como límite de control. Para eso existe border.input.'],
+  ['ink.100', 'purple.300', 4.5, 'Botón deshabilitado: exento (WCAG 1.4.3).', 'exempt'],
+];
+let okN = 0;
+const pairRows = PAIRS.map(([fg, bg, min, note]) => { const r = ratio(H(fg), H(bg)), ok = r >= min; if (ok) okN++;
+  return [`<span class="mono">${fg.replace('color.', '')}</span> <span class="meta">(${SM[fg]})</span>${note ? `<br><span class="meta">${note}</span>` : ''}`, `<span class="mono">${bg.replace('color.', '')}</span> <span class="meta">(${SM[bg]})</span>`,
+    `<span class="sample" style="color:${H(fg)};background:${H(bg)}">Aa</span>`, `<strong class="mono">${r.toFixed(2)}</strong>`, `<span class="mono">${min}:1</span>`, `<span class="aa ${ok ? 'ok' : 'bad'}">${ok ? '✓ AA' : '✗ No cumple'}</span>`]; });
+const badRows = BAD.map(([a, b, min, why, kind]) => { const [fg, bg] = kind === 'text-on' ? [b, a] : kind === 'exempt' ? [a, b] : [a, b]; const r = ratio(P(fg), P(bg));
+  return [`<span class="mono">${fg}</span> sobre <span class="mono">${bg}</span>`, `<span class="sample" style="color:${P(fg)};background:${P(bg)}">Aa</span>`, `<strong class="mono">${r.toFixed(2)}</strong>`,
+    `<span class="aa ${kind === 'exempt' ? 'ex' : 'bad'}">${kind === 'exempt' ? 'Exento' : '✗ No cumple'}</span>`, `<span class="meta">${why}</span>`]; });
+const contraste = `<section id="contraste"><h2>11 · Contraste AA</h2>
+  <p class="lead">Ratios WCAG 2.x calculados en vivo a partir de los hex de §1. Mínimos: 4.5:1 para texto normal y 3:1 para texto grande, iconos, límites de control y foco.</p>
+  <p><span class="aa ${okN === PAIRS.length ? 'ok' : 'bad'}">${okN} / ${PAIRS.length} pares en uso cumplen AA</span></p>
+  ${table(['Texto / icono', 'Fondo', '', 'Ratio', 'Mín.', ''], pairRows)}
+  <h3>Pares que no cumplen (prohibidos)</h3>
+  <p class="meta">Ninguno de estos pares se usa en el sistema. Se listan para que nadie los introduzca por error.</p>
+  ${table(['Par', '', 'Ratio', '', 'Motivo'], badRows)}
+</section>`;
+
+const figma = `<section id="figma"><h2>12 · Mapeo a Figma</h2>
+  <p class="lead">Los puntos pasan a ser barras: <code>color.purple.500</code> → <code>color/purple/500</code>. Las tallas y los números se mantienen tal cual.</p>
+  <h3>Colecciones de variables</h3>
+  ${table(['Colección', 'Modos', 'Contenido', 'Tipos'], [
+    ['<strong>Primitivos</strong>', 'Base', 'color, space, radius, font/size, font/family, border/width, opacity, size, icon/size, motion/duration', 'COLOR · NUMBER · STRING'],
+    ['<strong>Semánticos</strong>', 'Light (después Dark)', 'color/surface, text, brand, border, status, highlight, vertical/&lt;nombre&gt; · space/inset, gap · radius/input…pill · opacity/disabled… · motion/duration/press…', 'Alias de Primitivos'],
+    ['<strong>Vertical</strong>', 'banking · save · invest · credit', 'color/vertical/accent, color/vertical/on-accent', 'Alias de Semánticos, distintos en cada modo'],
+    ['<strong>Componentes</strong>', 'Default', 'button, chip, card, input, tabbar, balance', 'Alias de Semánticos y de Vertical']])}
+  ${rules(['<strong>Resolución por contexto:</strong> un frame de Save se pone en modo <code>save</code> de la colección Vertical, y <code>card/accent/*</code> se resuelve solo.',
+    'Los NUMBER van en px sin unidad. <code>opacity</code> va de 0 a 100. <code>font/family/ui</code> = "Plus Jakarta Sans" y <code>font/family/display</code> = "Bricolage Grotesque" (STRING).',
+    '<strong>Scopes:</strong> <code>color/surface</code> → relleno · <code>color/text</code> → texto · <code>color/border</code> → trazo · <code>space</code> → gap y padding · <code>radius</code> → radio de esquina. Los primitivos se ocultan de la publicación.'])}
+  <h3>Estilos de texto</h3>
+  ${table(['Estilo', 'Fuente', 'Estilo de fuente', 'Tamaño', 'Línea', 'Tracking'], TYPE.map(([r, , fam, w, px, lh, ls]) => [`<span class="mono">role/${r}</span>`, fam === 'display' ? 'Bricolage Grotesque' : 'Plus Jakarta Sans', w.split(' ').slice(-2, -1)[0], px, `${lh} px`, `${ls}%`]))}
+  <p class="meta" style="margin-top:8px">Las dos familias están en Google Fonts y Figma las tiene sin instalar nada. En Figma el tracking va en %; en React Native, en px.</p>
+  <h3>Estilos de efecto</h3>
+  ${table(['Estilo', 'Drop shadow'], [['<span class="mono">elevation/floating</span>', 'X 0 · Y 6 · Blur 20 · Spread 0 · #141411 al 12%'], ['<span class="mono">elevation/overlay</span>', 'X 0 · Y 12 · Blur 32 · Spread 0 · #141411 al 18%']])}
+  <h3>Movimiento en prototipos</h3>
+  ${table(['Token', 'Figma', 'Reanimated'], [['motion.spring.soft', 'Smart animate → Spring: Mass 1 · Stiffness 300 · Damping 22', 'withSpring({ mass: 1, stiffness: 300, damping: 22 })'], ['motion.spring.bounce', 'Smart animate → Spring: Mass 1 · Stiffness 340 · Damping 20', 'withSpring({ mass: 1, stiffness: 340, damping: 20 })'], ['motion.easing.standard', 'Custom bezier 0.2, 0, 0, 1', 'Easing.bezier(0.2, 0, 0, 1)'], ['motion.easing.exit', 'Custom bezier 0.4, 0, 1, 1', 'Easing.bezier(0.4, 0, 1, 1)']].map(([a, b, c]) => [`<span class="mono">${a}</span>`, b, `<span class="mono">${c}</span>`]))}
+  <h3>Iconos e intercambio</h3>
+  ${rules(['Archivo de comunidad de Ionicons, con un componente por icono que tiene la propiedad <code>active</code> (outline o relleno) y tamaños 16, 24 y 32.', 'Fuente única: JSON en formato DTCG. Style Dictionary v4 genera el <code>tokens.ts</code> y Tokens Studio sincroniza Figma. Ningún valor se edita a mano en Figma sin cambiarlo antes en el JSON.'])}
+</section>`;
+
+const pendientes = `<section id="pendientes"><h2>13 · Pendientes del brief resueltos</h2>
+  ${table(['Pendiente', 'Resolución'], [
+    ['Colores de vertical', `${sw(H('color.vertical.banking.accent'))}Banking ink.900 · ${sw(H('color.vertical.save.accent'))}Save mint.300 · ${sw(H('color.vertical.invest.accent'))}Invest sky.300 · ${sw(H('color.vertical.credit.accent'))}Credit coral.300, cada uno con su on-accent. Signal Lime no es de ninguna vertical: es el 10%.`],
+    ['Colores de estado', `${sw(H('color.status.success.fg'))}éxito green · ${sw(H('color.status.error.fg'))}error red · ${sw(H('color.status.warning.bg'))}advertencia amber · ${sw(H('color.status.info.fg'))}info azure. Son familias propias, separadas de las de vertical.`],
+    ['El 10% del 70/20/10', 'Detalles inesperados y puntuales: lima, spring.bounce y formas círculo/pastilla, solo en hitos positivos (§9).'],
+    ['Grosor de iconos', 'Ionicons outline, 1.5 px a 24 px. Relleno en estado activo (§7).'],
+    ['Tamaño mínimo de toque', 'size.touch.min = 48, con 8 de separación (§8).'],
+    ['Borde de campos', 'border.input = 1 px ink.600 (4.90:1) para cumplir WCAG 1.4.11.'],
+    ['Familias, movimiento, elevación, herramientas', 'Plus Jakarta Sans + Bricolage Grotesque · resortes soft/bounce · tarjetas planas · DTCG + Style Dictionary v4 + Tokens Studio · Storybook web con react-native-web-vite en Vercel.']].map(([a, b]) => [`<strong>${a}</strong>`, b]))}
+</section>`;
+
+document.getElementById('app').innerHTML = intro + color + tipo + espacio + radios + elevacion + movimiento + iconos + a11y + diez + componentes + contraste + figma + pendientes;
+
+// ---------- interactions ----------
+document.querySelectorAll('.play').forEach(b => b.addEventListener('click', () => {
+  const ball = b.previousElementSibling.querySelector('.ball'), end = ball.parentElement.clientWidth - 80, back = ball.dataset.at === 'end';
+  ball.style.transition = `transform ${ball.dataset.ms}ms ${ball.dataset.css}`; ball.style.transform = back ? 'translateX(0)' : `translateX(${end}px)`; ball.dataset.at = back ? 'start' : 'end';
+}));
+document.getElementById('goal-play').addEventListener('click', e => {
+  const g = document.getElementById('goal'), done = g.classList.toggle('done');
+  e.target.textContent = done ? '↺ Reiniciar' : '▶ Simular hito';
+  document.getElementById('goal-amt').textContent = done ? '$2,480.00' : '$1,540.00';
+});
+document.querySelectorAll('.tabbar').forEach(bar => {
+  const ind = bar.querySelector('.ind'), tabs = [...bar.querySelectorAll('.tab')];
+  const place = t => { ind.style.width = t.offsetWidth + 'px'; ind.style.transform = `translateX(${t.offsetLeft}px)`; };
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); x.querySelector('ion-icon').setAttribute('name', on ? x.dataset.icon : x.dataset.icon + '-outline'); });
+    place(t);
+  }));
+  const init = () => { ind.style.transition = 'none'; place(tabs.find(t => t.getAttribute('aria-selected') === 'true')); ind.offsetWidth; ind.style.transition = ''; };
+  init(); addEventListener('resize', init); document.fonts && document.fonts.ready.then(init);
+});
+</script>
+</body>
+</html>
