@@ -1,7 +1,7 @@
 # TOKEN-NAMING — Convención de nombres de tokens de Vuno
 
 > Convención elegida: **tres capas** (primitivo → semántico → componente), con puntos como separador.
-> Solo nombres; **sin valores** (hex, px, ms). Los valores se definen en una etapa posterior.
+> Este documento define **nombres**. Los valores (hex, px, ms) están en `FOUNDATIONS.md`.
 
 ## Regla de capas
 
@@ -21,16 +21,40 @@ Formato: `categoría.familia.paso`. Describe qué es, no para qué sirve.
 ```
 color.purple.500
 color.ink.900
-color.mint.200
-color.blue.200
-color.lime.400
-color.coral.400
+color.mint.300
+color.sky.300
+color.lime.500
+color.red.600
 radius.md
-space.md
+radius.full
+space.lg
 font.family.display
 font.family.ui
+font.size.2xl
+elevation.sm
+border.width.sm
+opacity.40
 motion.duration.250
 ```
+
+### Familias de color
+
+| Familia | Rol |
+|---|---|
+| `ink` | Neutros: texto, superficies y bordes |
+| `purple` | Marca y acción primaria |
+| `mint` | Vertical Save |
+| `sky` | Vertical Invest |
+| `coral` | Vertical Credit |
+| `lime` | Destacado: el 10% |
+| `green` | Estado de éxito |
+| `red` | Estado de error |
+| `amber` | Estado de advertencia |
+| `azure` | Estado de información |
+
+- Banking no tiene familia propia: su acento sale de `ink`.
+- Las familias de estado son distintas de las de vertical, aunque se parezcan en tono.
+- No se añaden familias sin acordarlo.
 
 ### Escala de los primitivos
 
@@ -48,7 +72,7 @@ motion.duration.250
 - Todas las familias de color usan los mismos nueve pasos, y `500` siempre es la base.
 - No se añaden pasos intermedios (por ejemplo `550`) ni extremos (`50`, `950`) sin acordarlo.
 
-**`radius`, `space`, `font.size`, `elevation`, `border.width` e `icon.size`: tallas con nombre.**
+**`space`, `font.size`, `radius`, `elevation`, `border.width` e `icon.size`: tallas con nombre.**
 
 | Categoría | Tallas acordadas |
 |---|---|
@@ -69,15 +93,20 @@ motion.duration.250
 - `motion.duration.<ms>`: el número son milisegundos (`motion.duration.250` = 250 ms).
 - `opacity.<porcentaje>`: el número es el porcentaje (`opacity.40` = 0.40).
 
+**Sin escala:** `font.family.ui`, `font.family.display`, `motion.easing.standard` y `motion.easing.exit` se nombran por rol, porque son valores únicos.
+
 ## Capa 2 — Semántico (el rol)
 
 Formato: `categoría.rol.variante`, o `categoría.rol.variante.estado` cuando hay estado interactivo. Describe para qué sirve.
 
 ```
-color.brand.primary
-color.text.primary
 color.surface.page
+color.text.primary
+color.brand.primary
+color.brand.logo
+color.border.input
 color.status.error.fg
+color.status.error.border
 color.status.success.bg
 color.vertical.save.accent
 color.vertical.save.on-accent
@@ -88,9 +117,15 @@ color.highlight.on-accent
 radius.card
 radius.pill
 space.inset.card
+space.gap.section
 font.role.balance
-font.role.headline
+font.role.title
+elevation.floating
+border.default
+opacity.disabled
+motion.duration.press
 motion.spring.soft
+size.touch.min
 ```
 
 ### Estados interactivos
@@ -100,27 +135,46 @@ Los estados `pressed`, `disabled` y `focus` se nombran en la capa semántica, co
 ```
 color.brand.primary.pressed
 color.brand.primary.disabled
-color.text.primary.disabled
 border.focus.ring
+opacity.disabled
 ```
 
-- `pressed` y `disabled` cambian el color o la opacidad del token base.
+- `pressed` y `disabled` cambian el color del token base. En los elementos sin un color propio de deshabilitado, se usa `opacity.disabled`.
 - `focus` se expresa como un contorno (`border.focus.ring`), no como un relleno distinto.
-- Los tokens `border.*` semánticos son compuestos (grosor + color): `border.default` combina `border.width.sm` con `color.border.default`, y `border.focus.ring` combina `border.width.md` con `color.border.focus`.
-- Los tokens de componente no definen estados propios: referencian el estado semántico que corresponda.
+- El **error** de un control se expresa con los semánticos de estado: `color.status.error.border` para el borde y `color.status.error.fg` para el texto.
+- Los tokens de componente no definen estados propios: referencian el estado semántico que corresponda (`input.error.border` → `color.status.error.border`, `input.border.focus` → `border.focus.ring`).
 
-### Par de contraste del acento de vertical
+### Pares de contraste: `accent` / `on-accent` y `bg` / `fg`
 
-Cada acento de vertical lleva un token de texto (o icono) para ponerse encima:
+Todo color que se usa como fondo lleva un token para el texto o icono que va encima:
 
 ```
 color.vertical.save.accent       →  fondo del acento
 color.vertical.save.on-accent    →  texto e iconos sobre ese fondo
+color.highlight.accent           →  fondo lima (el 10%)
+color.highlight.on-accent        →  texto e iconos sobre la lima
+color.status.error.bg            →  fondo del chip de error
+color.status.error.fg            →  texto e icono del chip de error
+color.brand.primary              →  fondo del botón primario
+color.brand.on-primary           →  texto e icono del botón primario
 ```
 
-- Se define **un par por vertical**: `color.vertical.<nombre>.accent` y `color.vertical.<nombre>.on-accent`.
 - El sufijo `on-` significa "sobre": `on-accent` es lo que se coloca encima de `accent`.
+- Se define **un par por vertical** (`color.vertical.<nombre>.accent` / `.on-accent`) y un par para el destacado (`color.highlight.accent` / `.on-accent`).
+- Los estados usan `bg` / `fg`, porque `fg` también sirve como texto sobre la superficie de la página.
 - Un componente que usa un acento como fondo siempre usa su `on-accent` para el contenido.
+
+### Bordes compuestos
+
+Los tokens semánticos `border.*` combinan un grosor y un color:
+
+| Token | Grosor | Color |
+|---|---|---|
+| `border.default` | `border.width.sm` | `color.border.default` |
+| `border.input` | `border.width.sm` | `color.border.input` |
+| `border.focus.ring` | `border.width.md` | `color.border.focus` |
+
+El color de un borde vive en `color.border.*`, y el borde completo en `border.*`.
 
 ## Capa 3 — Componente
 
@@ -129,11 +183,15 @@ Formato: `componente.variante.propiedad` o `componente.parte.estado.propiedad`.
 ```
 button.primary.bg
 button.primary.radius
+button.circle.size
 chip.status.success.bg
+chip.highlight.bg
 card.accent.bg
 card.accent.fg
-tabbar.item.active.icon
+input.border
 input.error.border
+tabbar.item.active.icon
+balance.font
 ```
 
 ### Regla: un token por componente, la vertical es contexto
@@ -145,26 +203,42 @@ Los tokens de componente **nunca nombran una vertical**. No existen `card.vertic
 - La **variante** también resuelve por nombre, no por duplicación: `button.primary.bg` y `chip.status.success.bg` son un token cada uno, con la variante como parte del nombre.
 - Añadir una vertical nueva solo añade tokens en la capa semántica; no toca ningún componente.
 
+**Cómo se resuelve el contexto:**
+- **En código:** un proveedor de vertical en React Native fija `color.vertical.accent` y `color.vertical.on-accent` para todo lo que tiene debajo.
+- **En Figma:** una colección "Vertical" con un modo por vertical (`banking`, `save`, `invest`, `credit`). Un frame en modo `save` resuelve `card/accent/*` con los valores de Save.
+
 ## Categorías
 
-| Categoría | Prefijo | Notas |
-|---|---|---|
-| Color | `color` | Marca, texto, superficie, borde, estado, vertical y destacado (el 10%). |
-| Radio | `radius` | Tallas primitivas y roles (`card`, `pill`). |
-| Espaciado | `space` | Tallas primitivas y roles de padding (`inset.*`). |
-| Tipografía | `font` | Familias, tallas (`font.size.*`) y roles como `balance` y `headline`. |
-| Movimiento | `motion` | Duraciones y resortes (`spring.soft`). |
-| Iconos | `icon` | Tamaños y trazo; el relleno en activo se resuelve a nivel de componente. |
-| Elevación | `elevation` | Profundidad de superficies (por ejemplo `elevation.card`, `elevation.floating`). |
-| Borde | `border` | Grosor y color de bordes (por ejemplo `border.default`, `border.focus.ring`). |
-| Tamaño | `size` | Tamaños con regla de accesibilidad. Incluye `size.touch.min`, el área táctil mínima. |
-| Opacidad | `opacity` | Opacidades con rol (por ejemplo `opacity.disabled`, `opacity.overlay`). |
+| Categoría | Prefijo | Primitivos | Semánticos |
+|---|---|---|---|
+| Color | `color` | Familias de color (`color.<familia>.100`–`900`) | `surface`, `text`, `brand`, `border`, `status`, `vertical` y `highlight` (el 10%) |
+| Radio | `radius` | `xs`–`xl`, `full` | `input`, `card`, `sheet`, `pill` |
+| Espaciado | `space` | `2xs`–`3xl` | `inset.screen`, `inset.card`, `inset.chip`, `gap.list`, `gap.stack`, `gap.section` |
+| Tipografía | `font` | `family.ui`, `family.display`, `size.xs`–`2xl` | `role.balance`, `headline`, `title`, `body`, `label`, `caption` |
+| Movimiento | `motion` | `duration.<ms>`, `easing.standard`, `easing.exit` | `duration.press`, `state`, `nav`, `celebrate` · `spring.soft`, `spring.bounce` |
+| Iconos | `icon` | `size.sm`, `md`, `lg` | El trazo lo fija la librería (Ionicons); el relleno en activo se resuelve en el componente. |
+| Elevación | `elevation` | `sm`, `md` | `floating`, `overlay` |
+| Borde | `border` | `width.sm`, `width.md` | `default`, `input`, `focus.ring` (compuestos de grosor + `color.border.*`) |
+| Tamaño | `size` | — | `touch.min`, el área táctil mínima |
+| Opacidad | `opacity` | `<porcentaje>` (`40`, `50`) | `disabled`, `overlay` |
 
 ## Verticales
 
 Banking, Save, Invest y Credit viven en `color.vertical.<nombre>.accent` y `color.vertical.<nombre>.on-accent`, con los nombres en minúscula: `banking`, `save`, `invest`, `credit`. Los componentes no los usan por nombre: usan `color.vertical.accent` y `color.vertical.on-accent`, que el contexto resuelve.
 
 Los colores de vertical (`color.vertical.*`) son independientes de los de estado (`color.status.*`), como se decidió en `DESIGN-BRIEF.md`.
+
+## Conversión a Figma
+
+- **Separador:** el punto se convierte en barra: `color.purple.500` → `color/purple/500`.
+- **Nombres:** se conservan tal cual, con tallas, números y guiones (`space/2xs`, `motion/duration/250`, `color/vertical/save/on-accent`).
+- **Estilos:** los estilos de texto omiten el prefijo `font.` (`font.role.balance` → `role/balance`). Los estilos de efecto conservan el nombre completo (`elevation.floating` → `elevation/floating`).
+- **Colecciones de variables:**
+  - **Primitivos:** capa 1.
+  - **Semánticos:** capa 2, con modo `Light` (y `Dark` cuando llegue).
+  - **Vertical:** un modo por vertical.
+  - **Componentes:** capa 3.
+- Detalle de tipos, scopes y estilos en `FOUNDATIONS.md` §12.
 
 ## Reglas de escritura
 

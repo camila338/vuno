@@ -58,6 +58,7 @@
 | `color.vertical.accent` / `color.vertical.on-accent` | El par de la vertical activa (lo resuelve el contexto) | — |
 | `color.status.success.bg` / `.fg` | `color.green.200` / `color.green.800` | `#CCF2D6` / `#014422` |
 | `color.status.error.bg` / `.fg` | `color.red.200` / `color.red.800` | `#FFDCD6` / `#6D0505` |
+| `color.status.error.border` | `color.red.600` | `#B81814` |
 | `color.status.warning.bg` / `.fg` | `color.amber.200` / `color.amber.900` | `#FEEAD0` / `#472C00` |
 | `color.status.info.bg` / `.fg` | `color.azure.200` / `color.azure.800` | `#D5E7FE` / `#03376E` |
 | `color.highlight.accent` | `color.lime.500` | `#D9F23F` |
@@ -254,8 +255,10 @@
 | `motion.duration.state` | `motion.duration.150` | Chips, cambios de estado, fundidos |
 | `motion.duration.nav` | `motion.duration.250` | Navegación, hojas, tarjetas |
 | `motion.duration.celebrate` | `motion.duration.400` | Momentos 10% |
-| `motion.spring.soft` | masa 1 · rigidez 300 · amortiguación 22 (≈7% de rebote, asienta en ≈620 ms) | Botones, tarjetas, indicador de la barra inferior |
-| `motion.spring.bounce` | masa 1 · rigidez 340 · amortiguación 20 (≈13% de rebote, asienta en ≈585 ms) | Solo momentos 10% |
+| `motion.spring.soft` | masa 1 · rigidez 300 · amortiguación 22 (≈8% de rebote, asienta en ≈370 ms) | Botones, tarjetas, indicador de la barra inferior |
+| `motion.spring.bounce` | masa 1 · rigidez 340 · amortiguación 20 (≈13% de rebote, asienta en ≈470 ms) | Solo momentos 10% |
+
+El asentamiento se mide como el momento en que el resorte queda dentro de ±1% del valor final. `bounce` tarda más que `soft` porque amortigua menos.
 
 ### 6.3 Reglas
 
@@ -354,7 +357,7 @@
 | Chip destacado | `chip.highlight.bg` → `color.highlight.accent` · `chip.highlight.fg` → `color.highlight.on-accent` |
 | Tarjeta de vertical | `card.accent.bg` → `color.vertical.accent` · `card.accent.fg` → `color.vertical.on-accent` · `card.radius` → `radius.card` · `card.inset` → `space.inset.card` |
 | Tarjeta neutra | `card.bg` → `color.surface.card` · `card.border` → `border.default` |
-| Campo de texto | `input.bg` → `color.surface.card` · `input.border` → `border.input` · `input.border.focus` → `border.focus.ring` · `input.error.border` → `color.status.error.fg` · `input.radius` → `radius.input` · `input.height` → `size.touch.min` |
+| Campo de texto | `input.bg` → `color.surface.card` · `input.border` → `border.input` · `input.border.focus` → `border.focus.ring` · `input.error.border` → `color.status.error.border` · `input.radius` → `radius.input` · `input.height` → `size.touch.min` |
 | Barra inferior flotante | `tabbar.bg` → `color.surface.card` · `tabbar.radius` → `radius.pill` · `tabbar.elevation` → `elevation.floating` · `tabbar.item.icon` → `color.text.tertiary` · `tabbar.item.active.bg` → `color.surface.inverse` · `tabbar.item.active.icon` → `color.highlight.accent` |
 | Saldo | `balance.fg` → `color.text.primary` · `balance.font` → `font.role.balance` |
 
@@ -387,6 +390,7 @@ Ratios WCAG 2.x calculados sobre los hex de §1. Mínimos: **4.5:1** texto norma
 | `vertical.credit.on-accent` (coral.900) | `vertical.credit.accent` (coral.300) | 11.01 | 4.5 | ✅ |
 | `status.success.fg` (green.800) | `status.success.bg` (green.200) | 9.31 | 4.5 | ✅ |
 | `status.error.fg` (red.800) | `status.error.bg` (red.200) | 9.83 | 4.5 | ✅ |
+| `status.error.border` (red.600), borde de campo con error | `surface.card` (ink.100) | 6.16 | 3 | ✅ |
 | `status.warning.fg` (amber.900) | `status.warning.bg` (amber.200) | 10.99 | 4.5 | ✅ |
 | `status.info.fg` (azure.800) | `status.info.bg` (azure.200) | 9.40 | 4.5 | ✅ |
 | `status.success.fg` (green.800) | `surface.page` / `surface.card` | 9.95 / 10.57 | 4.5 | ✅ |
@@ -397,7 +401,7 @@ Ratios WCAG 2.x calculados sobre los hex de §1. Mínimos: **4.5:1** texto norma
 | `highlight.accent` (lime.500), icono activo | `surface.inverse` (ink.900) | 14.70 | 3 | ✅ |
 | `surface.inverse` (ink.900), pastilla activa | `surface.card` (ink.100), barra | 17.19 | 3 | ✅ |
 
-**Resultado: 28 de 28 pares en uso cumplen AA.**
+**Resultado: 29 de 29 pares en uso cumplen AA.**
 
 ### 11.2 Pares que NO cumplen (prohibidos)
 
@@ -423,8 +427,8 @@ Los puntos pasan a ser barras: `color.purple.500` → `color/purple/500`. Las ta
 
 | Colección | Modos | Contenido | Tipos de variable |
 |---|---|---|---|
-| **Primitivos** | `Base` | `color/*`, `space/*`, `radius/*`, `font/size/*`, `font/family/*`, `border/width/*`, `opacity/*`, `size/*`, `icon/size/*`, `motion/duration/*` | COLOR · NUMBER · STRING |
-| **Semánticos** | `Light` (después se añade `Dark`) | `color/surface/*`, `color/text/*`, `color/brand/*`, `color/border/*`, `color/status/*`, `color/highlight/*`, `color/vertical/<nombre>/*`, `space/inset/*`, `space/gap/*`, `radius/input…pill`, `opacity/disabled…`, `motion/duration/press…` | Alias de Primitivos |
+| **Primitivos** | `Base` | `color/*`, `space/*`, `radius/*`, `font/size/*`, `font/family/*`, `border/width/*`, `opacity/*`, `icon/size/*`, `motion/duration/*` | COLOR · NUMBER · STRING |
+| **Semánticos** | `Light` (después se añade `Dark`) | `color/surface/*`, `color/text/*`, `color/brand/*`, `color/border/*`, `color/status/*`, `color/highlight/*`, `color/vertical/<nombre>/*`, `space/inset/*`, `space/gap/*`, `radius/input…pill`, `opacity/disabled…`, `motion/duration/press…`, `size/touch/min` | Alias de Primitivos |
 | **Vertical** | `banking`, `save`, `invest`, `credit` | `color/vertical/accent`, `color/vertical/on-accent` | Alias de Semánticos, distintos en cada modo |
 | **Componentes** | `Default` | `button/*`, `chip/*`, `card/*`, `tabbar/*`, `balance/*` | Alias de Semánticos y de Vertical |
 
