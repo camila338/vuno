@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { View } from 'react-native';
+import { PageHeader, Pill, Grid, CatalogCard, Live } from './blocks';
+import { ActionButton, Avatar, Balance, Button, TopBar, Logo, Card, Chip, ChoiceChip, IconBadge, IconButton, List, ListRow, ProgressBar, ProgressRing, SectionHeader, Segmented, SlideToConfirm, StepProgress, StepSlider, TabBar, Text, TextField, Toggle, Keypad } from '../components';
+import { tokens } from '../theme';
+
+<Meta title="Components" />
+
+<PageHeader eyebrow="Catalog" title="Components" meta={<><Pill tone="ok">24 available</Pill><Pill>iOS · Android</Pill><Pill>tokens/component.json</Pill></>}>
+  The generic building blocks of every Vuno screen. Each card opens its page: overview, props, usage, accessibility, variants, platforms, do's and don'ts and use cases. They work on iOS and Android (see Foundations › Platforms).
+</PageHeader>
+
+## Actions
+
+<Grid min={240}>
+  <CatalogCard to="components-button--docs" title="Button" status="Available" tone="ok" preview={<Live width={200}><Button label="Button" onPress={() => {}} /></Live>}>
+    Primary, secondary and tertiary. Sized by its content.
+  </CatalogCard>
+  <CatalogCard to="components-iconbutton--docs" title="IconButton" status="Available" tone="ok" preview={<Live width={200}><View style={{ flexDirection: 'row', gap: 8 }}><IconButton icon="arrow-back" label="Back" onPress={() => {}} /><IconButton icon="close" label="Close" onPress={() => {}} /></View></Live>}>
+    Back, close and more.
+  </CatalogCard>
+  <CatalogCard to="components-actionbutton--docs" title="ActionButton" status="Available" tone="ok" preview={<Live width={120}><ActionButton icon="add" label="Label" onPress={() => {}} /></Live>}>
+    A quick action with an icon and a label.
+  </CatalogCard>
+  <CatalogCard to="components-slidetoconfirm--docs" title="SlideToConfirm" status="Available" tone="ok" preview={<Live width={180}><SlideToConfirm label="Slide" onConfirm={() => {}} /></Live>}>
+    Confirm what moves money.
+  </CatalogCard>
+</Grid>
+
+## Inputs
+
+<Grid min={240}>
+  <CatalogCard to="components-textfield--docs" title="TextField" status="Available" tone="ok" preview={<Live width={220}><TextField label="Label" placeholder="Placeholder" value="" onChangeText={() => {}} /></Live>}>
+    Visible label, focus and error.
+  </CatalogCard>
+  <CatalogCard to="components-choicechip--docs" title="ChoiceChip" status="Available" tone="ok" preview={<Live width={220}><View style={{ flexDirection: 'row', gap: 8 }}><ChoiceChip label="Option" selected onPress={() => {}} /><ChoiceChip label="Option" onPress={() => {}} /></View></Live>}>
+    Pick one option among a few.
+  </CatalogCard>
+  <CatalogCard to="components-toggle--docs" title="Toggle" status="Available" tone="ok" preview={<Live width={80}><Toggle value label="Label" onValueChange={() => {}} /></Live>}>
+    A switch with an immediate effect.
+  </CatalogCard>
+  <CatalogCard to="components-segmented--docs" title="Segmented" status="Available" tone="ok" preview={<Live width={220}><Segmented value="a" onChange={() => {}} options={[{ value: 'a', label: 'First' }, { value: 'b', label: 'Second' }]} /></Live>}>
+    Switch between 2 or 3 views.
+  </CatalogCard>
+  <CatalogCard to="components-slider--docs" title="Slider" status="Available" tone="ok" preview={<Live width={220}><StepSlider min={1} max={12} value={6} onChange={() => {}} label="Label" valueText="6" /></Live>}>
+    A value within a range.
+  </CatalogCard>
+  <CatalogCard to="components-keypad--docs" title="Keypad" status="Available" tone="ok" preview={<Live width={200}><Text variant="title" style={{ textAlign: 'center' }}>1 2 3</Text></Live>}>
+    A keypad for amounts.
+  </CatalogCard>
+</Grid>
+
+## Content and status
+
+<Grid min={240}>
+  <CatalogCard to="components-chip--docs" title="Chip" status="Available" tone="ok" preview={<Live width={200}><Chip status="success" label="Success" /><Chip status="highlight" label="Milestone" /></Live>}>
+    Statuses with an icon and text; lime only for milestones.
+  </CatalogCard>
+  <CatalogCard to="components-card--docs" title="Card" status="Available" tone="ok" preview={<Live width={200}><Card><Text variant="label">Title</Text></Card></Live>}>
+    Neutral or with the vertical accent.
+  </CatalogCard>
+  <CatalogCard to="components-list--docs" title="List" status="Available" tone="ok" preview={<Live width={220}><List><ListRow title="Title" detail="Detail" /><ListRow title="Title" detail="Detail" /></List></Live>}>
+    Grouped rows with dividers.
+  </CatalogCard>
+  <CatalogCard to="components-sectionheader--docs" title="SectionHeader" status="Available" tone="ok" preview={<Live width={220}><SectionHeader title="Section title" detail="Detail" /></Live>}>
+    Section title with a badge.
+  </CatalogCard>
+  <CatalogCard to="components-balance--docs" title="Balance" status="Available" tone="ok" preview={<Live width={200}><Balance amount={1250.5} label="Label" /></Live>}>
+    The main figure on a screen.
+  </CatalogCard>
+  <CatalogCard to="components-iconbadge--docs" title="IconBadge" status="Available" tone="ok" preview={<Live width={120} vertical="save"><View style={{ flexDirection: 'row', gap: 8 }}><IconBadge icon="card-outline" /><IconBadge icon="card-outline" tone="vertical" /></View></Live>}>
+    An icon in a circle, neutral or vertical.
+  </CatalogCard>
+  <CatalogCard to="components-avatar--docs" title="Avatar" status="Available" tone="ok" preview={<Live width={60}><Avatar initials="AB" label="Full name" /></Live>}>
+    A person's initials.
+  </CatalogCard>
+</Grid>
+
+## Progress
+
+<Grid min={240}>
+  <CatalogCard to="components-progressbar--docs" title="ProgressBar" status="Available" tone="ok" preview={<Live width={200}><ProgressBar value={0.4} color={tokens['color.vertical.save.on-accent']} track={tokens['color.vertical.save.accent']} /></Live>}>
+    Linear progress.
+  </CatalogCard>
+  <CatalogCard to="components-progressring--docs" title="ProgressRing" status="Available" tone="ok" preview={<Live width={120}><ProgressRing value={0.4} size={96} color={tokens['color.vertical.save.on-accent']} track={tokens['color.vertical.save.accent']} /></Live>}>
+    Circular progress for a milestone.
+  </CatalogCard>
+  <CatalogCard to="components-stepprogress--docs" title="StepProgress" status="Available" tone="ok" preview={<Live width={200}><View style={{ flexDirection: 'row' }}><StepProgress step={2} total={4} /></View></Live>}>
+    Steps of a flow.
+  </CatalogCard>
+</Grid>
+
+## Navigation and moments
+
+<Grid min={240}>
+  <CatalogCard to="components-logo--docs" title="Logo" status="Available" tone="ok" preview={<Live width={160}><Logo /></Live>}>
+    The Vuno mark and wordmark.
+  </CatalogCard>
+  <CatalogCard to="components-topbar--docs" title="TopBar" status="Available" tone="ok" preview={<Live width={260}><TopBar title="Title" leading={{ kind: 'back', onPress: () => {} }} /></Live>}>
+    Top bar: centered title on iOS, start-aligned on Android.
+  </CatalogCard>
+  <CatalogCard to="components-tabbar--docs" title="TabBar" status="Available" tone="ok" preview={<Live width={280}><TabBar items={[{ key: 'a', label: 'Home', icon: 'home' }, { key: 'b', label: 'Activity', icon: 'list' }, { key: 'c', label: 'Profile', icon: 'person' }]} activeKey="a" onChange={() => {}} /></Live>}>
+    Main navigation.
+  </CatalogCard>
+  <CatalogCard to="components-confetti--docs" title="Confetti" status="Available" tone="ok" preview={<Live width={160}><Chip status="highlight" label="Milestone" /></Live>}>
+    The milestone moment (10%).
+  </CatalogCard>
+</Grid>

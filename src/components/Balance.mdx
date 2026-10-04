@@ -1,0 +1,64 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Balance.stories';
+import { Balance } from './Balance';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="Balance" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  The main figure on a screen, in the display face with tabular figures. Cents are smaller so the whole number reads at a glance.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Balance } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>One per screen; every other amount uses <code>headline</code> or <code>body</code>.</li>
+  <li>The label says what the figure is.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>VoiceOver and TalkBack read the label and the full figure: “Label: 1250 dollars and 50 cents”.</li>
+  <li>Scales with the system text size up to 1.5×.</li>
+</ul>
+
+## Variants
+
+### Amounts
+
+<p>Zero, with cents and without cents.</p>
+
+<Canvas of={Stories.Amounts} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="One large figure per screen."><Live width={300} center><Balance amount={1250.5} label="Available" /></Live></Do>
+  <Dont caption="Two large figures: neither is the main one."><Live width={300} center><><Balance amount={1250.5} label="Available" /><Balance amount={320} label="Owed" /></></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### With a notice
+
+<p>A chip underneath with what is about to change.</p>
+
+<Canvas of={Stories.WithNotice} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-chip--docs" title="Chip">Notices under the figure.</LinkCard>
+  <LinkCard to="components-keypad--docs" title="Keypad">Entering an amount.</LinkCard>
+</Grid>

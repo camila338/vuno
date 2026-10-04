@@ -1,0 +1,90 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { version } from '../../package.json';
+import { Grid, LinkCard, Pill, tokensCount } from './blocks';
+
+<Meta title="Introduction" />
+
+<div className="vds-hero">
+  <span className="vds-hero-shape" style={{ width: 220, height: 220, right: -40, top: -60, background: '#6C63FF' }} />
+  <span className="vds-hero-shape" style={{ width: 72, height: 72, right: 56, top: 40, background: '#D9F23F' }} />
+  <span className="vds-hero-shape" style={{ width: 160, height: 52, right: 40, bottom: 36, background: '#ABEBD4' }} />
+  <div className="vds-meta" style={{ marginTop: 0 }}>
+    <Pill>v{version}</Pill>
+    <Pill>iOS · Android</Pill>
+  </div>
+  <h1>Vuno Design System</h1>
+  <p>Banking that makes sense. Tokens, foundations, components and patterns to build Vuno as one brand on iOS and Android: clear to understand, simple to use and warm to be with.</p>
+</div>
+
+## Start here
+
+<Grid min={190}>
+  <LinkCard to="foundations-color--docs" icon="colorPaletteOutline" title="Foundations">
+    Color, typography, spacing, radius, elevation, motion, icons, accessibility and platforms.
+  </LinkCard>
+  <LinkCard to="components--docs" icon="layersOutline" tone="#D1F5E7" iconColor="#034938" title="Components">
+    The building blocks of every screen, each with usage, accessibility and do's and don'ts.
+  </LinkCard>
+  <LinkCard to="patterns--docs" icon="gitNetworkOutline" tone="#DEEDFF" iconColor="#123865" title="Patterns">
+    Repeatable solutions: vertical context, milestone moment, review and confirm.
+  </LinkCard>
+  <LinkCard to="contributing--docs" icon="createOutline" tone="#E0E3FE" iconColor="#2E2383" title="Contributing">
+    How to add a token, document a foundation or propose a component.
+  </LinkCard>
+</Grid>
+
+## Principles
+
+Five principles guide every interface decision. They come from the brand brief and apply to every vertical.
+
+<Grid min={300}>
+  <LinkCard title="1 · One clear action per screen" icon="flagOutline">
+    Put the next step first. One purple button per screen; context appears when it's needed.
+  </LinkCard>
+  <LinkCard title="2 · Hierarchy before decoration" icon="trendingUpOutline">
+    Balances, statuses and decisions read at a glance. Big headlines and figures, a calm interface.
+  </LinkCard>
+  <LinkCard title="3 · Shared components" icon="copyOutline">
+    The same patterns, radius, spacing and icons in Banking, Save, Invest and Credit. The vertical is context.
+  </LinkCard>
+  <LinkCard title="4 · Color with meaning" icon="colorFillOutline">
+    Color guides and is never the only signal of a state. Every text pair meets WCAG AA.
+  </LinkCard>
+  <LinkCard title="5 · Motion with purpose" icon="pulseOutline">
+    Short transitions that confirm, explain or connect an action. A soft bounce, never decoration at rest.
+  </LinkCard>
+</Grid>
+
+## Personality: 70 / 20 / 10
+
+<Grid min={240}>
+  <div className="vds-card" style={{ background: '#141411', borderColor: '#141411' }}>
+    <div style={{ font: "700 40px/44px 'Bricolage Grotesque'", color: '#F8F7F1' }}>70%</div>
+    <div style={{ color: '#F8F7F1', marginTop: 8, font: "16px/24px 'PlusJakartaSans_600SemiBold'" }}>Clean fintech</div>
+    <div style={{ color: '#C5C4BE', marginTop: 4, font: "14px/20px 'PlusJakartaSans_400Regular'" }}>Warm neutrals, an interface sans, flat cards. Adult confidence.</div>
+  </div>
+  <div className="vds-card" style={{ background: '#5347D3', borderColor: '#5347D3' }}>
+    <div style={{ font: "700 40px/44px 'Bricolage Grotesque'", color: '#F8F7F1' }}>20%</div>
+    <div style={{ color: '#F8F7F1', marginTop: 8, font: "16px/24px 'PlusJakartaSans_600SemiBold'" }}>Playful</div>
+    <div style={{ color: '#E0E3FE', marginTop: 4, font: "14px/20px 'PlusJakartaSans_400Regular'" }}>Purple actions, vertical accents, the display face on balances and a soft bounce.</div>
+  </div>
+  <div className="vds-card" style={{ background: '#D9F23F', borderColor: '#D9F23F' }}>
+    <div style={{ font: "700 40px/44px 'Bricolage Grotesque'", color: '#141411' }}>10%</div>
+    <div style={{ color: '#141411', marginTop: 8, font: "16px/24px 'PlusJakartaSans_600SemiBold'" }}>Unexpected</div>
+    <div style={{ color: '#2C2B27', marginTop: 4, font: "14px/20px 'PlusJakartaSans_400Regular'" }}>Small, rare lime accents and moments of surprise at milestones.</div>
+  </div>
+</Grid>
+
+## How it's built
+
+<div className="vds-table-wrap">
+  <table className="vds-table">
+    <tbody>
+      <tr><td style={{ width: 220 }}><strong>Tokens</strong></td><td className="is-muted">{tokensCount} tokens in three layers (primitive → semantic → component), in DTCG format (<code>tokens/*.json</code>), built for React Native with Style Dictionary 5.</td></tr>
+      <tr><td><strong>App</strong></td><td className="is-muted">Expo SDK 57 · React Native 0.86 · TypeScript, for iOS and Android.</td></tr>
+      <tr><td><strong>Storybook</strong></td><td className="is-muted">A native Storybook on the device and this web Storybook to share, with the same stories. Switch platform in the toolbar.</td></tr>
+      <tr><td><strong>Source of truth</strong></td><td className="is-muted"><code>DESIGN-BRIEF.md</code> (decisions), <code>TOKEN-NAMING.md</code> (names) and <code>FOUNDATIONS.md</code> (values and rules).</td></tr>
+      <tr><td><strong>Figma</strong></td><td className="is-muted"><a href="https://www.figma.com/design/m05PZu0ab0numdST2ebXf2" target="_blank" rel="noreferrer">Vuno Design System</a>: the same tokens as variables (Primitives, Semantic, Vertical, Component), text and effect styles, icons, the 24 components (one documented page each) and every prototype screen on iOS and Android. Dots become slashes (<code>color.purple.500</code> → <code>color/purple/500</code>).</td></tr>
+    </tbody>
+  </table>
+</div>

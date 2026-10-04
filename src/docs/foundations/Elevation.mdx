@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TokenTable, DoDont, Do, Dont, Live, CodeExample, Callout } from '../blocks';
+import { snippets } from '../snippets';
+import { Card, Text } from '../../components';
+import { tokens } from '../../theme';
+
+<Meta title="Foundations/Elevation" />
+
+<PageHeader eyebrow="Foundations" title="Elevation" meta={<><Pill tone="primary">Flat cards</Pill><Pill>FOUNDATIONS §5</Pill></>}>
+  Cards are flat and separated by a border. Shadows are reserved for what floats over the content, so when one appears, it means something.
+</PageHeader>
+
+## Shadows
+
+<TokenTable prefix="elevation." preview="shadow" />
+
+## Borders
+
+<TokenTable names={['border.width.sm', 'border.width.md', 'border.default', 'border.input', 'border.focus.ring']} preview="border" />
+
+## Opacity
+
+<TokenTable prefix="opacity." />
+
+## Usage
+
+- Cards use `border.default` and no shadow.
+- `elevation.floating` for the tab bar and floating buttons; `elevation.overlay` for sheets, modals and menus.
+- The scrim behind a sheet is `color.surface.scrim` with `opacity.overlay`, never pure black.
+- `border.default` is decorative. Fields and controls use `border.input` (3:1).
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="A flat card with a border.">
+    <Live width={260}><Card><Text variant="label">Title</Text><Text>Card content</Text></Card></Live>
+  </Do>
+  <Dont caption="A shadow on a content card: it competes with what really floats.">
+    <Live width={260}><Card style={{ boxShadow: tokens['elevation.overlay'] }}><Text variant="label">Title</Text><Text>Card content</Text></Card></Live>
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.elevation} />
+
+<Callout>In Figma these are the effect styles <code>elevation/floating</code> and <code>elevation/overlay</code>, with the same fields: x, y, blur, spread, color and alpha.</Callout>

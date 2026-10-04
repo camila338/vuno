@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { View } from 'react-native';
+import { PageHeader, Pill, Grid, CatalogCard, Live } from './blocks';
+import { Balance } from '../components/Balance';
+import { Card } from '../components/Surface';
+import { Chip } from '../components/Chip';
+import { List, ListRow } from '../components/List';
+import { ProgressBar } from '../components/Progress';
+import { SectionHeader } from '../components/SectionHeader';
+import { SlideToConfirm } from '../components/SlideToConfirm';
+import { Text } from '../components/Text';
+import { TextField } from '../components/TextField';
+import { tokens, VerticalProvider } from '../theme';
+
+<Meta title="Patterns" parameters={{ docs: { toc: { disable: true } } }} />
+
+<PageHeader eyebrow="Catalog" title="Patterns" meta={<><Pill tone="ok">Built with real components</Pill><Pill>FOUNDATIONS.md · TOKEN-NAMING.md</Pill></>}>
+  Repeatable solutions that combine foundations and components. Every preview is built with the real components and names where the prototype uses it.
+</PageHeader>
+
+<Grid min={400}>
+  <CatalogCard title="Vertical context" status="Home · Cards · Save" tone="ok" preview={<Live width={320}><VerticalProvider vertical="banking"><Card tone="accent"><Text variant="label" color={tokens['color.vertical.banking.on-accent']}>Vuno account</Text><Text variant="headline" color={tokens['color.vertical.banking.on-accent']} tabular>$1,050.77</Text></Card></VerticalProvider><VerticalProvider vertical="credit"><Card tone="accent"><Text variant="label" color={tokens['color.vertical.credit.on-accent']}>Due Oct 14</Text><Text variant="headline" color={tokens['color.vertical.credit.on-accent']} tabular>$320.15</Text></Card></VerticalProvider></Live>} tokens={['color.vertical.accent', 'color.vertical.on-accent']}>
+    Components never name a vertical. <code>VerticalProvider</code> sets the accent / on-accent pair and everything below inherits it. TOKEN-NAMING.md, layer 3.
+  </CatalogCard>
+  <CatalogCard title="Product sections" status="Home" tone="ok" preview={<Live width={320} gap={16}><SectionHeader icon="card-outline" title="Debit card" detail="•••• 4821 · spends your own money" /><VerticalProvider vertical="credit"><SectionHeader icon="card-outline" title="Credit" detail="Vuno Credit •••• 7702 · money you owe" /></VerticalProvider></Live>} tokens={['badge.*', 'font.role.title']}>
+    Debit and credit are separated by a header with their vertical badge, without card illustrations. What you spend and what you owe never share a card.
+  </CatalogCard>
+  <CatalogCard title="Milestone moment (10%)" status="Create a saving goal · Done" tone="ok" preview={<Live width={260} vertical="save"><ProgressBar value={0.25} color={tokens['color.vertical.save.on-accent']} track={tokens['color.vertical.save.accent']} /><View style={{ alignItems: 'center' }}><Chip status="highlight" label="Goal created!" /></View></Live>} tokens={['color.highlight.accent', 'motion.spring.bounce', 'motion.duration.celebrate']}>
+    The ring fills, the lime chip bounces in, <code>Confetti</code> bursts and a success haptic plays. Only for positive events the person triggers. FOUNDATIONS §9.
+  </CatalogCard>
+  <CatalogCard title="Field error" status="TextField · ready to use" tone="ok" preview={<Live width={300}><TextField label="Account number" value="1234" error="That account number is too short" onChangeText={() => {}} /></Live>} tokens={['input.error.border', 'color.status.error.fg']}>
+    A red border, an icon and text under the field. Color never goes alone. FOUNDATIONS §10 and §11.
+  </CatalogCard>
+  <CatalogCard title="Balance with a notice" status="Balance + Chip · ready to use" tone="ok" preview={<Live width={280}><Balance amount={1050.77} label="Vuno account · Debit" /><View style={{ flexDirection: 'row' }}><Chip status="info" label="+$100 arrives Monday" /></View></Live>} tokens={['balance.*', 'chip.status.info.*']}>
+    The main figure and, below it, a chip with what is about to change. One large balance per screen.
+  </CatalogCard>
+  <CatalogCard title="Review and slide" status="Transfer · Withdraw · Create goal" tone="ok" preview={<Live width={300}><List><ListRow icon="person-outline" title="To" detail="Leo Park" /><ListRow icon="time-outline" title="Arrives" detail="Instantly" /></List><SlideToConfirm label="Slide to send" onConfirm={() => {}} /></Live>} tokens={['list.*', 'slide-confirm.*']}>
+    Before money moves, a list of what will happen and the slide gesture as the final confirmation. No extra dialog.
+  </CatalogCard>
+</Grid>

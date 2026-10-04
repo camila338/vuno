@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TokenTable, DoDont, Do, Dont, Live, CodeExample } from '../blocks';
+import { snippets } from '../snippets';
+import { Card, Text } from '../../components';
+
+<Meta title="Foundations/Spacing" />
+
+<PageHeader eyebrow="Foundations" title="Spacing" meta={<><Pill tone="primary">4 pt grid</Pill><Pill>FOUNDATIONS §3</Pill></>}>
+  A 4 pt rhythm that gives the brand room to breathe and tightens what reads as a list. Every space is a multiple of 4 and comes from a token.
+</PageHeader>
+
+## Scale
+
+<TokenTable prefix="space." layer="primitive" preview="space" />
+
+## Roles
+
+<TokenTable prefix="space." layer="semantic" preview="space" />
+
+## Usage
+
+- Balanced density: home and brand screens use `space.gap.section`; transactions and details use `space.gap.list`.
+- The screen side margin is `space.inset.screen` (20) in every vertical.
+- At least `space.xs` (8) between two touch targets.
+- Never a loose value: if a space is missing, propose a token (see Contributing).
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Cards separated by space.gap.list (8), with space.inset.card (20) padding.">
+    <Live width={260} gap={8}><Card><Text variant="label">Title</Text></Card><Card><Text variant="label">Title</Text></Card></Live>
+  </Do>
+  <Dont caption="Arbitrary spaces (3 and 13) that break the grid.">
+    <Live width={260} gap={3}><Card style={{ padding: 13 }}><Text variant="label">Title</Text></Card><Card><Text variant="label">Title</Text></Card></Live>
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.spacing} />

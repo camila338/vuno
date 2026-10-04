@@ -1,0 +1,90 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './TopBar.stories';
+import { TopBar } from './TopBar';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Navigation" title="TopBar" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  The top bar of a screen: navigation, title and actions. It follows each platform: a centered title on iOS and a start-aligned one on Android.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { TopBar } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li><code>leading</code> with <code>back</code> on pushed screens and with <code>close</code> in modal flows.</li>
+  <li>Titles of one to three words; if they don't fit, they truncate with an ellipsis.</li>
+  <li>At most two actions on the end side, with <code>IconButton</code>.</li>
+  <li>In a flow, the title can be replaced by a <code>StepProgress</code>.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>The title is announced as a heading in VoiceOver and TalkBack.</li>
+  <li>Back and close have labels (“Back”, “Close”) and are 48.</li>
+  <li>On Android, the system Back button or gesture does the same as the arrow: never block it.</li>
+</ul>
+
+## Variants
+
+### Close (modal)
+
+<p>To leave a modal flow.</p>
+
+<Canvas of={Stories.Close} />
+
+### With actions
+
+<p>One action on the end side; “more” uses each platform's icon.</p>
+
+<Canvas of={Stories.WithActions} />
+
+### Without navigation
+
+<p>The top level of a section.</p>
+
+<Canvas of={Stories.WithoutLeading} />
+
+## Platforms
+
+<p>The bar follows each platform's anatomy. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300}><TopBar title="Title" leading={{ kind: "back", onPress: () => {} }} /></Live>} android={<Live os="android" width={300}><TopBar title="Title" leading={{ kind: "back", onPress: () => {} }} /></Live>} iosCaption={<>iOS navigation bar: a chevron and a centered title. A swipe from the left edge also goes back.</>} androidCaption={<>Material 3 small top app bar (64 dp): an arrow and a start-aligned title. System Back also goes back.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="A short title."><Live width={300}><TopBar title="Settings" leading={{ kind: "back", onPress: () => {} }} /></Live></Do>
+  <Dont caption="Long titles get cut off and don't say where you are."><Live width={300}><TopBar title="Your account and security settings" leading={{ kind: "back", onPress: () => {} }} /></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Close in modal flows."><Live width={300}><TopBar title="Send money" leading={{ kind: "close", onPress: () => {} }} /></Live></Do>
+  <Dont caption="Back to leave a modal: it looks like going back one step."><Live width={300}><TopBar title="Send money" leading={{ kind: "back", onPress: () => {} }} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Flow header
+
+<p>Back, the flow's progress and close.</p>
+
+<Canvas of={Stories.FlowHeader} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbutton--docs" title="IconButton">The bar's buttons.</LinkCard>
+  <LinkCard to="components-stepprogress--docs" title="StepProgress">Progress in the header.</LinkCard>
+</Grid>

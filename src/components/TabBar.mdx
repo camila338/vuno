@@ -1,0 +1,67 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './TabBar.stories';
+import { TabBar } from './TabBar';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Navigation" title="TabBar" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  Main navigation: a floating pill on an opaque strip. The dark pill slides to the active item and its icon turns lime.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { TabBar, TabBarItem } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>2 to 5 sections with one-word labels.</li>
+  <li>Each item uses a filled icon; the inactive one uses its <code>-outline</code> version.</li>
+  <li>It takes its own space: content never shows underneath.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>Announced as a tab list with the selected state.</li>
+  <li>Each item is at least 48 tall.</li>
+</ul>
+
+## Variants
+
+### Five sections
+
+<p>The maximum.</p>
+
+<Canvas of={Stories.FiveItems} />
+
+## Platforms
+
+<p>The bar is the same; the system area and Back behavior change. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300}><TabBar items={[{ key: "a", label: "Home", icon: "home" }, { key: "b", label: "Cards", icon: "card" }, { key: "c", label: "Save", icon: "wallet" }]} activeKey="a" onChange={() => {}} /></Live>} android={<Live os="android" width={300}><TabBar items={[{ key: "a", label: "Home", icon: "home" }, { key: "b", label: "Cards", icon: "card" }, { key: "c", label: "Save", icon: "wallet" }]} activeKey="a" onChange={() => {}} /></Live>} iosCaption={<>It sits above the home indicator (34 pt on Face ID iPhones). Back doesn't switch tabs.</>} androidCaption={<>It sits above gesture (or 3-button) navigation. System Back returns to the first tab and, from there, leaves the app.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Three to five sections with one word each."><Live width={300}><TabBar items={[{ key: "a", label: "Home", icon: "home" }, { key: "b", label: "Cards", icon: "card" }, { key: "c", label: "Save", icon: "wallet" }]} activeKey="a" onChange={() => {}} /></Live></Do>
+  <Dont caption="Long labels get cut off on a phone."><Live width={300}><TabBar items={[{ key: "a", label: "Home screen", icon: "home" }, { key: "b", label: "Transactions", icon: "list" }, { key: "c", label: "Savings goals", icon: "wallet" }, { key: "d", label: "Account settings", icon: "person" }]} activeKey="a" onChange={() => {}} /></Live></Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={"import { Tabs } from 'expo-router';\nimport { TabBar, type TabBarItem } from '../components';\n\nconst ITEMS: TabBarItem[] = [\n  { key: 'index', label: 'Home', icon: 'home' },\n  { key: 'profile', label: 'Profile', icon: 'person' },\n];\n\n<Tabs\n  tabBar={({ state, navigation }) => (\n    <TabBar items={ITEMS} activeKey={state.routes[state.index].name} onChange={(key) => navigation.navigate(key)} />\n  )}\n/>"} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-topbar--docs" title="TopBar">The top of each screen.</LinkCard>
+  <LinkCard to="components-segmented--docs" title="Segmented">Switching views inside a screen.</LinkCard>
+</Grid>

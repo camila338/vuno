@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vuno">
+  <!-- Isotipo provisional, recreado de la portada de brief/Vuno_Brand_Brief.pdf -->
+  <rect width="64" height="64" rx="16" fill="#6C63FF"/>
+  <path d="M19 22 L32 43 L42 26" fill="none" stroke="#F8F7F1" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="45" cy="20" r="6" fill="#D9F23F"/>
+</svg>

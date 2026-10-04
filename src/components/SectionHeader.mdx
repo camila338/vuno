@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './SectionHeader.stories';
+import { SectionHeader } from './SectionHeader';
+import { Button } from './Button';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="SectionHeader" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A section title with an optional detail, a vertical badge and a trailing element. It separates products and blocks of content.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { SectionHeader } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>With an icon only in product sections, inside their <code>VerticalProvider</code>.</li>
+  <li>The detail explains the section in the person's words.</li>
+  <li>At the end, a status or a tertiary link (“See all”); never the main action.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>The title is announced as a heading: VoiceOver (rotor) and TalkBack (heading navigation) jump from section to section.</li>
+</ul>
+
+## Variants
+
+### With detail
+
+<p>One line under the title.</p>
+
+<Canvas of={Stories.WithDetail} />
+
+### With a vertical icon
+
+<p>The badge takes the accent from context.</p>
+
+<Canvas of={Stories.WithIcon} />
+
+### With a trailing element
+
+<p>A status or a tertiary button.</p>
+
+<Canvas of={Stories.WithTrailing} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="A tertiary link at the end."><Live width={300}><SectionHeader title="Section title" trailing={<Button kind="tertiary" label="See all" onPress={() => {}} />} /></Live></Do>
+  <Dont caption="A primary button in the header: it competes with the screen's action."><Live width={300}><SectionHeader title="Section title" trailing={<Button label="Add" onPress={() => {}} />} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Product section
+
+<p>A header with a badge and its content below.</p>
+
+<Canvas of={Stories.ProductSection} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbadge--docs" title="IconBadge">The header's badge.</LinkCard>
+  <LinkCard to="components-card--docs" title="Card">The section's content.</LinkCard>
+</Grid>

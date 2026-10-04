@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { View } from 'react-native';
+import { PageHeader, Pill, TokenTable, ContrastTable, ProhibitedTable, DoDont, Do, Dont, Live, CodeExample, Callout } from '../blocks';
+import { snippets } from '../snippets';
+import { Chip, IconButton, Text, TextField } from '../../components';
+import { tokens } from '../../theme';
+
+<Meta title="Foundations/Accessibility" />
+
+<PageHeader eyebrow="Foundations" title="Accessibility" meta={<><Pill tone="ok">WCAG 2.2 AA</Pill><Pill>FOUNDATIONS §8 and §11</Pill></>}>
+  Clarity is Vuno's promise. AA contrast for every text pair, generous touch targets and states that never rely on color alone.
+</PageHeader>
+
+## Criteria
+
+- **Contrast:** 4.5:1 for body text; 3:1 for large text (24 px or more, or 18.66 px bold), icons, control boundaries and focus. Disabled elements are exempt.
+- **States:** color is never the only signal. Chips carry an icon and errors carry text.
+- **Scaling:** the system text size is honored up to 200% for `body`.
+- **Motion:** Reduce Motion is honored.
+- **Screen readers:** VoiceOver (iOS) and TalkBack (Android). Amounts are read in full (“1050 dollars and 77 cents”).
+
+## AA contrast
+
+Generated from the tokens: if a value changes, the table recalculates.
+
+<ContrastTable />
+
+### Prohibited combinations
+
+<ProhibitedTable />
+
+## Touch target
+
+<TokenTable prefix="size." />
+
+<div className="vds-canvas" style={{ justifyContent: 'flex-start' }}>
+  <span style={{ outline: '2px dashed #5347D3', borderRadius: 999, display: 'inline-flex' }}><Live width={48}><IconButton icon="arrow-back" label="Back" onPress={() => {}} /></Live></span>
+  <span style={{ font: '400 14px/20px var(--vds-ui)', color: 'var(--vds-text-2)', maxWidth: 520 }}>The dashed area is the 48 × 48 minimum. It covers iOS's 44 pt and Android's 48 dp. Touch targets are at least 8 apart.</span>
+</div>
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="An error with a border, an icon and text.">
+    <Live width={280}><TextField label="Account number" value="1234" error="Add the missing digits" onChangeText={() => {}} /></Live>
+  </Do>
+  <Dont caption="An error shown only with a red border: people who don't perceive the color miss it.">
+    <Live width={280}>
+      <Text variant="label">Account number</Text>
+      <View style={{ minHeight: tokens['input.height'], borderRadius: tokens['input.radius'], borderWidth: 1, borderColor: tokens['input.error.border'], backgroundColor: tokens['input.bg'], justifyContent: 'center', paddingHorizontal: tokens['space.md'] }}><Text>1234</Text></View>
+    </Live>
+  </Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="A chip with an icon and text.">
+    <Live width={240} center><Chip status="warning" label="Low balance" /></Live>
+  </Do>
+  <Dont caption="A status shown only as a colored dot.">
+    <Live width={240} center><View style={{ width: tokens['space.sm'], height: tokens['space.sm'], borderRadius: tokens['radius.pill'], backgroundColor: tokens['color.status.warning.fg'] }} /></Live>
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.accessibility} />
+
+<Callout>The tables on this page have no hand-typed numbers: the pairs live in <code>src/docs/contrast.ts</code> and ratios are computed with the WCAG 2.x formula from the tokens.</Callout>

@@ -1,0 +1,57 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Keypad.stories';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Inputs" title="Keypad" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A custom number pad for amounts. It keeps the large figure in view and avoids the system keyboard.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Keypad, applyKey } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Always with the figure above it, updating on every key.</li>
+  <li><code>applyKey</code> applies a key and caps the number of digits.</li>
+  <li>The continue action sits below and enables once there is an amount.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>Each key is a button with its digit; delete is announced as “Delete”.</li>
+  <li>Keys are 48 tall plus their spacing.</li>
+</ul>
+
+## Variants
+
+### With an amount
+
+<p>The figure updates on every key.</p>
+
+<Canvas of={Stories.WithAmount} />
+
+## Use cases and examples
+
+### Amount screen
+
+<p>Figure, keypad and the main action.</p>
+
+<Canvas of={Stories.AmountScreen} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-balance--docs" title="Balance">The main figure.</LinkCard>
+  <LinkCard to="components-textfield--docs" title="TextField">Free text.</LinkCard>
+</Grid>

@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, ColorRamp, TokenTable, DoDont, Do, Dont, Live, CodeExample, ContrastTable, Callout } from '../blocks';
+import { snippets } from '../snippets';
+import { Button, Card, Chip, Text } from '../../components';
+import { tokens } from '../../theme';
+
+<Meta title="Foundations/Color" />
+
+<PageHeader eyebrow="Foundations" title="Color" meta={<><Pill tone="primary">10 families · 90 primitives</Pill><Pill>FOUNDATIONS §1</Pill></>}>
+  Color guides: it marks the brand and the primary action, tells the verticals apart and communicates status. It is never the only signal, and every text pair meets WCAG AA.
+</PageHeader>
+
+## The 70 / 20 / 10 split
+
+70% of the interface is `ink` neutrals. 20% is the purple action and the vertical accents. 10% is lime, reserved for milestone moments.
+
+## Primitives
+
+Ten families in steps `100`–`900`; `500` is the base of each. A dot (●) marks the steps the semantic layer uses. The interface never uses a primitive directly.
+
+<ColorRamp family="ink" />
+<ColorRamp family="purple" />
+<ColorRamp family="mint" />
+<ColorRamp family="sky" />
+<ColorRamp family="coral" />
+<ColorRamp family="lime" />
+<ColorRamp family="green" />
+<ColorRamp family="red" />
+<ColorRamp family="amber" />
+<ColorRamp family="azure" />
+
+## Semantic tokens
+
+### Surface and text
+
+<TokenTable names={['color.surface.page', 'color.surface.card', 'color.surface.inverse', 'color.surface.scrim', 'color.text.primary', 'color.text.secondary', 'color.text.tertiary', 'color.text.on-inverse', 'color.text.on-inverse-muted']} preview="color" />
+
+### Brand and borders
+
+<TokenTable names={['color.brand.primary', 'color.brand.primary.pressed', 'color.brand.primary.disabled', 'color.brand.on-primary', 'color.brand.logo', 'color.border.default', 'color.border.input', 'color.border.focus']} preview="color" />
+
+### Verticals
+
+Each vertical has an `accent` / `on-accent` pair. Components use `color.vertical.accent` and `color.vertical.on-accent`, which the screen's context resolves.
+
+<TokenTable prefix="color.vertical." preview="color" />
+
+### Status
+
+Families of their own, separate from the verticals. Always paired with an icon or text.
+
+<TokenTable prefix="color.status." preview="color" />
+
+### Highlight (10%)
+
+<TokenTable prefix="color.highlight." preview="color" />
+
+## Usage
+
+- `color.brand.primary` is only for the primary action and focus. One purple button per screen.
+- `color.brand.logo` (#6C63FF, Vuno Purple from the brief) is for the logo and text-free brand surfaces: with text it doesn't reach AA.
+- Credit uses the purple ramp (`purple.300` / `purple.900`, 10.23:1). Its accent shares a step with the disabled primary button; the button also carries `opacity.disabled`, so they don't read alike.
+- A vertical color identifies the vertical and nothing else; it never means success or status.
+- When an accent is the background, its content uses the matching `on-accent`.
+- No pure white or black: the lightest surface is `ink.100` and the darkest `ink.900`.
+- `coral` stays in the palette as a brief color but has no semantic role.
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="One purple button per screen for the primary action.">
+    <Live width={300} center><Button label="Send money" icon="arrow-up" onPress={() => {}} /><Button kind="secondary" label="Not now" onPress={() => {}} /></Live>
+  </Do>
+  <Dont caption="Several purple actions competing for attention.">
+    <Live width={300} center><Button label="Send" onPress={() => {}} /><Button label="Request" onPress={() => {}} /></Live>
+  </Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Status with its color, icon and text.">
+    <Live width={300} center><Chip status="success" label="Payment received" /><Chip status="error" label="Payment declined" /></Live>
+  </Do>
+  <Dont caption="The lime or a vertical accent used to mean “success”.">
+    <Live width={300} center><Chip status="highlight" label="Payment received" /></Live>
+  </Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="On an accent, its on-accent.">
+    <Live width={260} vertical="save"><Card tone="accent"><Text variant="label" color={tokens['color.vertical.save.on-accent']}>Vuno Save</Text><Text variant="headline" color={tokens['color.vertical.save.on-accent']} tabular>$3,020.00</Text></Card></Live>
+  </Do>
+  <Dont caption="Tertiary text on an accent: 3.90:1, it fails AA.">
+    <Live width={260} vertical="save"><Card tone="accent"><Text variant="label" color={tokens['color.text.tertiary']}>Vuno Save</Text><Text variant="headline" color={tokens['color.text.tertiary']} tabular>$3,020.00</Text></Card></Live>
+  </Dont>
+</DoDont>
+
+## Contrast
+
+Computed live from the tokens. See also [Accessibility](?path=/docs/foundations-accessibility--docs).
+
+<ContrastTable />
+
+## Code
+
+<CodeExample code={snippets.color} />
+
+<Callout>Names follow <code>TOKEN-NAMING.md</code>. In Figma, dots become slashes: <code>color.brand.primary</code> → <code>color/brand/primary</code>.</Callout>

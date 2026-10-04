@@ -1,0 +1,73 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './ProgressBar.stories';
+import { ProgressBar } from './Progress';
+import { Text } from './Text';
+import { tokens } from '../theme';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Progress" title="ProgressBar" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A linear progress bar. It fills over <code>motion.duration.nav</code> and uses the vertical's color pair.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { ProgressBar } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Progress in <code>on-accent</code> and the track in <code>accent</code> (or <code>surface.card</code> on an accent card).</li>
+  <li>Always pair it with the figure or percentage as text.</li>
+  <li><code>slim</code> for lists and tight spaces.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>With Reduce Motion it appears filled, without animation.</li>
+  <li>The figure as text is what VoiceOver and TalkBack read.</li>
+</ul>
+
+## Variants
+
+### Sizes
+
+<p>Default (8) and slim (4).</p>
+
+<Canvas of={Stories.Sizes} />
+
+### Vertical colors
+
+<p>The same component with each vertical's pair.</p>
+
+<Canvas of={Stories.Verticals} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="The figure goes with the bar."><Live width={300}><Text variant="label" tabular>40% · $1,000 of $2,500</Text><ProgressBar value={0.4} color={tokens["color.vertical.save.on-accent"]} track={tokens["color.vertical.save.accent"]} /></Live></Do>
+  <Dont caption="The bar alone: it's unclear how much is left."><Live width={300}><ProgressBar value={0.4} color={tokens["color.vertical.save.on-accent"]} track={tokens["color.vertical.save.accent"]} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### With a figure
+
+<p>On an accent card, with the label and the percentage.</p>
+
+<Canvas of={Stories.WithLabel} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-progressring--docs" title="ProgressRing">Circular progress for a milestone.</LinkCard>
+  <LinkCard to="components-stepprogress--docs" title="StepProgress">Steps of a flow.</LinkCard>
+</Grid>

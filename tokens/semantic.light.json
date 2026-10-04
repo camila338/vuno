@@ -1,0 +1,487 @@
+{
+  "color": {
+    "surface": {
+      "page": {
+        "$type": "color",
+        "$value": "{color.ink.200}",
+        "$description": "Screen background."
+      },
+      "card": {
+        "$type": "color",
+        "$value": "{color.ink.100}",
+        "$description": "Cards, fields and the tab bar."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "$description": "Dark surface: Banking and the active tab pill."
+      },
+      "scrim": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "$description": "Scrim behind sheets and modals, with opacity.overlay."
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "$description": "Primary text, headlines and balances."
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.ink.700}",
+        "$description": "Supporting text and descriptions."
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.ink.600}",
+        "$description": "Metadata, captions and inactive icons."
+      },
+      "on-inverse": {
+        "$type": "color",
+        "$value": "{color.ink.100}",
+        "$description": "Text on surface.inverse."
+      },
+      "on-inverse-muted": {
+        "$type": "color",
+        "$value": "{color.ink.400}",
+        "$description": "Secondary text on surface.inverse."
+      }
+    },
+    "brand": {
+      "primary": {
+        "$root": {
+          "$type": "color",
+          "$value": "{color.purple.600}",
+          "$description": "Primary action and focus. One purple button per screen."
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "{color.purple.700}",
+          "$description": "Primary button while pressed."
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.purple.300}",
+          "$description": "Disabled primary button (exempt from contrast)."
+        }
+      },
+      "on-primary": {
+        "$type": "color",
+        "$value": "{color.ink.100}",
+        "$description": "Text and icons on brand.primary."
+      },
+      "logo": {
+        "$type": "color",
+        "$value": "{color.purple.500}",
+        "$description": "Vuno Purple from the brand brief. Logo and text-free brand surfaces only."
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.ink.300}",
+        "$description": "Decorative border for cards and dividers."
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{color.ink.600}",
+        "$description": "Boundary of fields and controls (3:1)."
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.purple.600}",
+        "$description": "Keyboard focus ring."
+      }
+    },
+    "status": {
+      "success": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.green.200}",
+          "$description": "Success chip background."
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.green.800}",
+          "$description": "Success text and icon."
+        }
+      },
+      "error": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.red.200}",
+          "$description": "Error chip background."
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.red.800}",
+          "$description": "Error text and icon."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.red.600}",
+          "$description": "Border of a field with an error."
+        }
+      },
+      "warning": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.amber.200}",
+          "$description": "Warning chip background."
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.amber.900}",
+          "$description": "Warning text and icon."
+        }
+      },
+      "info": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.azure.200}",
+          "$description": "Info chip background."
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.azure.800}",
+          "$description": "Info text and icon."
+        }
+      }
+    },
+    "vertical": {
+      "banking": {
+        "accent": {
+          "$type": "color",
+          "$value": "{color.ink.900}",
+          "$description": "Banking accent."
+        },
+        "on-accent": {
+          "$type": "color",
+          "$value": "{color.ink.100}",
+          "$description": "Content on the Banking accent."
+        }
+      },
+      "save": {
+        "accent": {
+          "$type": "color",
+          "$value": "{color.mint.300}",
+          "$description": "Save accent."
+        },
+        "on-accent": {
+          "$type": "color",
+          "$value": "{color.mint.900}",
+          "$description": "Content on the Save accent."
+        }
+      },
+      "invest": {
+        "accent": {
+          "$type": "color",
+          "$value": "{color.sky.300}",
+          "$description": "Invest accent."
+        },
+        "on-accent": {
+          "$type": "color",
+          "$value": "{color.sky.900}",
+          "$description": "Content on the Invest accent."
+        }
+      },
+      "credit": {
+        "accent": {
+          "$type": "color",
+          "$value": "{color.purple.300}",
+          "$description": "Credit accent."
+        },
+        "on-accent": {
+          "$type": "color",
+          "$value": "{color.purple.900}",
+          "$description": "Content on the Credit accent."
+        }
+      }
+    },
+    "highlight": {
+      "accent": {
+        "$type": "color",
+        "$value": "{color.lime.500}",
+        "$description": "The 10% lime: milestone chip, active tab icon."
+      },
+      "on-accent": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "$description": "Content on the lime."
+      }
+    }
+  },
+  "space": {
+    "inset": {
+      "screen": {
+        "$type": "dimension",
+        "$value": "{space.lg}",
+        "$description": "Screen side margin."
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{space.lg}",
+        "$description": "Card padding."
+      },
+      "chip": {
+        "$type": "dimension",
+        "$value": "{space.xs}",
+        "$description": "Chip horizontal padding (vertical: space.2xs)."
+      }
+    },
+    "gap": {
+      "list": {
+        "$type": "dimension",
+        "$value": "{space.xs}",
+        "$description": "Between list rows and cards in a grid."
+      },
+      "stack": {
+        "$type": "dimension",
+        "$value": "{space.md}",
+        "$description": "Between blocks inside a section."
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{space.2xl}",
+        "$description": "Between sections."
+      }
+    }
+  },
+  "radius": {
+    "input": {
+      "$type": "dimension",
+      "$value": "{radius.md}",
+      "$description": "Text fields and pickers."
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": "{radius.lg}",
+      "$description": "Cards."
+    },
+    "sheet": {
+      "$type": "dimension",
+      "$value": "{radius.xl}",
+      "$description": "Top corners of bottom sheets."
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": "{radius.full}",
+      "$description": "Buttons, chips, tab bar and icon buttons."
+    }
+  },
+  "font": {
+    "role": {
+      "balance": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.display}",
+          "fontSize": "{font.size.2xl}",
+          "fontWeight": 700,
+          "lineHeight": "56px",
+          "letterSpacing": "-1.04px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "BricolageGrotesque_700Bold"
+          }
+        },
+        "$description": "Main balance figure. One per screen."
+      },
+      "headline": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.display}",
+          "fontSize": "{font.size.xl}",
+          "fontWeight": 700,
+          "lineHeight": "32px",
+          "letterSpacing": "-0.28px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "BricolageGrotesque_700Bold"
+          }
+        },
+        "$description": "Screen headline, amount on a vertical card."
+      },
+      "title": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.ui}",
+          "fontSize": "{font.size.lg}",
+          "fontWeight": 600,
+          "lineHeight": "28px",
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "PlusJakartaSans_600SemiBold"
+          }
+        },
+        "$description": "Section, sheet and modal titles."
+      },
+      "body": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.ui}",
+          "fontSize": "{font.size.md}",
+          "fontWeight": 400,
+          "lineHeight": "24px",
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "PlusJakartaSans_400Regular"
+          }
+        },
+        "$description": "Running text and descriptions."
+      },
+      "label": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.ui}",
+          "fontSize": "{font.size.sm}",
+          "fontWeight": 600,
+          "lineHeight": "20px",
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "PlusJakartaSans_600SemiBold"
+          }
+        },
+        "$description": "Buttons, labels, names and amounts in lists."
+      },
+      "caption": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.family.ui}",
+          "fontSize": "{font.size.xs}",
+          "fontWeight": 500,
+          "lineHeight": "16px",
+          "letterSpacing": "0.12px"
+        },
+        "$extensions": {
+          "com.vuno.react-native": {
+            "fontFamily": "PlusJakartaSans_500Medium"
+          }
+        },
+        "$description": "Dates, metadata and chips."
+      }
+    }
+  },
+  "elevation": {
+    "floating": {
+      "$type": "shadow",
+      "$value": "{elevation.sm}",
+      "$description": "Tab bar and floating button."
+    },
+    "overlay": {
+      "$type": "shadow",
+      "$value": "{elevation.md}",
+      "$description": "Sheets, modals and menus."
+    }
+  },
+  "border": {
+    "default": {
+      "$type": "border",
+      "$value": {
+        "color": "{color.ink.300}",
+        "width": "{border.width.sm}",
+        "style": "solid"
+      },
+      "$description": "Neutral cards, dividers and icon buttons."
+    },
+    "input": {
+      "$type": "border",
+      "$value": {
+        "color": "{color.ink.600}",
+        "width": "{border.width.sm}",
+        "style": "solid"
+      },
+      "$description": "Text fields and controls."
+    },
+    "focus": {
+      "ring": {
+        "$type": "border",
+        "$value": {
+          "color": "{color.purple.600}",
+          "width": "{border.width.md}",
+          "style": "solid"
+        },
+        "$description": "Keyboard focus, 2 px away from the element."
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$type": "number",
+      "$value": "{opacity.40}",
+      "$description": "Disabled elements."
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": "{opacity.50}",
+      "$description": "Scrim behind sheets and modals."
+    }
+  },
+  "motion": {
+    "duration": {
+      "press": {
+        "$type": "duration",
+        "$value": "{motion.duration.100}",
+        "$description": "Response to a touch."
+      },
+      "state": {
+        "$type": "duration",
+        "$value": "{motion.duration.150}",
+        "$description": "Chips, state changes and fades."
+      },
+      "nav": {
+        "$type": "duration",
+        "$value": "{motion.duration.250}",
+        "$description": "Navigation, sheets and cards."
+      },
+      "celebrate": {
+        "$type": "duration",
+        "$value": "{motion.duration.400}",
+        "$description": "10% moments."
+      },
+      "effect": {
+        "$type": "duration",
+        "$value": "{motion.duration.1800}",
+        "$description": "Decorative effects that never block the UI, such as particles. Outside the transition scale (press → celebrate)."
+      }
+    },
+    "spring": {
+      "soft": {
+        "$type": "spring",
+        "$value": {
+          "mass": 1,
+          "stiffness": 300,
+          "damping": 22
+        },
+        "$description": "Buttons, cards and the tab bar indicator."
+      },
+      "bounce": {
+        "$type": "spring",
+        "$value": {
+          "mass": 1,
+          "stiffness": 340,
+          "damping": 20
+        },
+        "$description": "10% moments only."
+      }
+    }
+  },
+  "size": {
+    "touch": {
+      "min": {
+        "$type": "dimension",
+        "$value": "48px",
+        "$description": "Minimum touch target (44 pt iOS, 48 dp Android)."
+      }
+    }
+  }
+}

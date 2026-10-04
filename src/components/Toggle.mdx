@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Toggle.stories';
+import { Toggle } from './Toggle';
+import { List, ListRow } from './List';
+import { Row } from '../docs/StoryStage';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Inputs" title="Toggle" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  An on/off switch for settings with an immediate effect. On iOS it is the native UISwitch; on Android, the Material 3 switch. Both use Vuno's colors.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Toggle } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Immediate effect. If the change needs confirming, use a button.</li>
+  <li>Always in a row with a title and one line explaining what turning it on does.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li><code>label</code> is required: VoiceOver and TalkBack announce it as a switch with its state (“Label, switch, on”).</li>
+  <li>The disabled state is announced automatically.</li>
+</ul>
+
+## Variants
+
+### States
+
+<p>On, off and their disabled versions.</p>
+
+<Canvas of={Stories.States} />
+
+## Platforms
+
+<p>Each platform draws its own switch: the native UISwitch on iOS and the Material 3 switch on Android. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300} center><Row><Toggle value label="On" onValueChange={() => {}} /><Toggle value={false} label="Off" onValueChange={() => {}} /></Row></Live>} android={<Live os="android" width={300} center><Row><Toggle value label="On" onValueChange={() => {}} /><Toggle value={false} label="Off" onValueChange={() => {}} /></Row></Live>} iosCaption={<>UISwitch (51 × 31 pt): a filled track and a thumb of the same size in both states.</>} androidCaption={<>Material 3 switch (52 × 32 dp): an outlined track and a small thumb when off; a large thumb when on.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Reversible settings with an immediate effect."><Live width={300} center><List><ListRow title="Notifications" detail="Get an alert for every payment." trailing={<Toggle value label="Notifications" onValueChange={() => {}} />} /></List></Live></Do>
+  <Dont caption="Actions that need confirming."><Live width={300} center><List><ListRow title="Close account" trailing={<Toggle value={false} label="Close account" onValueChange={() => {}} />} /></List></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="The label names what turns on."><Live width={300} center><List><ListRow title="Notifications" trailing={<Toggle value label="Notifications" onValueChange={() => {}} />} /></List></Live></Do>
+  <Dont caption="Negative labels: “disable” while on is a double negative."><Live width={300} center><List><ListRow title="Disable notifications" trailing={<Toggle value label="Disable notifications" onValueChange={() => {}} />} /></List></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Settings row
+
+<p>Inside a <code>List</code>, as the row's trailing element.</p>
+
+<Canvas of={Stories.Settings} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-list--docs" title="List">Settings rows.</LinkCard>
+  <LinkCard to="components-choicechip--docs" title="ChoiceChip">Choosing between options.</LinkCard>
+</Grid>

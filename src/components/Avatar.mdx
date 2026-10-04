@@ -1,0 +1,69 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Avatar.stories';
+import { Avatar } from './Surface';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="Avatar" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A person's initials in a dark circle. It identifies the user and their contacts.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Avatar } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>One or two initials.</li>
+  <li>Next to the name when there is room; alone in compact lists.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li><code>label</code> carries the full name for VoiceOver and TalkBack.</li>
+</ul>
+
+## Variants
+
+### With text
+
+<p>A greeting and the name next to it.</p>
+
+<Canvas of={Stories.WithText} />
+
+### Several
+
+<p>Avatars for several contacts.</p>
+
+<Canvas of={Stories.Group} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="One or two initials."><Live width={300} center><Avatar initials="AB" label="Full name" /></Live></Do>
+  <Dont caption="More than two letters: they don't fit."><Live width={300} center><Avatar initials="ABCD" label="Full name" /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### In a contact list
+
+<p>As a row's trailing element.</p>
+
+<Canvas of={Stories.InList} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbadge--docs" title="IconBadge">An icon in a circle.</LinkCard>
+  <LinkCard to="components-list--docs" title="List">Contact lists.</LinkCard>
+</Grid>

@@ -1,0 +1,64 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Segmented.stories';
+import { Segmented } from './Segmented';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Inputs" title="Segmented" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A pill-shaped segmented control to switch between 2 or 3 exclusive views or options. The indicator slides with <code>motion.spring.soft</code>.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Segmented } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>2 to 3 options of one or two words.</li>
+  <li>It changes the view or mode right away; it is not a form.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>Each option is a tab with its selected state.</li>
+  <li>A 48 height.</li>
+</ul>
+
+## Variants
+
+### Three options
+
+<p>The recommended maximum.</p>
+
+<Canvas of={Stories.ThreeOptions} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Two or three short options."><Live width={300}><Segmented value="a" onChange={() => {}} options={[{ value: "a", label: "Day" }, { value: "b", label: "Week" }]} /></Live></Do>
+  <Dont caption="Too many options: they don't fit on a phone."><Live width={300}><Segmented value="a" onChange={() => {}} options={["a","b","c","d","e"].map((v) => ({ value: v, label: "Option" }))} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Switching views
+
+<p>It switches the content underneath.</p>
+
+<Canvas of={Stories.ViewSwitch} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-choicechip--docs" title="ChoiceChip">More options, or with icons.</LinkCard>
+  <LinkCard to="components-tabbar--docs" title="TabBar">Main navigation.</LinkCard>
+</Grid>

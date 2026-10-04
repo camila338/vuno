@@ -1,0 +1,66 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './ActionButton.stories';
+import { ActionButton } from './ActionButton';
+import { Row } from '../docs/StoryStage';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Actions" title="ActionButton" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A quick action: a circle with an icon and a short label underneath. Used in rows for a screen's most frequent actions.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { ActionButton } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>3 to 4 per row. With more, group them in a menu.</li>
+  <li>The row distributes the space; the component sizes to its content.</li>
+  <li>Labels of one or two words.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>The label is part of the touch target and is the name VoiceOver and TalkBack read.</li>
+  <li>The circle is 56 (24 icon + <code>action.inset</code>), above the 48 minimum.</li>
+</ul>
+
+## Variants
+
+### Labels
+
+<p>One or two words; never a second line.</p>
+
+<Canvas of={Stories.Labels} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Short labels."><Live width={300} center><Row><ActionButton icon="arrow-up" label="Send" onPress={() => {}} /><ActionButton icon="arrow-down" label="Request" onPress={() => {}} /></Row></Live></Do>
+  <Dont caption="Long labels break the row."><Live width={300} center><Row><ActionButton icon="arrow-up" label="Send money to someone" onPress={() => {}} /></Row></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Quick actions row
+
+<p>Three actions spread across the screen width.</p>
+
+<Canvas of={Stories.QuickActions} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbutton--docs" title="IconButton">An icon without a label.</LinkCard>
+  <LinkCard to="components-button--docs" title="Button">Actions with text.</LinkCard>
+</Grid>

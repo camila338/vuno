@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TokenTable, DoDont, Do, Dont, Live, CodeExample } from '../blocks';
+import { snippets } from '../snippets';
+import { Button, Card, Text, TextField } from '../../components';
+
+<Meta title="Foundations/Radius" />
+
+<PageHeader eyebrow="Foundations" title="Radius" meta={<><Pill tone="primary">Medium rounding</Pill><Pill>FOUNDATIONS §4</Pill></>}>
+  Medium rounding on containers and a pill on everything you can tap. Shape helps tell content from actions.
+</PageHeader>
+
+## Scale
+
+<TokenTable prefix="radius." layer="primitive" preview="radius" />
+
+## Roles
+
+<TokenTable prefix="radius." layer="semantic" preview="radius" />
+
+## Usage
+
+- Buttons, chips, the tab bar and icon buttons use `radius.pill`.
+- Cards use `radius.card` (20), fields `radius.input` (16) and sheets `radius.sheet` (28) on the top corners.
+- A nested element has a radius smaller than or equal to its container's.
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="A pill button and a field with radius.input.">
+    <Live width={280}><TextField label="Amount" value="$250.00" onChangeText={() => {}} /><Button label="Continue" onPress={() => {}} /></Live>
+  </Do>
+  <Dont caption="Off-scale radius: the card stops looking like Vuno.">
+    <Live width={280}><Card style={{ borderRadius: 4 }}><Text variant="label">Title</Text><Text>Card content</Text></Card></Live>
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.radius} />

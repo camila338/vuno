@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './TextField.stories';
+import { TextField } from './TextField';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Inputs" title="TextField" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A text field with an always-visible label, a 3:1 border, a focus ring and an error with a border, an icon and text. The large size is for a step's hero value.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { TextField } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>The label sits outside the field and stays while typing; the placeholder is an example.</li>
+  <li>Show the error when leaving the field or on continue, not while typing.</li>
+  <li>The error message says how to fix it.</li>
+  <li>Use the right keyboard (<code>keyboardType</code>) for emails, numbers or amounts.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>The label is the field's name for VoiceOver and TalkBack.</li>
+  <li>The border (<code>border.input</code>) is 4.90:1 on the card (WCAG 1.4.11).</li>
+  <li>The error doesn't depend on color: it has an icon and text.</li>
+</ul>
+
+## Variants
+
+### States
+
+<p>Empty, filled and with an error. Focus adds the <code>input.border.focus</code> ring.</p>
+
+<Canvas of={Stories.States} />
+
+### Sizes
+
+<p>Default for forms; large for a step's main value.</p>
+
+<Canvas of={Stories.Sizes} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="A label outside and an error that says how to fix it."><Live width={300}><TextField label="Email" value="name@" error="Add the domain, like name@example.com" onChangeText={() => {}} /></Live></Do>
+  <Dont caption="A placeholder as the only label: it disappears when typing."><Live width={300}><TextField label="" placeholder="Email" value="" onChangeText={() => {}} /></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="A placeholder with an example of the format."><Live width={300}><TextField label="Email" placeholder="name@example.com" value="" onChangeText={() => {}} /></Live></Do>
+  <Dont caption="A placeholder that repeats the label."><Live width={300}><TextField label="Email" placeholder="Email" value="" onChangeText={() => {}} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Form
+
+<p>Stacked fields and a full-width main action.</p>
+
+<Canvas of={Stories.Form} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-keypad--docs" title="Keypad">Entering amounts.</LinkCard>
+  <LinkCard to="components-button--docs" title="Button">Submitting the form.</LinkCard>
+</Grid>

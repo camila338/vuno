@@ -1,0 +1,85 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './IconButton.stories';
+import { IconButton } from './Button';
+import { Row } from '../docs/StoryStage';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Actions" title="IconButton" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A round, icon-only button for navigation and utilities: back, close, more options, share.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { IconButton } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Only with universally understood icons; if the icon needs explaining, use a <code>Button</code> with text.</li>
+  <li>Back, more and share use each platform's system icon: <code>useSystemIcon('back')</code>.</li>
+  <li>In a top bar: on the start side to go back or close, on the end side for more options.</li>
+  <li>Two or three at most in the same bar.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li><code>label</code> is required: it's what VoiceOver and TalkBack read (“Back”, “Close”).</li>
+  <li>A 48 diameter (<code>button.circle.size</code>): the full touch target.</li>
+</ul>
+
+## Variants
+
+### System icons
+
+<p>Back, close, more and share. Switch the platform in the toolbar to see each version.</p>
+
+<Canvas of={Stories.Icons} />
+
+### Disabled
+
+<p>With <code>opacity.disabled</code>.</p>
+
+<Canvas of={Stories.Disabled} />
+
+## Platforms
+
+<p>Back, more and share use each platform's system icon. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300} center><Row><IconButton icon="chevron-back" label="Back" onPress={() => {}} /><IconButton icon="ellipsis-horizontal" label="More" onPress={() => {}} /><IconButton icon="share-outline" label="Share" onPress={() => {}} /></Row></Live>} android={<Live os="android" width={300} center><Row><IconButton icon="arrow-back" label="Back" onPress={() => {}} /><IconButton icon="ellipsis-vertical" label="More" onPress={() => {}} /><IconButton icon="share-social-outline" label="Share" onPress={() => {}} /></Row></Live>} iosCaption={<>A chevron to go back, horizontal dots for more and the iOS share icon (HIG).</>} androidCaption={<>An arrow to go back, vertical dots for the overflow menu and the Material share icon.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Icons everyone recognizes."><Live width={300} center><IconButton icon="close" label="Close" onPress={() => {}} /></Live></Do>
+  <Dont caption="Ambiguous icons: nobody knows what they do."><Live width={300} center><IconButton icon="planet-outline" label="Settings" onPress={() => {}} /></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Three at most together."><Live width={300} center><Row><IconButton icon="share-outline" label="Share" onPress={() => {}} /><IconButton icon="ellipsis-horizontal" label="More" onPress={() => {}} /></Row></Live></Do>
+  <Dont caption="Too many icons in a row: group them under “more”."><Live width={300} center><Row>{["share-outline","heart-outline","bookmark-outline","download-outline","trash-outline"].map((i) => <IconButton key={i} icon={i} label={i} onPress={() => {}} />)}</Row></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Closing a modal
+
+<p>On both platforms, a modal closes from the top start corner.</p>
+
+<Canvas of={Stories.CloseButton} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-topbar--docs" title="TopBar">The bar where back and close live.</LinkCard>
+  <LinkCard to="components-button--docs" title="Button">Actions with text.</LinkCard>
+  <LinkCard to="components-actionbutton--docs" title="ActionButton">An icon with a label underneath.</LinkCard>
+</Grid>

@@ -1,0 +1,71 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Logo.stories';
+import { Logo } from './Logo';
+import { Text } from './Text';
+import { View } from 'react-native';
+import { tokens } from '../theme';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Brand" title="Logo" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  The Vuno logo from the brand brief: the app mark (a rounded square in <code>color.brand.logo</code> with a “V” and the lime dot) and the wordmark.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Logo } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Once per screen at most, on the start side of the home header.</li>
+  <li>The mark alone (<code>wordmark={false}</code>) where space is tight.</li>
+  <li>Never recolor the mark, add text on it, or stretch it: it only scales with <code>size</code>.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>Announced as an image named “Vuno”.</li>
+</ul>
+
+## Variants
+
+### Sizes
+
+<p>24, 32 and 48.</p>
+
+<Canvas of={Stories.Sizes} />
+
+### Mark only
+
+<p>Without the wordmark.</p>
+
+<Canvas of={Stories.MarkOnly} />
+
+### On a dark surface
+
+<p>The wordmark in <code>color.text.on-inverse</code>.</p>
+
+<Canvas of={Stories.OnDark} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="The mark as designed, with clear space around it."><Live width={300} center><Logo /></Live></Do>
+  <Dont caption="Text on the logo purple: Vuno Purple never carries text (4.02:1)."><Live width={300} center><View style={{ backgroundColor: tokens["color.brand.logo"], borderRadius: tokens["radius.input"], padding: tokens["space.sm"] }}><Text color={tokens["color.brand.on-primary"]}>Vuno</Text></View></Live></Dont>
+</DoDont>
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-topbar--docs" title="TopBar">Screen headers.</LinkCard>
+  <LinkCard to="components-avatar--docs" title="Avatar">The other side of the home header.</LinkCard>
+</Grid>

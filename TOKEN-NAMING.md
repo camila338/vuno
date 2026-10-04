@@ -42,10 +42,10 @@ motion.duration.250
 | Familia | Rol |
 |---|---|
 | `ink` | Neutros: texto, superficies y bordes |
-| `purple` | Marca y acción primaria |
+| `purple` | Marca, acción primaria y vertical Credit |
 | `mint` | Vertical Save |
 | `sky` | Vertical Invest |
-| `coral` | Vertical Credit |
+| `coral` | Paleta del brief, sin rol semántico (Credit pasó a `purple`) |
 | `lime` | Destacado: el 10% |
 | `green` | Estado de éxito |
 | `red` | Estado de error |
@@ -192,7 +192,10 @@ input.border
 input.error.border
 tabbar.item.active.icon
 balance.font
+confetti.duration
 ```
+
+- Los parámetros propios de un efecto (por ejemplo `confetti.gravity` o `confetti.count`) son tokens de componente de tipo `number`; la unidad se escribe en `$description`.
 
 ### Regla: un token por componente, la vertical es contexto
 
@@ -215,7 +218,7 @@ Los tokens de componente **nunca nombran una vertical**. No existen `card.vertic
 | Radio | `radius` | `xs`–`xl`, `full` | `input`, `card`, `sheet`, `pill` |
 | Espaciado | `space` | `2xs`–`3xl` | `inset.screen`, `inset.card`, `inset.chip`, `gap.list`, `gap.stack`, `gap.section` |
 | Tipografía | `font` | `family.ui`, `family.display`, `size.xs`–`2xl` | `role.balance`, `headline`, `title`, `body`, `label`, `caption` |
-| Movimiento | `motion` | `duration.<ms>`, `easing.standard`, `easing.exit` | `duration.press`, `state`, `nav`, `celebrate` · `spring.soft`, `spring.bounce` |
+| Movimiento | `motion` | `duration.<ms>`, `easing.standard`, `easing.exit` | `duration.press`, `state`, `nav`, `celebrate` (transiciones) y `duration.effect` (efectos decorativos que no bloquean la interfaz) · `spring.soft`, `spring.bounce` |
 | Iconos | `icon` | `size.sm`, `md`, `lg` | El trazo lo fija la librería (Ionicons); el relleno en activo se resuelve en el componente. |
 | Elevación | `elevation` | `sm`, `md` | `floating`, `overlay` |
 | Borde | `border` | `width.sm`, `width.md` | `default`, `input`, `focus.ring` (compuestos de grosor + `color.border.*`) |
@@ -250,7 +253,7 @@ Los colores de vertical (`color.vertical.*`) son independientes de los de estado
 
 ## Resuelto
 
-- Escala de `motion.duration`: número en milisegundos.
+- Escala de `motion.duration`: número en milisegundos. Las transiciones usan 100–400; los efectos decorativos tienen su propio semántico (`motion.duration.effect` → `motion.duration.1800`).
 - Pasos de `elevation` (`sm`, `md`), `border.width` (`sm`, `md`) y `opacity` (porcentaje).
 - Tallas ampliadas de `space` (`2xs`–`3xl`) y `font.size` (hasta `2xl`, para que quepa el rol `title`), y `radius.full`.
 - Lista final de roles de `elevation`, `border` y `opacity`, con sus valores: ver `FOUNDATIONS.md`.

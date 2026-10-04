@@ -1,0 +1,686 @@
+{
+  "color": {
+    "ink": {
+      "100": {
+        "$type": "color",
+        "$value": "#F8F7F1",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#F2F0EA",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#E3E1DB",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#C5C4BE",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#94928D",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6D6C67",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#4E4D48",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#2C2B27",
+        "$description": "Neutrals: text, surfaces and borders."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#141411",
+        "$description": "Neutrals: text, surfaces and borders."
+      }
+    },
+    "purple": {
+      "100": {
+        "$type": "color",
+        "$value": "#F5F6FF",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#E0E3FE",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#C2C8FF",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#9BA1FD",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#6C63FF",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#5347D3",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#4034AC",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#2E2383",
+        "$description": "Brand, primary action and the Credit vertical."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#1B1355",
+        "$description": "Brand, primary action and the Credit vertical."
+      }
+    },
+    "mint": {
+      "100": {
+        "$type": "color",
+        "$value": "#E9FCF5",
+        "$description": "Save vertical accent."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#D1F5E7",
+        "$description": "Save vertical accent."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ABEBD4",
+        "$description": "Save vertical accent."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#7BDABB",
+        "$description": "Save vertical accent."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#46BE9C",
+        "$description": "Save vertical accent."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#0F7B61",
+        "$description": "Save vertical accent."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#0A614C",
+        "$description": "Save vertical accent."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#034938",
+        "$description": "Save vertical accent."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#002F23",
+        "$description": "Save vertical accent."
+      }
+    },
+    "sky": {
+      "100": {
+        "$type": "color",
+        "$value": "#F2F7FF",
+        "$description": "Invest vertical accent."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#DEEDFF",
+        "$description": "Invest vertical accent."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#C4DDFE",
+        "$description": "Invest vertical accent."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#9CC7FF",
+        "$description": "Invest vertical accent."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#6AA8F7",
+        "$description": "Invest vertical accent."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#2D64A7",
+        "$description": "Invest vertical accent."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#1E4D87",
+        "$description": "Invest vertical accent."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#123865",
+        "$description": "Invest vertical accent."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#082240",
+        "$description": "Invest vertical accent."
+      }
+    },
+    "coral": {
+      "100": {
+        "$type": "color",
+        "$value": "#FFF4F2",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#FFE7E2",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#FED4CC",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#FEB8AB",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#FF8D7A",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#B45243",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#913D30",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#6C2B21",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#461912",
+        "$description": "Warm Coral from the brand brief. Not mapped to any semantic token."
+      }
+    },
+    "lime": {
+      "100": {
+        "$type": "color",
+        "$value": "#F4FCD7",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#EFFCBA",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#E8FC90",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#E1F964",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#D9F23F",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#8C9D03",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#64710C",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#444E02",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#2B3200",
+        "$description": "Highlight: the 10% (milestone moments only)."
+      }
+    },
+    "green": {
+      "100": {
+        "$type": "color",
+        "$value": "#E9FDEE",
+        "$description": "Success status."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#CCF2D6",
+        "$description": "Success status."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#A0E3B4",
+        "$description": "Success status."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#67CA8A",
+        "$description": "Success status."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#17A35B",
+        "$description": "Success status."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#107641",
+        "$description": "Success status."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#085D31",
+        "$description": "Success status."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#014422",
+        "$description": "Success status."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#012A13",
+        "$description": "Success status."
+      }
+    },
+    "red": {
+      "100": {
+        "$type": "color",
+        "$value": "#FFF4F2",
+        "$description": "Error status."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#FFDCD6",
+        "$description": "Error status."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#FEB8AE",
+        "$description": "Error status."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#FC8172",
+        "$description": "Error status."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#E0352B",
+        "$description": "Error status."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#B81814",
+        "$description": "Error status."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#940204",
+        "$description": "Error status."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#6D0505",
+        "$description": "Error status."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#480000",
+        "$description": "Error status."
+      }
+    },
+    "amber": {
+      "100": {
+        "$type": "color",
+        "$value": "#FFF5E9",
+        "$description": "Warning status."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#FEEAD0",
+        "$description": "Warning status."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#FED9AA",
+        "$description": "Warning status."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#FDC16E",
+        "$description": "Warning status."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#F0A21A",
+        "$description": "Warning status."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#B57801",
+        "$description": "Warning status."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#8D5E0E",
+        "$description": "Warning status."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#694403",
+        "$description": "Warning status."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#472C00",
+        "$description": "Warning status."
+      }
+    },
+    "azure": {
+      "100": {
+        "$type": "color",
+        "$value": "#F1F7FF",
+        "$description": "Info status."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#D5E7FE",
+        "$description": "Info status."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ADD0FD",
+        "$description": "Info status."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#6EAEFF",
+        "$description": "Info status."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#2B7FE0",
+        "$description": "Info status."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#1162B8",
+        "$description": "Info status."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#014B95",
+        "$description": "Info status."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#03376E",
+        "$description": "Info status."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#002148",
+        "$description": "Info status."
+      }
+    }
+  },
+  "space": {
+    "2xs": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "48px"
+    }
+  },
+  "radius": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "28px"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "999px",
+      "$description": "Fully rounded (pill or circle)."
+    }
+  },
+  "font": {
+    "family": {
+      "ui": {
+        "$type": "fontFamily",
+        "$value": "Plus Jakarta Sans",
+        "$description": "Interface sans."
+      },
+      "display": {
+        "$type": "fontFamily",
+        "$value": "Bricolage Grotesque",
+        "$description": "Display face for headlines and balances (part of the 20%)."
+      }
+    },
+    "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "14px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "28px"
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "52px"
+      }
+    }
+  },
+  "elevation": {
+    "sm": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#1414111F",
+        "offsetX": "0px",
+        "offsetY": "6px",
+        "blur": "20px",
+        "spread": "0px"
+      },
+      "$description": "ink.900 at 12%."
+    },
+    "md": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#1414112E",
+        "offsetX": "0px",
+        "offsetY": "12px",
+        "blur": "32px",
+        "spread": "0px"
+      },
+      "$description": "ink.900 at 18%."
+    }
+  },
+  "border": {
+    "width": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "1px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "2px"
+      }
+    }
+  },
+  "opacity": {
+    "40": {
+      "$type": "number",
+      "$value": 0.4
+    },
+    "50": {
+      "$type": "number",
+      "$value": 0.5
+    }
+  },
+  "icon": {
+    "size": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Inside chips and next to captions."
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Default size."
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "Empty states and milestones."
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "100": {
+        "$type": "duration",
+        "$value": "100ms"
+      },
+      "150": {
+        "$type": "duration",
+        "$value": "150ms"
+      },
+      "250": {
+        "$type": "duration",
+        "$value": "250ms"
+      },
+      "400": {
+        "$type": "duration",
+        "$value": "400ms"
+      },
+      "1800": {
+        "$type": "duration",
+        "$value": "1800ms"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.2,
+          0,
+          0,
+          1
+        ],
+        "$description": "Entrances and changes without a spring."
+      },
+      "exit": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.4,
+          0,
+          1,
+          1
+        ],
+        "$description": "Exits."
+      }
+    }
+  }
+}

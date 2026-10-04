@@ -1,0 +1,646 @@
+{
+  "button": {
+    "primary": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.brand.primary}",
+        "$description": "Primary button background. Pressed and disabled: color.brand.primary.pressed / .disabled."
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.brand.on-primary}",
+        "$description": "Primary button text and icon."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.pill}",
+        "$description": "Pill-shaped buttons."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Minimum height: the touch target."
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{font.role.label}",
+        "$description": "Button label."
+      }
+    },
+    "secondary": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.surface.card}",
+        "$description": "Secondary button background."
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Secondary button text and icon."
+      },
+      "border": {
+        "$type": "border",
+        "$value": "{border.default}",
+        "$description": "Secondary button border."
+      }
+    },
+    "tertiary": {
+      "fg": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Tertiary button text and icon: no background or border, for the lowest-weight action (Cancel, Skip)."
+      }
+    },
+    "circle": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.surface.card}",
+        "$description": "Icon button background."
+      },
+      "border": {
+        "$type": "border",
+        "$value": "{border.default}",
+        "$description": "Icon button border."
+      },
+      "size": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Diameter: the touch target."
+      },
+      "icon": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Icon button icon."
+      }
+    }
+  },
+  "action": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Quick action background."
+    },
+    "border": {
+      "$type": "border",
+      "$value": "{border.default}",
+      "$description": "Quick action border."
+    },
+    "icon": {
+      "$type": "color",
+      "$value": "{color.text.primary}",
+      "$description": "Quick action icon."
+    },
+    "label": {
+      "$type": "color",
+      "$value": "{color.text.secondary}",
+      "$description": "Label under the action."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.md}",
+      "$description": "Space around the icon (24 + 2 × 16 = 56)."
+    }
+  },
+  "chip": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.pill}",
+      "$description": "Pill-shaped chips."
+    },
+    "font": {
+      "$type": "typography",
+      "$value": "{font.role.caption}",
+      "$description": "Chip text."
+    },
+    "icon": {
+      "$type": "dimension",
+      "$value": "{icon.size.sm}",
+      "$description": "Chip icon."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.inset.chip}",
+      "$description": "Chip horizontal padding."
+    },
+    "status": {
+      "success": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.success.bg}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.success.fg}"
+        }
+      },
+      "error": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.error.bg}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.error.fg}"
+        }
+      },
+      "warning": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.warning.bg}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.warning.fg}"
+        }
+      },
+      "info": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.info.bg}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.info.fg}"
+        }
+      }
+    },
+    "highlight": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.highlight.accent}",
+        "$description": "The 10% chip: milestone moments only."
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.highlight.on-accent}",
+        "$description": "Content of the 10% chip."
+      }
+    },
+    "choice": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.surface.card}",
+        "$description": "Choice chip at rest."
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Choice chip text."
+      },
+      "border": {
+        "$type": "border",
+        "$value": "{border.default}",
+        "$description": "Border at rest."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Height: the touch target."
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{font.role.label}",
+        "$description": "Choice chip text."
+      },
+      "selected": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.surface.inverse}",
+          "$description": "Selected: the same dark pill as the tab bar."
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.text.on-inverse}",
+          "$description": "Selected text."
+        },
+        "icon": {
+          "$type": "color",
+          "$value": "{color.highlight.accent}",
+          "$description": "Selected icon (fixed 10% accent)."
+        }
+      }
+    }
+  },
+  "input": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Field background."
+    },
+    "border": {
+      "$root": {
+        "$type": "border",
+        "$value": "{border.input}",
+        "$description": "Field boundary (3:1)."
+      },
+      "focus": {
+        "$type": "border",
+        "$value": "{border.focus.ring}",
+        "$description": "Field focus ring."
+      }
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.primary}",
+      "$description": "Typed text."
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{color.text.tertiary}",
+      "$description": "Example text."
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.input}",
+      "$description": "Field radius."
+    },
+    "height": {
+      "$type": "dimension",
+      "$value": "{size.touch.min}",
+      "$description": "Minimum height."
+    },
+    "font": {
+      "$type": "typography",
+      "$value": "{font.role.body}",
+      "$description": "Field text."
+    },
+    "error": {
+      "border": {
+        "$type": "color",
+        "$value": "{color.status.error.border}",
+        "$description": "Border with an error."
+      }
+    },
+    "large": {
+      "font": {
+        "$type": "typography",
+        "$value": "{font.role.headline}",
+        "$description": "Hero field of a step (\"What are you saving for?\")."
+      }
+    }
+  },
+  "card": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Neutral card. The vertical card uses color.vertical.accent / on-accent from context."
+    },
+    "border": {
+      "$type": "border",
+      "$value": "{border.default}",
+      "$description": "Flat cards: border, no shadow."
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.card}",
+      "$description": "Card radius."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.inset.card}",
+      "$description": "Card padding."
+    }
+  },
+  "list": {
+    "divider": {
+      "$type": "border",
+      "$value": "{border.default}",
+      "$description": "Divider between rows."
+    },
+    "row": {
+      "height": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Minimum row height."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{space.sm}",
+        "$description": "Row vertical padding."
+      },
+      "title": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Row title."
+      },
+      "detail": {
+        "$type": "color",
+        "$value": "{color.text.secondary}",
+        "$description": "Row detail."
+      },
+      "positive": {
+        "$type": "color",
+        "$value": "{color.status.success.fg}",
+        "$description": "Incoming amount."
+      }
+    }
+  },
+  "badge": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.page}",
+      "$description": "Neutral icon badge. With a vertical: color.vertical.accent."
+    },
+    "icon": {
+      "$type": "dimension",
+      "$value": "{icon.size.md}",
+      "$description": "Badge icon."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.xs}",
+      "$description": "Space around the icon (24 + 2 × 8 = 40)."
+    }
+  },
+  "avatar": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.inverse}",
+      "$description": "Initials avatar background."
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.on-inverse}",
+      "$description": "Initials."
+    },
+    "size": {
+      "$type": "dimension",
+      "$value": "{size.touch.min}",
+      "$description": "Diameter."
+    }
+  },
+  "balance": {
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.primary}",
+      "$description": "Balance figure."
+    },
+    "font": {
+      "$type": "typography",
+      "$value": "{font.role.balance}",
+      "$description": "Balance role: one per screen."
+    },
+    "cents": {
+      "$type": "dimension",
+      "$value": "{font.size.xl}",
+      "$description": "Size of the cents."
+    }
+  },
+  "keypad": {
+    "key": {
+      "height": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Minimum touch target of each key (plus space.md of air)."
+      },
+      "font": {
+        "$type": "typography",
+        "$value": "{font.role.title}",
+        "$description": "Digits."
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.text.primary}",
+        "$description": "Digits and the delete icon."
+      }
+    }
+  },
+  "slider": {
+    "track": {
+      "$type": "color",
+      "$value": "{color.border.default}",
+      "$description": "Track."
+    },
+    "fill": {
+      "$type": "color",
+      "$value": "{color.surface.inverse}",
+      "$description": "Filled part of the track."
+    },
+    "height": {
+      "$type": "dimension",
+      "$value": "{space.xs}",
+      "$description": "Track thickness."
+    },
+    "thumb": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.surface.card}",
+        "$description": "Thumb."
+      },
+      "border": {
+        "$type": "border",
+        "$value": "{border.input}",
+        "$description": "Thumb outline (3:1)."
+      },
+      "size": {
+        "$type": "dimension",
+        "$value": "{space.2xl}",
+        "$description": "Thumb diameter."
+      },
+      "elevation": {
+        "$type": "shadow",
+        "$value": "{elevation.floating}",
+        "$description": "The thumb floats above the track."
+      }
+    }
+  },
+  "segmented": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Control background."
+    },
+    "border": {
+      "$type": "border",
+      "$value": "{border.default}",
+      "$description": "Control border."
+    },
+    "indicator": {
+      "$type": "color",
+      "$value": "{color.surface.inverse}",
+      "$description": "Pill of the active option."
+    },
+    "label": {
+      "$type": "color",
+      "$value": "{color.text.secondary}",
+      "$description": "Option at rest."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.2xs}",
+      "$description": "Space between the border and the pill."
+    },
+    "active": {
+      "label": {
+        "$type": "color",
+        "$value": "{color.text.on-inverse}",
+        "$description": "Active option."
+      }
+    }
+  },
+  "slide-confirm": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.brand.primary}",
+      "$description": "Track: this is the primary action."
+    },
+    "fill": {
+      "$type": "color",
+      "$value": "{color.brand.primary.pressed}",
+      "$description": "Dragged part of the track."
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.brand.on-primary}",
+      "$description": "Label."
+    },
+    "font": {
+      "$type": "typography",
+      "$value": "{font.role.label}",
+      "$description": "Label."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.2xs}",
+      "$description": "Space around the thumb."
+    },
+    "thumb": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.brand.on-primary}",
+        "$description": "Thumb."
+      },
+      "icon": {
+        "$type": "color",
+        "$value": "{color.brand.primary}",
+        "$description": "Thumb arrow."
+      },
+      "size": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Thumb diameter: the touch target."
+      }
+    }
+  },
+  "progress": {
+    "height": {
+      "$type": "dimension",
+      "$value": "{space.xs}",
+      "$description": "Progress bar."
+    },
+    "slim": {
+      "$type": "dimension",
+      "$value": "{space.2xs}",
+      "$description": "Slim bar (lists, flow steps)."
+    },
+    "ring": {
+      "stroke": {
+        "$type": "dimension",
+        "$value": "{space.sm}",
+        "$description": "Ring thickness."
+      }
+    },
+    "step": {
+      "track": {
+        "$type": "color",
+        "$value": "{color.border.default}",
+        "$description": "Pending step."
+      },
+      "done": {
+        "$type": "color",
+        "$value": "{color.surface.inverse}",
+        "$description": "Completed step."
+      }
+    }
+  },
+  "switch": {
+    "on": {
+      "$type": "color",
+      "$value": "{color.brand.primary}",
+      "$description": "Track when on."
+    },
+    "off": {
+      "$type": "color",
+      "$value": "{color.border.input}",
+      "$description": "Track when off (3:1); outline and handle of the Android switch."
+    },
+    "thumb": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Thumb on both platforms (iOS UISwitch and Material 3 switch when on)."
+    }
+  },
+  "tabbar": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.card}",
+      "$description": "Tab bar pill."
+    },
+    "strip": {
+      "$type": "color",
+      "$value": "{color.surface.page}",
+      "$description": "Opaque strip: nothing shows underneath."
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.pill}",
+      "$description": "Pill-shaped bar."
+    },
+    "elevation": {
+      "$type": "shadow",
+      "$value": "{elevation.floating}",
+      "$description": "The bar floats."
+    },
+    "inset": {
+      "$type": "dimension",
+      "$value": "{space.2xs}",
+      "$description": "Space between the bar and the active pill."
+    },
+    "item": {
+      "icon": {
+        "$type": "color",
+        "$value": "{color.text.tertiary}",
+        "$description": "Icon at rest (outline)."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{size.touch.min}",
+        "$description": "Item height."
+      },
+      "active": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.surface.inverse}",
+          "$description": "Active pill."
+        },
+        "icon": {
+          "$type": "color",
+          "$value": "{color.highlight.accent}",
+          "$description": "Active icon (filled, lime)."
+        },
+        "label": {
+          "$type": "color",
+          "$value": "{color.text.on-inverse}",
+          "$description": "Active label."
+        }
+      }
+    }
+  },
+  "confetti": {
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.effect}",
+      "$description": "Lifetime of the burst, from launch to the last piece leaving the screen."
+    },
+    "gravity": {
+      "$type": "number",
+      "$value": 1400,
+      "$description": "Downward acceleration of each piece, in pt/s² (dp/s² on Android)."
+    },
+    "count": {
+      "$type": "number",
+      "$value": 48,
+      "$description": "Pieces per burst."
+    }
+  }
+}

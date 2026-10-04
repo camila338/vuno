@@ -1,0 +1,80 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Card.stories';
+import { Card } from './Surface';
+import { Text } from './Text';
+import { tokens } from '../theme';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="Card" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  A surface that groups related content. The neutral card is flat with a border; the accent card takes the vertical color from context without naming it.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Card } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Flat: a border and no shadow. Shadows are only for what floats (FOUNDATIONS §5).</li>
+  <li>Accent only for a product summary, inside its <code>VerticalProvider</code>.</li>
+  <li>Text on the accent uses the same vertical's <code>on-accent</code>.</li>
+  <li>Don't nest a card inside another.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>A card isn't tappable by itself; if it leads to another screen, use a <code>ListRow</code> or a button inside.</li>
+  <li>Every accent / on-accent pair passes AA.</li>
+</ul>
+
+## Variants
+
+### Tones
+
+<p>Neutral and accent.</p>
+
+<Canvas of={Stories.Tones} />
+
+### Accent per vertical
+
+<p>The same component under four different <code>VerticalProvider</code>s.</p>
+
+<Canvas of={Stories.Verticals} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Flat, with a border."><Live width={300}><Card><Text variant="label">Title</Text></Card></Live></Do>
+  <Dont caption="A shadow on something that doesn't float."><Live width={300}><Card style={{ boxShadow: tokens['elevation.floating'] }}><Text variant="label">Title</Text></Card></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="One card per group of content."><Live width={300}><Card><Text variant="label">Title</Text><Text>Content</Text></Card></Live></Do>
+  <Dont caption="Cards inside cards."><Live width={300}><Card><Text variant="label">Title</Text><Card><Text>Content</Text></Card></Card></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Product summary
+
+<p>A badge, a figure, progress and a secondary action on the accent.</p>
+
+<Canvas of={Stories.ProductSummary} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbadge--docs" title="IconBadge">Icon badge.</LinkCard>
+  <LinkCard to="components-list--docs" title="List">Lists inside a card.</LinkCard>
+  <LinkCard to="components-progressbar--docs" title="ProgressBar">Progress on the accent.</LinkCard>
+</Grid>

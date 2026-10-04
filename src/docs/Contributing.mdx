@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, CodeExample, Callout } from './blocks';
+import { snippets } from './snippets';
+
+<Meta title="Contributing" />
+
+<PageHeader eyebrow="Guide" title="Contributing" meta={<><Pill>tokens/</Pill><Pill>src/components/</Pill><Pill>src/docs/</Pill><Pill>CHANGELOG.md</Pill></>}>
+  How to change a token, document a foundation or add a component without breaking the system's consistency.
+</PageHeader>
+
+## Change or add a token
+
+<div className="vds-steps">
+  <div className="vds-step"><div><h4>Decide in the document</h4><p>Every value starts in <code>FOUNDATIONS.md</code> and every name follows <code>TOKEN-NAMING.md</code>. If a design decision is missing, ask before touching code.</p></div></div>
+  <div className="vds-step"><div><h4>Edit the JSON</h4><p>Change <code>tokens/primitives.json</code>, <code>tokens/semantic.light.json</code> or <code>tokens/component.json</code> (DTCG format). Add a <code>$description</code> with the usage: it's what the tables show. A component token only points to semantic tokens.</p></div></div>
+  <div className="vds-step"><div><h4>Build</h4><p>Run <code>npm run tokens</code>. It regenerates <code>src/theme/tokens.ts</code> and <code>tokens.meta.ts</code>; never edit them by hand.</p></div></div>
+  <div className="vds-step"><div><h4>Check contrast</h4><p>If the token is a text or background color, add its pair to <code>src/docs/contrast.ts</code>. The Accessibility table recalculates itself.</p></div></div>
+  <div className="vds-step"><div><h4>Log it</h4><p>Add the entry to <code>CHANGELOG.md</code>. The Changelog page shows it directly.</p></div></div>
+</div>
+
+<CodeExample language="json" code={snippets.contributingToken} />
+
+## Document a foundation
+
+Every foundation page follows the same template: **purpose → tokens → usage → do's and don'ts → code**. Use the blocks in `src/docs/blocks` so all pages look alike.
+
+<div className="vds-table-wrap">
+  <table className="vds-table">
+    <thead><tr><th>Block</th><th>What for</th></tr></thead>
+    <tbody>
+      <tr><td className="vds-value">PageHeader</td><td className="is-muted">Eyebrow, title, purpose and tags.</td></tr>
+      <tr><td className="vds-value">TokenTable</td><td className="is-muted">Token table (name, value, primitive and usage) by <code>prefix</code>, <code>names</code> or <code>layer</code>, with an optional preview (<code>preview="auto"</code> picks it from the type).</td></tr>
+      <tr><td className="vds-value">ColorSwatch · ColorRamp</td><td className="is-muted">A single color or a 100–900 ramp.</td></tr>
+      <tr><td className="vds-value">TypeSpecimen</td><td className="is-muted">A type role with its spec.</td></tr>
+      <tr><td className="vds-value">DoDont · Do · Dont</td><td className="is-muted">Rendered examples of what to do and what to avoid.</td></tr>
+      <tr><td className="vds-value">PlatformPair</td><td className="is-muted">The same component on iOS and Android, side by side.</td></tr>
+      <tr><td className="vds-value">Live</td><td className="is-muted">Renders real components in an MDX page, with fonts, gestures, safe areas, vertical and platform context.</td></tr>
+      <tr><td className="vds-value">ContrastTable · ProhibitedTable</td><td className="is-muted">AA contrast computed from the tokens.</td></tr>
+      <tr><td className="vds-value">CodeExample</td><td className="is-muted">A code sample with a copy button.</td></tr>
+      <tr><td className="vds-value">Grid · LinkCard · CatalogCard · Callout · Pill</td><td className="is-muted">Layout and navigation.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<CodeExample code={snippets.contributingPage} />
+
+## Add a component
+
+<div className="vds-steps">
+  <div className="vds-step"><div><h4>Component tokens</h4><p>Define its group in <code>tokens/component.json</code> (for example <code>slider.*</code>), always pointing to semantic tokens. No hex values, sizes or durations hard-coded in the component.</p></div></div>
+  <div className="vds-step"><div><h4>Component</h4><p>Create <code>src/components/Name.tsx</code> with the system's <code>Text</code> and <code>Pressable</code>: they bring type roles, touch feedback per platform, haptics and Reduce Motion. If it depends on a vertical, use <code>useVerticalColors()</code>; if it depends on the platform, use <code>useOS()</code> or <code>useSystemIcon()</code>. Export it from <code>src/components/index.ts</code>.</p></div></div>
+  <div className="vds-step"><div><h4>Stories</h4><p><code>Name.stories.tsx</code> titled <code>Components/Name</code>: an <code>Overview</code> with args, one story per variant and one per use case. Generic content (“Button”, “Title”, “Label”), never copies of app screens. Interactive components get a stateful wrapper.</p></div></div>
+  <div className="vds-step"><div><h4>Page</h4><p><code>Name.mdx</code> with <code>&lt;Meta of=&#123;Stories&#125; /&gt;</code>, in this order: overview → import → props → usage → accessibility → variants → platforms (if it differs) → do's and don'ts → use cases → related components. Everything renders at phone width.</p></div></div>
+  <div className="vds-step"><div><h4>Catalog</h4><p>Add its card to Components and, if it solves a repeatable case, to Patterns.</p></div></div>
+</div>
+
+## Before opening a PR
+
+- Names follow `TOKEN-NAMING.md` and no component names a vertical.
+- Every new text pair passes AA in the contrast table.
+- The page has do's and don'ts with rendered examples.
+- The component works on iOS and Android (switch the platform in the toolbar).
+- No loose values in the component: everything comes from `tokens`.
+- `npx tsc --noEmit` and `npm run build-storybook` pass.
+- `CHANGELOG.md` has the entry.
+
+<Callout>MDX pages only exist in the web Storybook. The native Storybook shows the stories in <code>src/**/*.stories.tsx</code>.</Callout>

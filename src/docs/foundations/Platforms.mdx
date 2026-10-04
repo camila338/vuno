@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, PlatformPair, Live, Callout, CodeExample } from '../blocks';
+import { TopBar, Toggle, Button } from '../../components';
+
+<Meta title="Foundations/Platforms" />
+
+<PageHeader eyebrow="Foundations" title="Platforms" meta={<><Pill tone="primary">iOS · Android</Pill><Pill>Apple HIG · Material 3</Pill><Pill>FOUNDATIONS §14</Pill></>}>
+  Vuno is one brand on two platforms. Color, typography, spacing, radius and motion are the same; what the operating system already solves (navigation, touch feedback, native controls and system bars) follows each platform's convention, so the app feels at home on both phones.
+</PageHeader>
+
+## What stays the same and what changes
+
+<div className="vds-table-wrap">
+  <table className="vds-table">
+    <thead><tr><th>Topic</th><th>iOS (Apple HIG)</th><th>Android (Material 3)</th><th>Vuno</th></tr></thead>
+    <tbody>
+      <tr><td>Units</td><td className="is-muted">Points (pt)</td><td className="is-muted">Density-independent pixels (dp)</td><td className="is-muted">Tokens are the same in pt and dp: 16 = 16 pt = 16 dp.</td></tr>
+      <tr><td>Minimum touch target</td><td className="is-muted">44 × 44 pt</td><td className="is-muted">48 × 48 dp</td><td className="is-muted"><code>size.touch.min</code> = 48 meets both.</td></tr>
+      <tr><td>System bars</td><td className="is-muted">Status bar with the Dynamic Island (54 pt on iPhone 15) and home indicator (34 pt)</td><td className="is-muted">Status bar (24 dp) and gesture navigation (24 dp) or 3-button navigation (48 dp)</td><td className="is-muted">Never fixed values: always <code>useSafeAreaInsets()</code>. Android draws edge to edge.</td></tr>
+      <tr><td>Back</td><td className="is-muted">Chevron in the bar and a swipe from the left edge</td><td className="is-muted">Arrow in the bar and the system Back button or gesture</td><td className="is-muted"><code>TopBar</code> and <code>useSystemIcon('back')</code>. Never block system Back.</td></tr>
+      <tr><td>Screen title</td><td className="is-muted">Centered in the navigation bar</td><td className="is-muted">Start-aligned in the top app bar (64 dp)</td><td className="is-muted"><code>TopBar</code> handles it.</td></tr>
+      <tr><td>Touch feedback</td><td className="is-muted">Opacity or scale change</td><td className="is-muted">Ripple with a state layer</td><td className="is-muted"><code>Pressable</code>: 0.96 scale on iOS; a ripple with the content color at 10% on Android.</td></tr>
+      <tr><td>Switch</td><td className="is-muted">UISwitch (51 × 31 pt)</td><td className="is-muted">Material 3 switch (52 × 32 dp)</td><td className="is-muted"><code>Toggle</code> with the <code>switch.*</code> colors on both.</td></tr>
+      <tr><td>System icons</td><td className="is-muted">More: horizontal dots. Share: box with an arrow</td><td className="is-muted">More: vertical dots. Share: three nodes</td><td className="is-muted"><code>useSystemIcon('more' | 'share')</code>. Every other icon is the same Ionicons icon on both.</td></tr>
+      <tr><td>Modals</td><td className="is-muted">A sheet that slides up and shows the previous screen behind</td><td className="is-muted">A full screen that enters from the bottom</td><td className="is-muted"><code>presentation: 'modal'</code> in expo-router: each platform uses its own.</td></tr>
+      <tr><td>Typography</td><td className="is-muted">System San Francisco</td><td className="is-muted">System Roboto</td><td className="is-muted">Plus Jakarta Sans and Bricolage Grotesque on both. On Android, <code>includeFontPadding: false</code> so line heights match.</td></tr>
+      <tr><td>Haptics</td><td className="is-muted">Taptic Engine (impact, selection, success)</td><td className="is-muted">Vibration motor; varies by device</td><td className="is-muted">The same events with <code>expo-haptics</code>; never the only signal.</td></tr>
+      <tr><td>Screen reader</td><td className="is-muted">VoiceOver</td><td className="is-muted">TalkBack</td><td className="is-muted">React Native roles, labels and states work on both. Test every flow with each.</td></tr>
+      <tr><td>Text size</td><td className="is-muted">Dynamic Type</td><td className="is-muted">System font scale</td><td className="is-muted">The same per-role limits (<code>maxFontSizeMultiplier</code>, FOUNDATIONS §2.3).</td></tr>
+    </tbody>
+  </table>
+</div>
+
+## Navigation
+
+<PlatformPair
+  ios={<Live os="ios" width={320}><TopBar title="Title" leading={{ kind: 'back', onPress: () => {} }} /></Live>}
+  android={<Live os="android" width={320}><TopBar title="Title" leading={{ kind: 'back', onPress: () => {} }} /></Live>}
+  iosCaption="Chevron and a centered title. A swipe from the left edge also goes back."
+  androidCaption="Arrow and a start-aligned title in a 64 dp bar. System Back also goes back."
+/>
+
+## Controls
+
+<PlatformPair
+  ios={<Live os="ios" width={200} center><Toggle value label="On" onValueChange={() => {}} /><Toggle value={false} label="Off" onValueChange={() => {}} /></Live>}
+  android={<Live os="android" width={200} center><Toggle value label="On" onValueChange={() => {}} /><Toggle value={false} label="Off" onValueChange={() => {}} /></Live>}
+  iosCaption="The native UISwitch."
+  androidCaption="Material 3 switch: an outline and a small thumb when off."
+/>
+
+## Touch feedback
+
+<PlatformPair
+  ios={<Live os="ios" width={200} center><Button label="Press me" onPress={() => {}} /></Live>}
+  android={<Live os="android" width={200} center><Button label="Press me" onPress={() => {}} /></Live>}
+  iosCaption="Press and hold: the button scales to 0.96 and springs back."
+  androidCaption="Press and hold: a state layer of the content color at 10% appears (a ripple on the device)."
+/>
+
+## In code
+
+<Callout>Components read the platform with <code>useOS()</code>. On a device it is the operating system; in the web prototype and in Storybook, <code>PlatformProvider</code> picks it (the prototype's iOS / Android switch and the Storybook toolbar).</Callout>
+
+<CodeExample code={"import { useOS, useSystemIcon } from '../theme';\n\nconst os = useOS(); // 'ios' | 'android'\nconst back = useSystemIcon('back'); // chevron-back on iOS, arrow-back on Android\n\n// For screens, use TopBar: it applies each platform's title, icon and height.\n<TopBar title=\"Send money\" leading={{ kind: 'close', onPress: router.back }} />"} />

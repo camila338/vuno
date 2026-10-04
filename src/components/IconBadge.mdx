@@ -1,0 +1,54 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './IconBadge.stories';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="IconBadge" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  An icon inside a circle. It identifies rows, headers and cards; with the vertical tone it takes the accent from context.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { IconBadge } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Neutral in generic rows; <code>vertical</code> to mark which product something belongs to.</li>
+  <li>One 24 icon (<code>badge.icon</code>).</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>Decorative: the meaning is in the text next to it.</li>
+</ul>
+
+## Variants
+
+### Tones
+
+<p>Neutral and vertical.</p>
+
+<Canvas of={Stories.Tones} />
+
+### Per vertical
+
+<p>The vertical tone in each context.</p>
+
+<Canvas of={Stories.Verticals} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-sectionheader--docs" title="SectionHeader">Headers with a badge.</LinkCard>
+  <LinkCard to="components-list--docs" title="List">Rows with an icon.</LinkCard>
+  <LinkCard to="components-avatar--docs" title="Avatar">A person's identity.</LinkCard>
+</Grid>

@@ -1,0 +1,77 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TypeSpecimen, TokenTable, DoDont, Do, Dont, Live, CodeExample, Callout } from '../blocks';
+import { snippets } from '../snippets';
+import { Balance, Text } from '../../components';
+
+<Meta title="Foundations/Typography" />
+
+<PageHeader eyebrow="Foundations" title="Typography" meta={<><Pill tone="primary">2 families · 6 roles</Pill><Pill>FOUNDATIONS §2</Pill></>}>
+  A legible sans for the interface and a display face with character for headlines and balances. The display face is part of the 20% “playful”: it appears rarely, and where it matters.
+</PageHeader>
+
+## Families
+
+<TokenTable prefix="font.family." />
+
+<div className="vds-table-wrap">
+  <table className="vds-table">
+    <thead><tr><th>Family</th><th>Expo package</th><th>Instances</th></tr></thead>
+    <tbody>
+      <tr><td style={{ fontFamily: 'PlusJakartaSans_600SemiBold' }}>Plus Jakarta Sans</td><td className="vds-value">@expo-google-fonts/plus-jakarta-sans</td><td className="vds-value">PlusJakartaSans_400Regular · _500Medium · _600SemiBold</td></tr>
+      <tr><td style={{ fontFamily: 'BricolageGrotesque_700Bold' }}>Bricolage Grotesque</td><td className="vds-value">@expo-google-fonts/bricolage-grotesque</td><td className="vds-value">BricolageGrotesque_700Bold</td></tr>
+    </tbody>
+  </table>
+</div>
+
+## Roles
+
+<TypeSpecimen role="balance">$12,480.50</TypeSpecimen>
+<TypeSpecimen role="headline">Your money, clear</TypeSpecimen>
+<TypeSpecimen role="title">Recent activity</TypeSpecimen>
+<TypeSpecimen role="body">Your payment arrived. Here's your balance now.</TypeSpecimen>
+<TypeSpecimen role="label">Send money</TypeSpecimen>
+<TypeSpecimen role="caption">Today, 9:41 · Card •••• 4821</TypeSpecimen>
+
+## Tokens
+
+<TokenTable prefix="font.role." preview="type" />
+
+### Sizes
+
+<TokenTable prefix="font.size." />
+
+## Usage
+
+- The display face is only for `balance` and `headline`, never for paragraphs, buttons or labels.
+- One `balance` per screen.
+- Amounts in lists use tabular figures (`fontVariant: ['tabular-nums']`) so they line up.
+- In React Native each weight is its own family: a role points to the instance, not to `fontWeight` (Android ignores it with custom fonts).
+- On Android, `includeFontPadding: false` so line heights match iOS.
+- Text never goes below 12 px and every line height is a multiple of 4.
+- The system text size is honored up to 200% for `body`; the balance caps at 1.5× (`maxFontSizeMultiplier`).
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="One large balance; everything else in interface roles.">
+    <Live width={280}><Balance amount={1050.77} label="Available" /></Live>
+  </Do>
+  <Dont caption="The balance in body: it loses hierarchy and doesn't read at a glance.">
+    <Live width={280}><Text variant="caption">AVAILABLE</Text><Text>$1,050.77</Text></Live>
+  </Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="The display face for a short headline.">
+    <Live width={280}><Text variant="headline">Your money, clear</Text></Live>
+  </Do>
+  <Dont caption="The display face in running text.">
+    <Live width={280}><Text variant="headline">Your payment arrived, and this is how your balance looks after the transfer.</Text></Live>
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.typography} />
+
+<Callout>Fonts load with <code>expo-font</code> (<code>src/theme/fonts.ts</code>). In Figma they are the text styles <code>role/balance</code> … <code>role/caption</code>.</Callout>

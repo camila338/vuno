@@ -1,0 +1,32 @@
+<style>
+  /* Fuentes de FOUNDATIONS §2: por familia (chrome y docs) y por instancia (tokens de React Native). */
+  @font-face { font-family: 'Plus Jakarta Sans'; font-weight: 400; font-display: swap; src: url('fonts/plus-jakarta-sans/400Regular/PlusJakartaSans_400Regular.ttf') format('truetype'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-weight: 500; font-display: swap; src: url('fonts/plus-jakarta-sans/500Medium/PlusJakartaSans_500Medium.ttf') format('truetype'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-weight: 600; font-display: swap; src: url('fonts/plus-jakarta-sans/600SemiBold/PlusJakartaSans_600SemiBold.ttf') format('truetype'); }
+  @font-face { font-family: 'Plus Jakarta Sans'; font-weight: 700; font-display: swap; src: url('fonts/plus-jakarta-sans/600SemiBold/PlusJakartaSans_600SemiBold.ttf') format('truetype'); }
+  @font-face { font-family: 'Bricolage Grotesque'; font-weight: 700; font-display: swap; src: url('fonts/bricolage-grotesque/700Bold/BricolageGrotesque_700Bold.ttf') format('truetype'); }
+  @font-face { font-family: 'PlusJakartaSans_400Regular'; font-display: swap; src: url('fonts/plus-jakarta-sans/400Regular/PlusJakartaSans_400Regular.ttf') format('truetype'); }
+  @font-face { font-family: 'PlusJakartaSans_500Medium'; font-display: swap; src: url('fonts/plus-jakarta-sans/500Medium/PlusJakartaSans_500Medium.ttf') format('truetype'); }
+  @font-face { font-family: 'PlusJakartaSans_600SemiBold'; font-display: swap; src: url('fonts/plus-jakarta-sans/600SemiBold/PlusJakartaSans_600SemiBold.ttf') format('truetype'); }
+  @font-face { font-family: 'BricolageGrotesque_700Bold'; font-display: swap; src: url('fonts/bricolage-grotesque/700Bold/BricolageGrotesque_700Bold.ttf') format('truetype'); }
+</style>
+<link rel="icon" type="image/svg+xml" href="vuno-mark.svg" />
+<style>
+  /* Marca en la cabecera de la sidebar. */
+  .vds-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .vds-brand img { width: 32px; height: 32px; flex: none; }
+  .vds-brand-name { font: 700 18px/22px 'Bricolage Grotesque', system-ui, sans-serif; letter-spacing: -0.2px; color: #141411; }
+  .vds-brand-sub { display: block; font: 500 12px/16px 'Plus Jakarta Sans', system-ui, sans-serif; color: #6D6C67; letter-spacing: 0; }
+  .vds-brand-version { font: 600 11px/14px 'Plus Jakarta Sans', system-ui, sans-serif; color: #4034AC; background: #E0E3FE; border-radius: 999px; padding: 2px 8px; margin-left: 2px; align-self: flex-start; margin-top: 2px; }
+</style>
+<style>
+  /* Iconos de la sidebar en los tonos de Vuno (por defecto son naranja y azul). */
+  .sidebar-item svg[type='document'] { color: #6D6C67 !important; }
+  .sidebar-item svg[type='folder'], .sidebar-item svg[type='group'], .sidebar-item svg[type='component'] { color: #5347D3 !important; }
+  .sidebar-item[data-selected='true'] svg { color: #F8F7F1 !important; }
+  .sidebar-item a, .sidebar-item button { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+</style>
+<style>
+  /* Botón "crear story" del modo dev: las stories se crean como archivos (ver Contribución). */
+  button[aria-label='Create a new story'] { display: none !important; }
+</style>

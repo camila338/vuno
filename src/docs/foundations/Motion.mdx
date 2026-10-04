@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TokenTable, SpringDemo, PressDemo, Grid, CodeExample, Callout, DoDont, Do, Dont } from '../blocks';
+import { snippets } from '../snippets';
+
+<Meta title="Foundations/Motion" />
+
+<PageHeader eyebrow="Foundations" title="Motion" meta={<><Pill tone="primary">Soft bounce</Pill><Pill>FOUNDATIONS §6</Pill></>}>
+  Motion confirms, explains or connects an action. Springs give the brand its soft bounce; nothing moves at rest just for decoration.
+</PageHeader>
+
+## Springs
+
+The same parameters in React Native (Reanimated `withSpring`) and in Figma (custom spring in Smart animate).
+
+<Grid min={420}>
+  <SpringDemo token="motion.spring.soft" />
+  <SpringDemo token="motion.spring.bounce" />
+</Grid>
+
+<TokenTable prefix="motion.spring." />
+
+## Durations
+
+Two kinds of duration, kept apart on purpose.
+
+- **Transitions** (`press` → `celebrate`, 100–400 ms) move the interface from one state to another. The person waits for them, so they stay short. For reference, Material 3's whole transition scale ends at 1000 ms.
+- **Effects** (`motion.duration.effect`, 1800 ms) are decorative and never block the interface: you can keep tapping while they play. They live outside the transition scale, so a long effect never becomes a precedent for a slow transition.
+
+<TokenTable prefix="motion.duration." layer="semantic" />
+
+### Primitives
+
+<TokenTable prefix="motion.duration." layer="primitive" />
+
+### Component tokens
+
+An effect's own parameters live in the component layer and point to the semantic duration. Physical values with no semantic meaning, like gravity, are DTCG `number` tokens with their unit in the description.
+
+<TokenTable prefix="confetti." />
+
+## Easing
+
+<TokenTable prefix="motion.easing." />
+
+## Usage
+
+- On iOS, a pressed element scales to 0.96 for `motion.duration.press` and springs back with `motion.spring.soft`. Android uses the Material ripple instead (see Platforms).
+- Entrances use `motion.easing.standard`; exits use `motion.easing.exit` with `motion.duration.state`.
+- `motion.spring.bounce` only in 10% moments (see the Milestone moment pattern).
+- Navigation uses each platform's native transitions.
+- With Reduce Motion on, springs become an instant change or a `motion.duration.state` fade, and effects such as confetti don't play.
+
+## Do's and Don'ts
+
+Press and hold each button to compare.
+
+<DoDont>
+  <Do caption="A regular button: motion.spring.soft on release. A soft, barely noticeable bounce.">
+    <PressDemo token="motion.spring.soft" label="Send money" />
+  </Do>
+  <Dont caption="motion.spring.bounce on a regular button: it's for 10% moments, not every tap.">
+    <PressDemo token="motion.spring.bounce" label="Send money" />
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.motion} />
+
+<Callout>Settling time is when the spring stays within ±1% of the final value. <code>bounce</code> takes longer than <code>soft</code> because it damps less. Durations follow the DTCG <code>duration</code> type.</Callout>

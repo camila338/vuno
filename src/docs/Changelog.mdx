@@ -1,0 +1,14 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import changelog from '../../CHANGELOG.md?raw';
+import { PageHeader, Pill } from './blocks';
+import { version } from '../../package.json';
+
+<Meta title="Changelog" />
+
+<PageHeader eyebrow="Release notes" title="Changelog" meta={<Pill tone="primary">Current version: v{version}</Pill>}>
+  What changed in each version. This page is generated from <code>CHANGELOG.md</code> at the repo root.
+</PageHeader>
+
+<div className="vds-changelog">
+  <Markdown>{changelog.replace(/^# Changelog\n+[^\n]*\n/, '')}</Markdown>
+</div>

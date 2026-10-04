@@ -1,0 +1,88 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './List.stories';
+import { List, ListRow } from './List';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Content" title="List" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  Rows grouped in a card for transactions, settings and details. <code>List</code> adds the dividers; each <code>ListRow</code> combines an icon, title, detail and a value or trailing element.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { List, ListRow } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Amounts sit on the end side with tabular figures and a sign; incoming ones use <code>valueTone="positive"</code>.</li>
+  <li>The detail is one line of context (date, category, number).</li>
+  <li>With <code>onPress</code>, the row shows a chevron.</li>
+  <li>Rows grow with their text: never fixed heights.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>A tappable row is announced as a button with its title and detail.</li>
+  <li>A minimum height of 48 (<code>list.row.height</code>).</li>
+</ul>
+
+## Variants
+
+### Text only
+
+<p>Title and detail without an icon.</p>
+
+<Canvas of={Stories.TextOnly} />
+
+### With amounts
+
+<p>Money going out and coming in.</p>
+
+<Canvas of={Stories.WithValues} />
+
+### Tappable
+
+<p>Leads to another screen.</p>
+
+<Canvas of={Stories.Clickable} />
+
+### With a trailing element
+
+<p>A chip, a toggle or an avatar at the end.</p>
+
+<Canvas of={Stories.WithTrailing} />
+
+## Platforms
+
+<p>Tappable rows use each platform's feedback. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300}><List><ListRow icon="person-outline" title="Title" detail="Detail" onPress={() => {}} /></List></Live>} android={<Live os="android" width={300}><List><ListRow icon="person-outline" title="Title" detail="Detail" onPress={() => {}} /></List></Live>} iosCaption={<>The row scales to 0.98 on tap.</>} androidCaption={<>A ripple across the whole row, like Material lists.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="The sign and color tell the direction of money."><Live width={300}><List><ListRow icon="arrow-down" title="Title" detail="Detail" value="+$120.00" valueTone="positive" /></List></Live></Do>
+  <Dont caption="Without a sign or detail it's unclear whether money came in or went out."><Live width={300}><List><ListRow title="Title" value="$120.00" /></List></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="A one-line detail."><Live width={300}><List><ListRow title="Title" detail="Oct 2 · Groceries" /></List></Live></Do>
+  <Dont caption="Paragraphs in the detail: the list stops being scannable."><Live width={300}><List><ListRow title="Title" detail="This purchase was made at a grocery store on October 2 using your debit card ending in 4821." /></List></Live></Dont>
+</DoDont>
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-card--docs" title="Card">The list's container.</LinkCard>
+  <LinkCard to="components-toggle--docs" title="Toggle">Settings in a row.</LinkCard>
+  <LinkCard to="components-chip--docs" title="Chip">Status at the end of a row.</LinkCard>
+</Grid>

@@ -1,0 +1,71 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './SlideToConfirm.stories';
+import { SlideToConfirm } from './SlideToConfirm';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Actions" title="SlideToConfirm" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  Slide to the right to confirm what moves money or creates a commitment. The gesture prevents accidental taps without an extra dialog.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { SlideToConfirm } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>Only for the last step of a flow that moves money. Everywhere else, <code>Button</code>.</li>
+  <li>The label is the verb of what happens: “Slide to send”.</li>
+  <li>Released early, it returns with <code>motion.spring.soft</code>; on confirm, a success haptic.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>No gesture with a screen reader: a VoiceOver or TalkBack double tap triggers the “activate” action.</li>
+  <li>The thumb is 48 (<code>slide-confirm.thumb.size</code>).</li>
+</ul>
+
+## Variants
+
+### Disabled
+
+<p>Until the flow has the values it needs.</p>
+
+<Canvas of={Stories.Disabled} />
+
+## Platforms
+
+<p>The gesture is the same; the haptic response changes. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300}><SlideToConfirm label="Slide to send" onConfirm={() => {}} /></Live>} android={<Live os="android" width={300}><SlideToConfirm label="Slide to send" onConfirm={() => {}} /></Live>} iosCaption={<>A Taptic Engine success haptic on confirm.</>} androidCaption={<>A confirmation vibration; its strength depends on each device's motor.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="To confirm moving money."><Live width={300}><SlideToConfirm label="Slide to send" onConfirm={() => {}} /></Live></Do>
+  <Dont caption="For something trivial: the gesture loses its weight."><Live width={300}><SlideToConfirm label="Slide to see details" onConfirm={() => {}} /></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Review and confirm
+
+<p>A summary list with the gesture underneath.</p>
+
+<Canvas of={Stories.Review} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-button--docs" title="Button">Actions for every other step.</LinkCard>
+  <LinkCard to="components-list--docs" title="List">The summary before confirming.</LinkCard>
+</Grid>

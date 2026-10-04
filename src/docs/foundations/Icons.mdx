@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, TokenTable, IconGrid, DoDont, Do, Dont, Live, Icon, CodeExample, Callout } from '../blocks';
+import { snippets } from '../snippets';
+import { IconButton, TabBar } from '../../components';
+
+<Meta title="Foundations/Icons" />
+
+<PageHeader eyebrow="Foundations" title="Icons" meta={<><Pill tone="primary">Ionicons</Pill><Pill>Outline · filled when active</Pill><Pill>FOUNDATIONS §7</Pill></>}>
+  Outline by default and filled in the active state. One library, Ionicons, bundled with Expo, with a 1.5 px stroke at 24 px.
+</PageHeader>
+
+## Rest and active
+
+Every icon has an outline variant (rest) and a filled one (active or selected).
+
+<IconGrid names={['home', 'card', 'pieChart', 'person', 'wallet', 'notifications', 'swapHorizontal', 'flag', 'search', 'settings', 'shieldCheckmark', 'receipt']} />
+
+## Sizes
+
+<TokenTable prefix="icon.size." />
+
+<div className="vds-canvas" style={{ justifyContent: 'flex-start', gap: 32 }}>
+  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Icon name="homeOutline" size={16} /><code>16</code></span>
+  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Icon name="homeOutline" size={24} /><code>24</code></span>
+  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Icon name="homeOutline" size={32} /><code>32</code></span>
+</div>
+
+## Usage
+
+- `-outline` by default; the filled version of the same icon when active or selected.
+- An icon takes the color of the text it sits with (`color.text.*`, `.fg` or `on-accent`).
+- An icon without text needs an accessibility label, and its touch target is `size.touch.min` (48) even if the icon is 24.
+- Back, more and share follow each platform (see Platforms): `useSystemIcon()`.
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="home-outline becomes home when the tab is selected.">
+    <Live width={300}><TabBar items={[{ key: 'a', label: 'Home', icon: 'home' }, { key: 'b', label: 'Cards', icon: 'card' }, { key: 'c', label: 'Save', icon: 'wallet' }]} activeKey="a" onChange={() => {}} /></Live>
+  </Do>
+  <Dont caption="Mixed styles: filled icons at rest, or icons from another library.">
+    <span style={{ display: 'flex', gap: 24 }}>
+      <Icon name="home" />
+      <Icon name="cardOutline" />
+      <span style={{ fontSize: 22 }}>⚙︎</span>
+      <Icon name="person" />
+    </span>
+  </Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="A 48 icon button with a 24 icon.">
+    <Live width={120} center><IconButton icon="close" label="Close" onPress={() => {}} /></Live>
+  </Do>
+  <Dont caption="A bare 24 icon as a 24 touch target.">
+    <Icon name="close" />
+  </Dont>
+</DoDont>
+
+## Code
+
+<CodeExample code={snippets.icons} />
+
+<Callout>These docs draw icons from the <code>ionicons</code> package (the same SVGs). The app uses <code>@expo/vector-icons</code>.</Callout>

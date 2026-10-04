@@ -1,0 +1,122 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { PageHeader, Pill, DoDont, Do, Dont, PlatformPair, CodeExample, Live, Grid, LinkCard } from '../docs/blocks';
+import * as Stories from './Button.stories';
+import { Button } from './Button';
+import { Row } from '../docs/StoryStage';
+
+<Meta of={Stories} />
+
+<PageHeader eyebrow="Components · Actions" title="Button" meta={<><Pill tone="ok">Available</Pill><Pill>iOS · Android</Pill></>}>
+  Buttons trigger an action with one tap: continue a step, confirm, cancel. They size to their content; only a screen's main action spans the full width.
+</PageHeader>
+
+<Canvas of={Stories.Overview} />
+
+## Import
+
+<CodeExample code={"import { Button } from '../components';"} />
+
+## Props
+
+<Controls of={Stories.Overview} />
+
+## Usage
+
+<ul>
+  <li>One <code>primary</code> button per screen; the rest are <code>secondary</code> or <code>tertiary</code>.</li>
+  <li>Width follows the content. Use <code>fullWidth</code> only for the main action at the bottom of a screen.</li>
+  <li>Labels of 1 to 3 words that start with a verb, in sentence case: “Continue”, “Send money”.</li>
+  <li>8 pt (<code>space.xs</code>) between adjacent buttons. The heavier one goes on the right or on top.</li>
+  <li>When the action takes time, use <code>loading</code>: the button keeps its width and blocks a second tap.</li>
+</ul>
+
+## Accessibility
+
+<ul>
+  <li>The visible label is the name VoiceOver (iOS) and TalkBack (Android) read; no separate <code>accessibilityLabel</code> is needed.</li>
+  <li>Use <code>accessibilityHint</code> when the result isn't obvious (“Opens the transfer flow”).</li>
+  <li>Minimum height of 48 (<code>size.touch.min</code>): it meets iOS's 44 pt and Android's 48 dp, tertiary included.</li>
+  <li>Disabled and loading are announced through <code>accessibilityState</code>.</li>
+</ul>
+
+## Variants
+
+### Kinds
+
+<p>Primary for the main action, secondary for alternatives and tertiary for the lowest-weight action (Cancel, Skip).</p>
+
+<Canvas of={Stories.Kinds} />
+
+### Disabled
+
+<p>Only while a required value is missing. The screen must make clear what is missing.</p>
+
+<Canvas of={Stories.Disabled} />
+
+### Icons
+
+<p>An icon on the left reinforces the action; on the right it signals moving forward.</p>
+
+<Canvas of={Stories.Icons} />
+
+### Loading
+
+<p>A spinner replaces the label while the action runs.</p>
+
+<Canvas of={Stories.Loading} />
+
+### Full width
+
+<p>For the main action at the bottom of a screen, within thumb reach.</p>
+
+<Canvas of={Stories.FullWidth} />
+
+## Platforms
+
+<p>The button is the same on both platforms; the touch feedback changes. In the canvas, switch the platform in the toolbar.</p>
+
+<PlatformPair ios={<Live os="ios" width={300} center><Button label="Continue" onPress={() => {}} /></Live>} android={<Live os="android" width={300} center><Button label="Continue" onPress={() => {}} /></Live>} iosCaption={<>It scales to 0.96 for <code>motion.duration.press</code> and springs back with <code>motion.spring.soft</code>.</>} androidCaption={<>A Material 3 ripple with a state layer of the content color at 10%; no scale.</>} />
+
+## Do's and Don'ts
+
+<DoDont>
+  <Do caption="Use 1 to 3 words that start with a verb."><Live width={300} center><Button label="Continue" onPress={() => {}} /></Live></Do>
+  <Dont caption="Long labels get cut off on a phone."><Live width={300} center><Button label="Continue to the next step" onPress={() => {}} /></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Primary for the main action, tertiary as the alternative."><Live width={300} center><Row><Button kind="tertiary" label="Cancel" onPress={() => {}} /><Button label="Confirm" onPress={() => {}} /></Row></Live></Do>
+  <Dont caption="Two primary buttons side by side compete for attention."><Live width={300} center><Row><Button label="Cancel" onPress={() => {}} /><Button label="Confirm" onPress={() => {}} /></Row></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Use sentence case."><Live width={300} center><Button label="Get started" onPress={() => {}} /></Live></Do>
+  <Dont caption="Don't use all caps or Title Case."><Live width={300} center><Button label="GET STARTED" onPress={() => {}} /></Live></Dont>
+</DoDont>
+
+<DoDont>
+  <Do caption="Use verbs that say what happens on tap."><Live width={300} center><Row><Button kind="tertiary" label="Cancel" onPress={() => {}} /><Button label="Send money" onPress={() => {}} /></Row></Live></Do>
+  <Dont caption="Generic labels like Yes / No force people to read the whole context."><Live width={300} center><Row><Button kind="tertiary" label="No" onPress={() => {}} /><Button label="Yes" onPress={() => {}} /></Row></Live></Dont>
+</DoDont>
+
+## Use cases and examples
+
+### Adjacent buttons
+
+<p>Tertiary and primary on one row, the main one on the right.</p>
+
+<Canvas of={Stories.Adjacent} />
+
+### Main screen action
+
+<p>A full-width primary with a tertiary underneath to leave the step.</p>
+
+<Canvas of={Stories.ScreenAction} />
+
+## Related components
+
+<Grid min={200}>
+  <LinkCard to="components-iconbutton--docs" title="IconButton">Icon-only actions: back, close, more.</LinkCard>
+  <LinkCard to="components-actionbutton--docs" title="ActionButton">Quick actions with an icon and a label.</LinkCard>
+  <LinkCard to="components-slidetoconfirm--docs" title="SlideToConfirm">Confirm what moves money.</LinkCard>
+</Grid>
