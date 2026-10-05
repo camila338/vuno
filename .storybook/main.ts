@@ -5,7 +5,8 @@ const shim = (file: string) => fileURLToPath(new URL(`../src/docs/shims/${file}`
 
 // Web build to share. The MDX docs pages only exist here;
 // the native Storybook (.rnstorybook) shows the stories in src/foundations and src/components.
-const main: StorybookConfig = {
+// `title` is a Storybook preset that its config type doesn't list.
+const main: StorybookConfig & { title: string } = {
   stories: ['../src/docs/**/*.mdx', '../src/components/**/*.mdx', '../src/components/**/*.stories.@(ts|tsx)'],
   addons: ['@storybook/addon-docs'],
   framework: {
@@ -36,6 +37,8 @@ const main: StorybookConfig = {
   docs: {
     defaultName: 'Docs',
   },
+  // Browser tab and link previews: the system's name instead of "Storybook".
+  title: 'Vuno Design System',
   // Native-only modules swapped for web equivalents so components render in the web Storybook.
   viteFinal: (config) => {
     const extra = [
