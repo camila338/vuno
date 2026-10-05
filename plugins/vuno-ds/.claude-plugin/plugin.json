@@ -1,0 +1,10 @@
+{
+  "name": "vuno-ds",
+  "version": "0.1.0",
+  "description": "Diseña e implementa pantallas de Vuno solo con el design system: reglas, catálogo de componentes, comandos para pantallas, componentes y auditoría, y conexión al MCP de Figma.",
+  "author": {
+    "name": "Hibrids"
+  },
+  "homepage": "https://vuno-storybook.vercel.app",
+  "keywords": ["design-system", "react-native", "expo", "figma", "storybook"]
+}

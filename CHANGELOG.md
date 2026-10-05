@@ -2,6 +2,14 @@
 
 Every change to the Vuno Design System. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow [SemVer](https://semver.org/).
 
+## Unreleased
+
+### Added
+
+- The web Storybook is published at [vuno-storybook.vercel.app](https://vuno-storybook.vercel.app); `npm run deploy-storybook` builds and publishes it.
+- The browser tab and link previews show “Vuno Design System”.
+- `vuno-ds`, a Claude Code plugin (`plugins/vuno-ds`) to design and build with the system: a skill with the rules and the components catalog, `/vuno-ds:screen`, `/vuno-ds:component` and `/vuno-ds:audit` commands, a `ds-reviewer` agent and the Figma MCP connection.
+
 ## 0.2.0 — 2026-10-03
 
 The prototype app now runs entirely on the system: foundations, component tokens, components and patterns, documented in Storybook for iOS and Android.

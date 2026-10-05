@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "vuno",
+  "description": "Herramientas de Claude Code para diseñar e implementar con el Vuno Design System",
+  "owner": {
+    "name": "Hibrids"
+  },
+  "plugins": [
+    {
+      "name": "vuno-ds",
+      "description": "Diseña e implementa pantallas de Vuno solo con el design system: reglas, catálogo de componentes, comandos para pantallas, componentes y auditoría, y conexión al MCP de Figma.",
+      "source": "./plugins/vuno-ds",
+      "category": "design"
+    }
+  ]
+}
