@@ -525,6 +525,7 @@ Los mismos parámetros funcionan en Reanimated: `withSpring({ mass, stiffness, d
 
 - Una página por componente, agrupadas por familia con separadores (`↳ Actions`, `↳ Inputs`, `↳ Content`, `↳ Progress`, `↳ Navigation`, `↳ Brand & Moments`).
 - Cada página documenta lo mismo que el Storybook: overview, anatomía numerada (partes → tokens), import, tabla de propiedades (propiedad de Figma ↔ prop de código), uso, accesibilidad, variantes rotuladas, plataformas, do's and don'ts, casos de uso, código, tokens, componentes relacionados y, al final, el componente principal.
+- El encabezado de cada página lleva la etiqueta «View in Storybook ↗», enlazada a la página del mismo componente en el Storybook publicado (`https://vuno-storybook.vercel.app/?path=/docs/components-<nombre>--docs`).
 - Todos los rellenos, trazos, paddings, gaps, radios y alturas están enlazados a variables; los textos usan los estilos `role/*`.
 - Las diferencias de plataforma son una variante `Platform=iOS | Android` (TopBar, Toggle) o iconos de sistema (IconButton).
 - Cada estado de Chip tiene su icono por defecto (checkmark, close, alert, information-circle-outline); para cambiarlo se hace swap de la capa `icon`.
