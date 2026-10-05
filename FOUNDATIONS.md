@@ -537,6 +537,7 @@ Los mismos parámetros funcionan en Reanimated: `withSpring({ mass, stiffness, d
 - Están hechas solo con instancias del DS, variables (color, espaciado, radios) y estilos `role/*`; cada sección fija el modo de la colección Vertical que usa en código (`VerticalProvider`).
 - La versión Android cambia las variantes `Platform` (TopBar, Toggle), la flecha atrás y las barras de sistema.
 - `System / Status bar` y `System / Home indicator` son chrome de dispositivo para maquetas, no componentes de Vuno.
+- La página **Design Brief**, justo después de la portada, resume en inglés el brief: el reto, la plataforma de marca, el usuario de referencia, el 70/20/10, las cuatro verticales (cada tarjeta con su modo de la colección Vertical), los principios de UI, las decisiones clave y qué se toma de las referencias. Está hecha solo con variables y estilos `role/*`.
 - La página **Wireframes** repite las 15 pantallas de iOS en baja fidelidad (líneas, círculos y bloques grises, sin contenido real ni tokens), con flechas entre pantallas y notas de decisiones, ideas y preguntas abiertas. Sirve para discutir el flujo, no como especificación visual.
 
 ### 12.9 Intercambio
