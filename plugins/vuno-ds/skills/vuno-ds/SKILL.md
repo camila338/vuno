@@ -36,7 +36,7 @@ Léelas antes de decidir; no las resumas de memoria.
 
 1. **No cambies valores de `FOUNDATIONS.md` ni inventes decisiones.** Si falta una decisión de diseño, pregunta.
 2. **Solo tokens.** Todo color, espacio, radio, tipografía, sombra y duración sale de `tokens['…']` (`import { tokens } from '<ruta>/theme'`). Nada de hex, `rgba()`, números de espaciado ni milisegundos escritos a mano.
-3. **La interfaz nunca usa primitivos.** Usa semánticos (`color.text.primary`, `space.inset.screen`) o de componente (`button.primary.bg`), nunca `color.purple.600` o `space.lg` directamente.
+3. **Color y tipografía nunca son primitivos.** Usa semánticos (`color.text.primary`, `font.role.*` a través de `Text variant`) o de componente (`button.primary.bg`), nunca `color.purple.600` o `font.size.md`. En **espaciado y radio**, usa primero los semánticos (`space.inset.*`, `space.gap.*`, `radius.card`, `radius.pill`); para ajustes internos de layout se usa la escala (`space.2xs`–`space.3xl`, `radius.xs`–`radius.xl`), como en el resto del código.
 4. **Solo componentes del sistema.** Construye con los de `<components>`. Si algo no existe, no lo dibujes a mano: propón un componente nuevo siguiendo `/vuno-ds:component`.
 5. **La vertical es contexto.** Envuelve cada zona en `<VerticalProvider vertical="banking|save|invest|credit">` y toma sus colores con `useVerticalColors()`. Ningún token ni componente nombra una vertical.
 6. **Una acción primaria por pantalla.** Un solo `Button kind="primary"`. `fullWidth` solo para la llamada a la acción principal de la pantalla.
@@ -90,7 +90,32 @@ const { accent, onAccent } = useVerticalColors();
 El plugin conecta el MCP de Figma (archivo [Vuno Design System](https://www.figma.com/design/m05PZu0ab0numdST2ebXf2)). Con un enlace con `node-id`:
 
 - `get_design_context` y `get_variable_defs` del frame: cada instancia es el componente de `<components>` con las mismas props (`Kind` → `kind`, `State=Disabled` → `disabled`).
-- Las variables de Figma son los tokens: `color/brand/primary` en Figma es `tokens['color.brand.primary']`.
+- Las variables de Figma son los tokens: `color/text/primary` en Figma es `tokens['color.text.primary']`. Cuando un token tiene estados, la base lleva `/default` en Figma: `color/brand/primary/default` es `tokens['color.brand.primary']`.
 - El modo de la colección Vertical del frame es el `VerticalProvider`; la variante `Platform` es `useOS()`, no dos componentes.
 - Termina comparando con `get_screenshot` del frame y lista las diferencias.
 - Si el frame tiene algo que no es un componente del sistema, no lo inventes: pregunta.
+
+## 5. Hacia Figma (cuando se pida)
+
+Si la persona pide llevar a Figma un componente o una pantalla nuevos, trabaja con `use_figma` en el archivo `m05PZu0ab0numdST2ebXf2` y carga antes las skills `figma-use` y `figma-generate-library` (componente) o `figma-generate-design` (pantalla).
+
+- **Componente:**
+  - Página propia en su familia (`↳ Actions`, `↳ Inputs`, `↳ Content`…) con un frame `<Nombre> — Documentation`. Copia la estructura de una página existente: encabezado con etiquetas (`Available`, `iOS · Android`, `src/components/<Nombre>.tsx`, «View in Storybook ↗»), anatomía, propiedades, variantes, do's and don'ts y el componente principal.
+  - Todo enlazado a variables existentes: cero colores ni medidas sueltos.
+  - Las propiedades del componente en Figma se llaman como sus props en código.
+- **Pantalla:**
+  - En la página `Screens`, dentro de la sección del flujo que corresponda, en iOS y Android.
+  - Solo instancias de los componentes y las variables del archivo.
+- Verifica con una captura y cuenta los rellenos sin variable (deben ser 0).
+
+## 6. Publicar (solo en el repositorio del DS)
+
+Después de un cambio aprobado:
+
+1. `npm run typecheck`.
+2. Commit.
+3. `npm run deploy-storybook` (documentación en https://vuno-storybook.vercel.app).
+4. `npm run deploy-prototype` (app en https://vuno-prototype.vercel.app).
+5. `git push`, para que los proyectos con el DS instalado lo reciban con `/vuno-ds:setup`.
+
+Pide confirmación antes de publicar o hacer push: son enlaces públicos.

@@ -24,3 +24,4 @@ Usa la skill `vuno-ds` y sigue sus reglas sin excepción.
 3. **Implementa** siguiendo la estructura del proyecto, con la lógica y los datos de ejemplo separados de la pantalla. Solo componentes de `<components>` y tokens de `<theme>`.
 4. **Verifica** con los pasos de la sección 3 de la skill. Si vino de Figma, compara con `get_screenshot` y lista las diferencias.
 5. **Cierra con un resumen:** archivos creados, componentes usados, decisiones de diseño con su porqué y lo que quedó pendiente.
+6. **Si se pide**, lleva la pantalla a Figma (sección 5 de la skill) y publica los cambios (sección 6). Pide confirmación antes de publicar.

@@ -16,7 +16,7 @@ Lee `<docs>/TOKEN-NAMING.md`, `<docs>/FOUNDATIONS.md` (§8, §9, §10 y §14) y 
 Revisa en el alcance que te pasen:
 
 1. **Valores sueltos:** hex, `rgba()`, números de espaciado, radio, tipografía o duración escritos a mano. Las únicas excepciones son las medidas de plataforma documentadas en `CHANGELOG.md`.
-2. **Primitivos en la interfaz:** `tokens['color.<familia>.<paso>']`, `tokens['space.<talla>']` y similares usados directamente en pantallas o componentes (compruébalo contra `<theme>/tokens.ts` y la capa de cada nombre en `TOKEN-NAMING.md`).
+2. **Primitivos de color o tipografía en la interfaz:** `tokens['color.<familia>.<paso>']` o `tokens['font.size.*']` usados directamente en pantallas o componentes. La escala de espaciado y radio (`space.2xs`–`3xl`, `radius.xs`–`xl`) sí se usa para ajustes internos; marca solo los casos en que existe un semántico que encaja (`space.inset.screen` para el margen de pantalla, `radius.card` en una tarjeta…).
 3. **Componentes fuera del sistema:** botones, chips, filas o tarjetas hechos a mano cuando existe el componente.
 4. **Vertical:** tokens o componentes que nombran una vertical; zonas sin `VerticalProvider` que usan color de vertical.
 5. **Jerarquía:** más de un `Button kind="primary"` por pantalla; `fullWidth` fuera de la acción principal.

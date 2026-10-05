@@ -29,3 +29,4 @@ Usa la skill `vuno-ds`. En el repositorio del DS, sigue además `src/docs/Contri
    6. Su tarjeta en el catálogo de Components.
    7. La entrada en `CHANGELOG.md`, en inglés.
 5. **Verifica:** `npm run typecheck`, ningún valor suelto y AA en cada par de texto y fondo nuevo (añádelo a `src/docs/contrast.ts`).
+6. **Si se pide**, crea el componente en Figma con su página de documentación (sección 5 de la skill) y publica el Storybook (sección 6). Pide confirmación antes de publicar.
