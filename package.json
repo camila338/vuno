@@ -62,6 +62,7 @@
     "storybook:web": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy-storybook": "npm run build-storybook && bash scripts/deploy-storybook.sh",
+    "deploy-prototype": "rm -rf dist && expo export --platform web && bash scripts/deploy-prototype.sh",
     "typecheck": "tsc --noEmit"
   },
   "private": true,

@@ -8,6 +8,7 @@ Neobanco móvil (iOS y Android) de Hibrids. Este repo contiene el sistema de dis
 - `TOKEN-NAMING.md`: convención de nombres de tokens.
 - `FOUNDATIONS.md`: valores, reglas de uso, contraste AA, plataformas y mapeo a Figma.
 - `CHANGELOG.md`: cambios por versión (en inglés, porque se muestra en el Storybook).
+- Prototipo interactivo publicado: [vuno-prototype.vercel.app](https://vuno-prototype.vercel.app), la app en el navegador con marco de iPhone y Android.
 - Storybook web publicado: [vuno-storybook.vercel.app](https://vuno-storybook.vercel.app), con la documentación de foundations, componentes y patrones.
 - Figma: [Vuno Design System](https://www.figma.com/design/m05PZu0ab0numdST2ebXf2), con variables, estilos, iconos, una página documentada por componente, patrones y las 15 pantallas del prototipo en iOS y Android, todo conectado al DS (`FOUNDATIONS.md` §12).
 
@@ -79,6 +80,7 @@ La lógica vive en `src/features/` y todo se construye con los componentes de `s
 | `npm run storybook:generate` | Regenera la lista de stories del Storybook nativo. |
 | `npm run storybook:web` | Storybook web en `http://localhost:6006`. |
 | `npm run build-storybook` | Build estático del Storybook web en `storybook-static/`, para publicar. |
+| `npm run deploy-prototype` | Exporta la app para web y la publica en Vercel (proyecto `vuno-prototype` del equipo Cafe_bumbul). |
 | `npm run deploy-storybook` | Hace el build y lo publica en Vercel (proyecto `vuno-storybook` del equipo Cafe_bumbul). Requiere `npx vercel login` la primera vez. |
 | `npm run tokens` | Regenera `src/theme/tokens.ts` y `tokens.meta.ts` desde `tokens/`. |
 | `npm run typecheck` | Comprueba los tipos con TypeScript. |

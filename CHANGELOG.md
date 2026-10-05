@@ -7,6 +7,7 @@ Every change to the Vuno Design System. The format follows [Keep a Changelog](ht
 ### Added
 
 - The web Storybook is published at [vuno-storybook.vercel.app](https://vuno-storybook.vercel.app); `npm run deploy-storybook` builds and publishes it.
+- The interactive prototype is published at [vuno-prototype.vercel.app](https://vuno-prototype.vercel.app); `npm run deploy-prototype` exports the web app and publishes it.
 - The browser tab and link previews show “Vuno Design System”.
 - Each component page in Figma links to its Storybook page from the header (“View in Storybook ↗”).
 - `vuno-ds`, a Claude Code plugin (`plugins/vuno-ds`) to design and build with the system: a skill with the rules and the components catalog, `/vuno-ds:screen`, `/vuno-ds:component` and `/vuno-ds:audit` commands, a `ds-reviewer` agent and the Figma MCP connection.
