@@ -61,7 +61,7 @@
     "storybook:generate": "sb-rn-get-stories",
     "storybook:web": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook": "npm run build-storybook && cross-env VERCEL_ORG_ID=team_Yo6KUAjtwa6pzmfQymDxI49q VERCEL_PROJECT_ID=prj_b8VUnftjBCLfI0vTlHET92i8n6kg npx vercel deploy storybook-static --prod --yes",
+    "deploy-storybook": "npm run build-storybook && bash scripts/deploy-storybook.sh",
     "typecheck": "tsc --noEmit"
   },
   "private": true,
