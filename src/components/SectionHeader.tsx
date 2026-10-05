@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { IconName } from '../features/goals/model';
+import type { IconName } from './icons';
 import { tokens } from '../theme';
 import { IconBadge } from './Surface';
 import { Text } from './Text';

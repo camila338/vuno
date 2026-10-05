@@ -1,6 +1,6 @@
 # Catálogo de componentes
 
-Resumen de `src/components/index.ts`. Antes de usar un componente, lee su archivo: las props completas y sus comentarios están ahí. Cada uno tiene su página en https://vuno-storybook.vercel.app.
+Resumen de `<components>/index.ts` (las rutas `<components>` y `<theme>` se explican en la sección 0 de la skill). Antes de usar un componente, lee su archivo: las props completas y sus comentarios están ahí. Cada uno tiene su página en https://vuno-storybook.vercel.app.
 
 ## Actions
 
@@ -60,4 +60,5 @@ Resumen de `src/components/index.ts`. Antes de usar un componente, lee su archiv
 ## Base y contexto
 
 - `Pressable`: base de todo lo pulsable (escala en iOS, ripple en Android, háptico).
-- `tokens`, `VerticalProvider`, `useVerticalColors`, `PlatformProvider`, `useOS`, `useSystemIcon`: desde `src/theme`.
+- `money`, `moneySpoken` e `IconName`: desde `<components>`.
+- `tokens`, `VerticalProvider`, `useVerticalColors`, `PlatformProvider`, `useOS`, `useSystemIcon` y `FontGate`: desde `<theme>`.

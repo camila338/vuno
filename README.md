@@ -15,14 +15,22 @@ Los documentos de decisión están en español. El Storybook y la interfaz de la
 
 ## Plugin de Claude Code
 
-`plugins/vuno-ds` es un plugin para diseñar e implementar con el sistema desde Claude Code: una skill con las reglas y el catálogo, los comandos `/vuno-ds:screen`, `/vuno-ds:component` y `/vuno-ds:audit`, un agente revisor y la conexión al MCP de Figma. Para instalarlo, dentro de Claude Code en la raíz del repo:
+`plugins/vuno-ds` es un plugin para usar el sistema desde Claude Code en cualquier proyecto Expo. Incluye:
+
+- `/vuno-ds:setup`: instala el DS en el proyecto.
+- `/vuno-ds:screen`, `/vuno-ds:component` y `/vuno-ds:audit`.
+- Una skill con las reglas y el catálogo.
+- Un agente revisor.
+- La conexión al MCP de Figma.
 
 ```
-/plugin marketplace add ./
+/plugin marketplace add camila338/vuno
 /plugin install vuno-ds@vuno
 ```
 
-Detalle y ejemplos en `plugins/vuno-ds/README.md`.
+Después, en la raíz de cualquier app Expo: `/vuno-ds:setup`. Detalle en `plugins/vuno-ds/README.md`.
+
+`src/components` y `src/theme` no dependen del resto del repo: son lo que el instalador copia.
 
 ## Stack
 

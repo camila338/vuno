@@ -4,6 +4,8 @@ export { Balance } from './Balance';
 export { Button, IconButton, type ButtonProps } from './Button';
 export { Chip, ChoiceChip } from './Chip';
 export { Confetti } from './Confetti';
+export { money, moneySpoken } from './format';
+export type { IconName } from './icons';
 export { applyKey, Keypad } from './Keypad';
 export { List, ListRow } from './List';
 export { Logo } from './Logo';

@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Children, isValidElement, cloneElement, type ReactElement, type ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { IconName } from '../features/goals/model';
+import type { IconName } from './icons';
 import { tokens } from '../theme';
 import { Pressable } from './Pressable';
 import { Card } from './Surface';

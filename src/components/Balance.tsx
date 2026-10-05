@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import { money, moneySpoken } from '../features/goals/format';
 import { tokens } from '../theme';
+import { money, moneySpoken } from './format';
 import { Text } from './Text';
 
 /**

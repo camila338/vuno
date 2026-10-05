@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { IconName } from '../features/goals/model';
+import type { IconName } from './icons';
 import { tokens } from '../theme';
 import { Pressable } from './Pressable';
 import { Text } from './Text';

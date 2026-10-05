@@ -1,11 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import type { ComponentProps } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { tokens } from '../theme';
+import type { IconName } from './icons';
 import { Pressable } from './Pressable';
 import { Text } from './Text';
-
-type IconName = ComponentProps<typeof Ionicons>['name'];
 
 export type ButtonProps = {
   /** Visible text; also the VoiceOver label. Verb first, 1–3 words. */

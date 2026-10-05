@@ -1,7 +1,6 @@
-import type Ionicons from '@expo/vector-icons/Ionicons';
-import type { ComponentProps } from 'react';
+import type { IconName } from '../../components/icons';
 
-export type IconName = ComponentProps<typeof Ionicons>['name'];
+export type { IconName };
 
 export type Category = 'travel' | 'emergency' | 'tech' | 'home' | 'gift' | 'car' | 'education' | 'other';
 
